@@ -4,18 +4,30 @@ import Box from '@mui/material/Box';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input } from '@/components/ui-kit';
+import { Button, Input } from '@/components/ui';
+import { useToast } from '@/hooks/use-toast';
 
 import { TLoginForm } from '../../types/form';
+import { PASSWORD_REGEX } from './constants/validation';
 import * as styles from './styles';
 
 const Form: FC = () => {
   const methods = useForm<TLoginForm>({ reValidateMode: 'onBlur' });
   const { formState, handleSubmit } = methods;
 
-  const onSubmit = useCallback(async (values: TLoginForm) => {
-    console.log(values);
-  }, []);
+  const toast = useToast();
+
+  const onSubmit = useCallback(
+    async (values: TLoginForm) => {
+      try {
+        console.log(values);
+        throw new Error('test');
+      } catch (e) {
+        toast.error('test error');
+      }
+    },
+    [toast],
+  );
 
   return (
     <FormProvider {...methods}>
@@ -34,6 +46,7 @@ const Form: FC = () => {
             name="password"
             required
             type="password"
+            pattern={PASSWORD_REGEX}
           />
           <Button
             disabled={!formState.isValid}

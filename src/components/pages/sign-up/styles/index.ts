@@ -1,14 +1,14 @@
-import { Theme } from '@mui/material';
-import { SxProps } from '@mui/system';
+import { SxProps, Theme } from '@mui/material';
 
 export const container: SxProps<Theme> = {
-  width: '100vw',
   height: '100vh',
+  width: '100vw',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  flexDirection: 'column',
   gap: 4,
+  padding: 2,
   boxSizing: 'border-box',
 };
 
@@ -18,16 +18,16 @@ export const card: SxProps<Theme> = {
 };
 
 export const title: SxProps<Theme> = {
-  marginBottom: '1.5rem',
   textAlign: 'center',
   fontSize: '2rem',
   lineHeight: 1.5,
-  fontWeight: '700',
+  fontWeight: 700,
+  marginBottom: '1.5rem',
 };
 
 export const footer: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: 0.5,
+  gap: 0.25,
 };

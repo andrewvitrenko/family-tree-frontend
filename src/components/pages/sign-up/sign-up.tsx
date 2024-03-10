@@ -7,27 +7,25 @@ import { FC } from 'react';
 import { Link } from '@/components/ui';
 import { ERoute } from '@/types/routes';
 
-import LoginForm from './components/form';
+import SignUpForm from './components/form';
 import * as styles from './styles';
 
-const Login: FC = () => {
+const SignUp: FC = () => {
   return (
     <Box sx={styles.container}>
       <Card sx={styles.card}>
         <CardContent>
-          <Typography variant="h1" sx={styles.title}>
-            Login
-          </Typography>
-          <LoginForm />
+          <Typography sx={styles.title}>Sign up</Typography>
+          <SignUpForm />
         </CardContent>
       </Card>
 
       <Box sx={styles.footer}>
-        <Typography>Don&apos;t have an account?</Typography>
-        <Link to={ERoute.SIGN_UP}>Create now</Link>
+        <Typography>Already have an account?</Typography>
+        <Link to={ERoute.LOGIN}>Log in</Link>
       </Box>
     </Box>
   );
 };
 
-export default Login;
+export default SignUp;

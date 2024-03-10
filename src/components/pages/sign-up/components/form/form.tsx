@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input } from '@/components/ui';
+import { Button, Input, PasswordInput } from '@/components/ui';
+import { PASSWORD_REGEX } from '@/constants/validation';
 
 import { TSignUpForm } from '../../types/form';
 import * as styles from './styles';
@@ -28,7 +29,20 @@ const Form: FC = () => {
             type="email"
             required
           />
-          <Input name="password" type="password" required label="Password" />
+          <Input type="text" name="firstName" required />
+          <Input type="text" name="lastName" required />
+          <PasswordInput
+            pattern={PASSWORD_REGEX}
+            name="password"
+            required
+            label="Password"
+          />
+          <PasswordInput
+            name="confirmPassword"
+            pattern={PASSWORD_REGEX}
+            required
+            label="Confirm password"
+          />
           <Button
             sx={styles.button}
             disabled={!formState.isValid}

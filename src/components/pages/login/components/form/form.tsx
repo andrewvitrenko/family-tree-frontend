@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input } from '@/components/ui';
+import { Button, Input, PasswordInput } from '@/components/ui';
+import { PASSWORD_REGEX } from '@/constants/validation';
 import { useToast } from '@/hooks/use-toast';
 
 import { TLoginForm } from '../../types/form';
-import { PASSWORD_REGEX } from './constants/validation';
 import * as styles from './styles';
 
 const Form: FC = () => {
@@ -40,12 +40,11 @@ const Form: FC = () => {
             required
             type="email"
           />
-          <Input
+          <PasswordInput
             label="Password"
             placeholder="Please, enter password"
             name="password"
             required
-            type="password"
             pattern={PASSWORD_REGEX}
           />
           <Button

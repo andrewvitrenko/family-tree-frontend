@@ -4,9 +4,9 @@ import { SxProps } from '@mui/system';
 export const container: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
+  gap: 4,
 };
 
 export const button: SxProps<Theme> = {
-  marginTop: '2.25rem',
+  marginTop: 10,
 };

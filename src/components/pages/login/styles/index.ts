@@ -8,17 +8,17 @@ export const container: SxProps<Theme> = {
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
-  gap: 4,
+  gap: 8,
   boxSizing: 'border-box',
 };
 
 export const card: SxProps<Theme> = {
-  width: '24rem',
+  width: 112,
   maxWidth: '100%',
 };
 
 export const title: SxProps<Theme> = {
-  marginBottom: '1.5rem',
+  marginBottom: 6,
   textAlign: 'center',
   fontSize: '2rem',
   lineHeight: 1.5,
@@ -29,5 +29,5 @@ export const footer: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: 0.5,
+  gap: 1,
 };

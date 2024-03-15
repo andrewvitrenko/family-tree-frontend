@@ -1,5 +1,4 @@
-import MuiLink from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
+import { Link as MuiLink, Typography } from '@mui/material';
 import NextLink from 'next/link';
 import { FC } from 'react';
 

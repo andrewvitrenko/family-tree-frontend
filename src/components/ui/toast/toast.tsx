@@ -1,5 +1,4 @@
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import { Alert, Snackbar } from '@mui/material';
 import { FC, useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 

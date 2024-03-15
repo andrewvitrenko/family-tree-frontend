@@ -1,5 +1,4 @@
-import MuiButton from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Button as MuiButton, CircularProgress } from '@mui/material';
 import { FC } from 'react';
 
 import { mergeSx } from '@/utils';

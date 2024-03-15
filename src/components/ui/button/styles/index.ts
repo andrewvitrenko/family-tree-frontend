@@ -6,6 +6,6 @@ export const progress: SxProps<Theme> = {
   position: 'absolute',
   top: '50%',
   left: '50%',
-  marginTop: '-12px',
-  marginLeft: '-12px',
+  marginTop: -3,
+  marginLeft: -3,
 };

@@ -1,28 +1,28 @@
-import { TextField } from '@mui/material';
+import { MenuItem, TextField } from '@mui/material';
 import { FC } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
 import { mergeSx } from '@/utils';
 
-import { TInputProps } from './types';
+import { TSelectProps } from './types';
 
-const Input: FC<TInputProps> = ({
+const Select: FC<TSelectProps> = ({
+  defaultValue,
   name,
-  required,
-  pattern,
+  options,
   helperText,
   sx,
-  defaultValue,
   onBlur,
   onChange,
+  required,
   ...props
 }) => {
   const { control } = useFormContext();
   const { field, fieldState } = useController({
     name,
-    control,
     defaultValue,
-    rules: { required, pattern, onBlur, onChange },
+    control,
+    rules: { required, onBlur, onChange },
   });
 
   return (
@@ -30,14 +30,22 @@ const Input: FC<TInputProps> = ({
       name={field.name}
       onChange={field.onChange}
       onBlur={field.onBlur}
+      value={field.value}
+      helperText={fieldState.error?.message ?? helperText}
+      select
+      required={required}
       inputRef={field.ref}
       error={!!fieldState.error}
-      helperText={fieldState.error?.message ?? helperText}
-      required={required}
       sx={mergeSx(sx)}
       {...props}
-    />
+    >
+      {options.map((option) => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </TextField>
   );
 };
 
-export default Input;
+export default Select;

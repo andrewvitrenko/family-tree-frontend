@@ -7,14 +7,15 @@ export const container: SxProps<Theme> = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: 4,
-  padding: 2,
+  gap: 8,
+  padding: 4,
   boxSizing: 'border-box',
 };
 
 export const card: SxProps<Theme> = {
-  width: '24rem',
+  width: 112,
   maxWidth: '100%',
+  overflow: 'auto',
 };
 
 export const title: SxProps<Theme> = {
@@ -22,12 +23,12 @@ export const title: SxProps<Theme> = {
   fontSize: '2rem',
   lineHeight: 1.5,
   fontWeight: 700,
-  marginBottom: '1.5rem',
+  marginBottom: 6,
 };
 
 export const footer: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: 0.25,
+  gap: 0.5,
 };

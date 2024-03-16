@@ -1,3 +1,5 @@
+'use client';
+
 import { MenuItem, TextField } from '@mui/material';
 import { FC } from 'react';
 import { useController, useFormContext } from 'react-hook-form';

@@ -7,7 +7,7 @@ import { mergeSx } from '@/utils';
 import { TSelectProps } from './types';
 
 const Select: FC<TSelectProps> = ({
-  defaultValue,
+  defaultValue = '',
   name,
   options,
   helperText,

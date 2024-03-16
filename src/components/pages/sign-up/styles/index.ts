@@ -13,7 +13,7 @@ export const container: SxProps<Theme> = {
 };
 
 export const card: SxProps<Theme> = {
-  width: 112,
+  width: '28rem',
   maxWidth: '100%',
   overflow: 'auto',
 };

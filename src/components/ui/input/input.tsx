@@ -30,6 +30,7 @@ const Input: FC<TInputProps> = ({
   return (
     <TextField
       name={field.name}
+      value={field.value}
       onChange={field.onChange}
       onBlur={field.onBlur}
       inputRef={field.ref}

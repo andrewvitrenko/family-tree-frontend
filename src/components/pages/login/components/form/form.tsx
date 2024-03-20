@@ -4,26 +4,28 @@ import { Box } from '@mui/material';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { AuthApi } from '@/api/auth';
 import { Button, Input, PasswordInput } from '@/components/ui';
 import { PASSWORD_REGEX } from '@/constants/validation';
 import { useToast } from '@/hooks/use-toast';
+import { ELocalStorageKey } from '@/types/local-storage';
 
 import { TLoginForm } from '../../types/form';
 import * as styles from './styles';
 
 const Form: FC = () => {
+  const toast = useToast();
+
   const methods = useForm<TLoginForm>({ reValidateMode: 'onBlur' });
   const { formState, handleSubmit } = methods;
-
-  const toast = useToast();
 
   const onSubmit = useCallback(
     async (values: TLoginForm) => {
       try {
-        console.log(values);
-        throw new Error('test');
+        const { access_token } = await AuthApi.login(values);
+        localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, access_token);
       } catch (e) {
-        toast.error('test error');
+        toast.error((e as Error).message);
       }
     },
     [toast],

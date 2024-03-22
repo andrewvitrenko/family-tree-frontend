@@ -1,6 +1,7 @@
 'use client';
 
 import { Box } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -9,12 +10,14 @@ import { Button, Input, PasswordInput } from '@/components/ui';
 import { PASSWORD_REGEX } from '@/constants/validation';
 import { useToast } from '@/hooks/use-toast';
 import { ELocalStorageKey } from '@/types/local-storage';
+import { ERoute } from '@/types/routes';
 
 import { TLoginForm } from '../../types/form';
 import * as styles from './styles';
 
 const Form: FC = () => {
   const toast = useToast();
+  const router = useRouter();
 
   const methods = useForm<TLoginForm>({ reValidateMode: 'onBlur' });
   const { formState, handleSubmit } = methods;
@@ -24,11 +27,12 @@ const Form: FC = () => {
       try {
         const { access_token } = await AuthApi.login(values);
         localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, access_token);
+        router.push(ERoute.HOME);
       } catch (e) {
         toast.error((e as Error).message);
       }
     },
-    [toast],
+    [toast, router],
   );
 
   return (

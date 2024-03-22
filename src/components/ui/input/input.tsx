@@ -14,7 +14,7 @@ const Input: FC<TInputProps> = ({
   pattern,
   helperText,
   sx,
-  defaultValue,
+  defaultValue = '',
   onBlur,
   onChange,
   ...props

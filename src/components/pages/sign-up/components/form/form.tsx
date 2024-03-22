@@ -1,37 +1,32 @@
 'use client';
 
 import { Box } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { AuthApi } from '@/api/auth';
-import { Button, Input, PasswordInput, Select } from '@/components/ui';
+import {
+  Button,
+  DateInput,
+  Input,
+  PasswordInput,
+  Select,
+} from '@/components/ui';
 import { PASSWORD_REGEX } from '@/constants/validation';
 import { useToast } from '@/hooks/use-toast';
 import { ELocalStorageKey } from '@/types/local-storage';
-import { ESex } from '@/types/user';
+import { ERoute } from '@/types/routes';
 
 import { TSignUpForm } from '../../types/form';
 import { sexes } from './constants';
 import * as styles from './styles';
 
-const defaultValues: TSignUpForm = {
-  email: 'test@gmail.com',
-  firstName: 'Andrii',
-  lastName: 'Vitrenko',
-  sex: ESex.MALE,
-  password: 'M81dy140',
-  confirmPassword: 'M81dy140',
-  birthDate: '',
-};
-
 const Form: FC = () => {
   const toast = useToast();
+  const router = useRouter();
 
-  const methods = useForm<TSignUpForm>({
-    reValidateMode: 'onBlur',
-    defaultValues,
-  });
+  const methods = useForm<TSignUpForm>({ reValidateMode: 'onBlur' });
   const { handleSubmit, formState } = methods;
 
   const onSubmit = useCallback(
@@ -40,11 +35,12 @@ const Form: FC = () => {
       try {
         const { access_token } = await AuthApi.register(registerValues);
         localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, access_token);
+        router.push(ERoute.HOME);
       } catch (e) {
         toast.error((e as Error).message);
       }
     },
-    [toast],
+    [toast, router],
   );
 
   return (
@@ -63,6 +59,12 @@ const Form: FC = () => {
             <Input type="text" name="lastName" label="Last name" required />
           </Box>
           <Select name="sex" label="Sex" required options={sexes} />
+          <DateInput
+            name="birthDate"
+            label="Birth date"
+            required
+            maxDate={new Date()}
+          />
           <PasswordInput
             pattern={PASSWORD_REGEX}
             name="password"

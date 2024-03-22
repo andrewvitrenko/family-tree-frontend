@@ -1,7 +1,7 @@
 'use client';
 
 import { TextField } from '@mui/material';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
 import { mergeSx } from '@/utils';
@@ -43,4 +43,4 @@ const Input: FC<TInputProps> = ({
   );
 };
 
-export default Input;
+export default memo(Input);

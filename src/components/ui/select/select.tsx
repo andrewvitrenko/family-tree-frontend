@@ -1,7 +1,7 @@
 'use client';
 
 import { MenuItem, TextField } from '@mui/material';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
 import { mergeSx } from '@/utils';
@@ -50,4 +50,4 @@ const Select: FC<TSelectProps> = ({
   );
 };
 
-export default Select;
+export default memo(Select);

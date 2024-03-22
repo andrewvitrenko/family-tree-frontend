@@ -1,6 +1,6 @@
 import { Link as MuiLink, Typography } from '@mui/material';
 import NextLink from 'next/link';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 import { TLinkProps } from './types';
 
@@ -12,4 +12,4 @@ const Link: FC<TLinkProps> = ({ to, children, ...props }) => {
   );
 };
 
-export default Link;
+export default memo(Link);

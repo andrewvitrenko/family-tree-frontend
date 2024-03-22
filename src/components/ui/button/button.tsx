@@ -1,5 +1,5 @@
 import { Button as MuiButton, CircularProgress } from '@mui/material';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 import { mergeSx } from '@/utils';
 
@@ -33,4 +33,4 @@ const Button: FC<TButtonProps> = ({
   );
 };
 
-export default Button;
+export default memo(Button);

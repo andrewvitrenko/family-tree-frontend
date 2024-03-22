@@ -3,7 +3,7 @@
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { format as dateFnsFormat, formatISO, toDate } from 'date-fns';
-import { FC, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
 import { mergeSx } from '@/utils';
@@ -59,4 +59,4 @@ const DateInput: FC<TDateInputProps> = ({
   );
 };
 
-export default DateInput;
+export default memo(DateInput);

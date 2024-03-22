@@ -2,7 +2,7 @@
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton, InputAdornment } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
 
 import Input from '../input';
 import { TPasswordInputProps } from './types';
@@ -29,4 +29,4 @@ const PasswordInput: FC<TPasswordInputProps> = (props) => {
   );
 };
 
-export default PasswordInput;
+export default memo(PasswordInput);

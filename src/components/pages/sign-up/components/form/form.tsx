@@ -2,7 +2,7 @@
 
 import { Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { FC, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { AuthApi } from '@/api/auth';
@@ -91,4 +91,4 @@ const Form: FC = () => {
   );
 };
 
-export default Form;
+export default memo(Form);

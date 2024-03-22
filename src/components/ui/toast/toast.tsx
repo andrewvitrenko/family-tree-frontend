@@ -1,5 +1,5 @@
 import { Alert, Snackbar } from '@mui/material';
-import { FC, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useToastStore } from '@/store/toast';
@@ -34,4 +34,4 @@ const Toast: FC<TToast> = ({ description, open, id, severity }) => {
   );
 };
 
-export default Toast;
+export default memo(Toast);

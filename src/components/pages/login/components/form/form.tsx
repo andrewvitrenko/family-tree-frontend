@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { AuthApi } from '@/api/auth';
+import { Auth } from '@/api/auth';
 import { Button, Input, PasswordInput } from '@/components/ui';
 import { PASSWORD_REGEX } from '@/constants/validation';
 import { useToast } from '@/hooks/use-toast';
@@ -25,7 +25,7 @@ const Form: FC = () => {
   const onSubmit = useCallback(
     async (values: TLoginForm) => {
       try {
-        const { access_token } = await AuthApi.login(values);
+        const { access_token } = await Auth.login(values);
         localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, access_token);
         router.push(ERoute.HOME);
       } catch (e) {

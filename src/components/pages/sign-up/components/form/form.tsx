@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { AuthApi } from '@/api/auth';
+import { Auth } from '@/api/auth';
 import {
   Button,
   DateInput,
@@ -33,7 +33,7 @@ const Form: FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async ({ confirmPassword, ...registerValues }: TSignUpForm) => {
       try {
-        const { access_token } = await AuthApi.register(registerValues);
+        const { access_token } = await Auth.register(registerValues);
         localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, access_token);
         router.push(ERoute.HOME);
       } catch (e) {

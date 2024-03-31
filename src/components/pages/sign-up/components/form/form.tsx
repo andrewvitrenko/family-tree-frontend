@@ -3,7 +3,7 @@
 import { Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { FC, memo, useCallback } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FieldValues, FormProvider, useForm, Validate } from 'react-hook-form';
 
 import { Auth } from '@/api/auth';
 import {
@@ -26,8 +26,22 @@ const Form: FC = () => {
   const toast = useToast();
   const router = useRouter();
 
-  const methods = useForm<TSignUpForm>({ reValidateMode: 'onBlur' });
-  const { handleSubmit, formState } = methods;
+  const methods = useForm<TSignUpForm>({
+    reValidateMode: 'onChange',
+    mode: 'onChange',
+  });
+  const { handleSubmit, formState, watch } = methods;
+
+  const onConfirmPasswordValidate: Validate<string, FieldValues> = useCallback(
+    (value) => {
+      if (watch('password') !== value) {
+        return 'Passwords do not match';
+      }
+
+      return undefined;
+    },
+    [watch],
+  );
 
   const onSubmit = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -76,6 +90,7 @@ const Form: FC = () => {
             pattern={PASSWORD_REGEX}
             required
             label="Confirm password"
+            validate={onConfirmPasswordValidate}
           />
           <Button
             type="submit"

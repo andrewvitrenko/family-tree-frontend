@@ -10,13 +10,14 @@ import { TInputProps } from './types';
 
 const Input: FC<TInputProps> = ({
   name,
-  required,
+  required = false,
   pattern,
   helperText,
   sx,
   defaultValue = '',
   onBlur,
   onChange,
+  validate,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -24,8 +25,15 @@ const Input: FC<TInputProps> = ({
     name,
     control,
     defaultValue,
-    rules: { required, pattern, onBlur, onChange },
+    rules: {
+      required: { value: required, message: 'This field is required' },
+      pattern: pattern && { value: pattern, message: 'Invalid format' },
+      onBlur,
+      onChange,
+      validate,
+    },
   });
+  console.log(name, fieldState.invalid);
 
   return (
     <TextField

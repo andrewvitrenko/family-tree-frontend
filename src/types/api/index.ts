@@ -11,3 +11,9 @@ export const enum EMethod {
   PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
+
+export type TQueryParams = {
+  search?: string;
+  page?: number;
+  take?: number;
+};

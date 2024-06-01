@@ -2,6 +2,10 @@ body {
     margin: 0;
 }
 
+* {
+    outline: none;
+}
+
 *::-webkit-scrollbar {
     width: 24px;
     background-clip: padding-box;

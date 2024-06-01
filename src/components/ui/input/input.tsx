@@ -33,7 +33,6 @@ const Input: FC<TInputProps> = ({
       validate,
     },
   });
-  console.log(name, fieldState.invalid);
 
   return (
     <TextField

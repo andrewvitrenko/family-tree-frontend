@@ -15,7 +15,7 @@ export type TSignUpPayload = {
   email: string;
   firstName: string;
   lastName: string;
-  birthDate: string;
+  dateOfBirth: string;
   sex: ESex;
   password: string;
 };

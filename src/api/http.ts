@@ -83,7 +83,9 @@ export class Http {
 
   private parseError(e: unknown) {
     if (isAxiosError<TError>(e)) {
-      const messages = [e.response!.data.message].flat();
+      const errorMessage =
+        e.response?.data.message ?? 'Network error. Please try again later';
+      const messages = [errorMessage].flat();
 
       throw new Error(messages[0]);
     } else {

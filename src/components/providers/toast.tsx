@@ -6,7 +6,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { Toast } from '@/components/ui';
 import { useToastStore } from '@/store/toast';
 
-export const ToastContext: FC = () => {
+export const ToastProvider: FC = () => {
   const { toasts } = useToastStore(
     useShallow((state) => ({ toasts: state.toasts })),
   );

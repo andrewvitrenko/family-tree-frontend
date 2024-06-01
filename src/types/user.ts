@@ -1,3 +1,5 @@
+import { TPerson, TTree } from '@/types/tree';
+
 export const enum ESex {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
@@ -8,14 +10,8 @@ export type TUser = {
   email: string;
   firstName: string;
   lastName: string;
-  person: TPerson;
-};
-
-export type TPerson = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  birthDate: string;
-  userId: string;
+  dateOfBirth: string;
   sex: ESex;
+  persons: TPerson[];
+  trees: TTree[];
 };

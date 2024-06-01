@@ -15,6 +15,7 @@ import {
 } from '@/components/ui';
 import { PASSWORD_REGEX } from '@/constants/validation';
 import { useToast } from '@/hooks/use-toast';
+import { LocalStorage } from '@/services';
 import { ELocalStorageKey } from '@/types/local-storage';
 import { ERoute } from '@/types/routes';
 
@@ -48,7 +49,7 @@ const Form: FC = () => {
     async ({ confirmPassword, ...registerValues }: TSignUpForm) => {
       try {
         const { access_token } = await Auth.register(registerValues);
-        localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, access_token);
+        LocalStorage.set(ELocalStorageKey.ACCESS_TOKEN, access_token);
         router.push(ERoute.HOME);
       } catch (e) {
         toast.error((e as Error).message);

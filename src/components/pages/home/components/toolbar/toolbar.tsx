@@ -1,5 +1,3 @@
-'use client';
-
 import IconPerson from '@mui/icons-material/Person';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,7 +10,7 @@ import * as styles from './styles';
 
 const Toolbar: FC = () => {
   return (
-    <Box>
+    <Box sx={styles.wrapper}>
       <AppBar>
         <MuiToolbar sx={styles.container}>
           <Typography variant="h1" sx={styles.title}>

@@ -24,3 +24,16 @@ export const title: SxProps<Theme> = {
 export const profile: SxProps<Theme> = {
   color: 'common.white',
 };
+
+export const menuItem: SxProps<Theme> = {
+  textTransform: 'uppercase',
+  color: 'grey.500',
+  display: 'flex',
+  alignItems: 'center',
+  gap: 1.5,
+
+  '.MuiTypography-root': {
+    fontSize: '0.875rem',
+    fontWeight: 300,
+  },
+};

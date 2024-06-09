@@ -22,7 +22,7 @@ const PaginationAnchor: FC<TPaginationAnchorProps> = ({
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage]);
+  }, [inView, hasNextPage, fetchNextPage]);
 
   return (
     <Box sx={mergeSx(styles.container, sx)} ref={ref}>

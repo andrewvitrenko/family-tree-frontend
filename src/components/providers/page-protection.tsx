@@ -6,9 +6,9 @@ import { FullscreenLoader } from '@/components/ui';
 import { useUser } from '@/hooks/use-user';
 
 export const PageProtection: FC<PropsWithChildren> = ({ children }) => {
-  const { status } = useUser();
+  const { isFetching } = useUser();
 
-  if (status !== 'success') {
+  if (isFetching) {
     return <FullscreenLoader />;
   }
 

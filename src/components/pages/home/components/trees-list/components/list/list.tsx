@@ -8,6 +8,7 @@ import { Loader } from '@/components/ui';
 import { PaginationAnchor } from '@/components/utils';
 import { useTrees } from '@/hooks/use-trees';
 import { useTreesStore } from '@/store/trees';
+import { useUserStore } from '@/store/user';
 
 import TreeCard from './components/tree-card';
 import * as styles from './styles';
@@ -19,6 +20,7 @@ const List: FC = () => {
   const { trees } = useTreesStore(
     useShallow((state) => ({ trees: state.trees })),
   );
+  const { user } = useUserStore(useShallow((state) => ({ user: state.user })));
 
   if (isFetching) {
     return <Loader sx={styles.loader} />;
@@ -37,7 +39,7 @@ const List: FC = () => {
       <Grid container spacing={4}>
         {trees.map((tree) => (
           <Grid key={tree.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <TreeCard {...tree} />
+            <TreeCard {...tree} editable={tree.ownerId === user?.id} />
           </Grid>
         ))}
       </Grid>

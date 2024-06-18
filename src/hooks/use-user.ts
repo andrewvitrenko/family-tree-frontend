@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { useQuery, useQueryClient, UseQueryResult } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
 import { User } from '@/api/user';
@@ -13,7 +13,6 @@ import { ERoute } from '@/types/routes';
 export type TUseUser = {
   isFetching: boolean;
   logout: () => Promise<void>;
-  status: UseQueryResult['status'];
 };
 
 export const useUser = (): TUseUser => {
@@ -35,7 +34,7 @@ export const useUser = (): TUseUser => {
     });
   }, [queryClient, router]);
 
-  const { isFetching, status } = useQuery({
+  const { isFetching } = useQuery({
     queryKey: ['user.me'],
     queryFn: () => User.getMe(),
     onError: async (err) => {
@@ -45,5 +44,5 @@ export const useUser = (): TUseUser => {
     onSuccess: (user) => setUser(user),
   });
 
-  return { isFetching, logout, status };
+  return { isFetching, logout };
 };

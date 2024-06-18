@@ -11,21 +11,23 @@ import { useTreesListContext } from '../../../../trees-list';
 import * as styles from './styles';
 import { TTreeCardProps } from './types';
 
-const TreeCard: FC<TTreeCardProps> = (props) => {
+const TreeCard: FC<TTreeCardProps> = ({ editable, ...tree }) => {
   const { openDeleteModal, openUpdateModal } = useTreesListContext();
 
-  const onDeleteClick = () => openDeleteModal(props);
-  const onEditClick = () => openUpdateModal(props);
+  const onDeleteClick = () => openDeleteModal(tree);
+  const onEditClick = () => openUpdateModal(tree);
 
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5">{props.name}</Typography>
+        <Typography variant="h5">{tree.name}</Typography>
       </CardContent>
       <CardActions sx={styles.actions}>
-        <IconButton color="primary" onClick={onEditClick}>
-          <EditIcon />
-        </IconButton>
+        {editable && (
+          <IconButton color="primary" onClick={onEditClick}>
+            <EditIcon />
+          </IconButton>
+        )}
         <IconButton color="warning" onClick={onDeleteClick}>
           <DeleteIcon />
         </IconButton>

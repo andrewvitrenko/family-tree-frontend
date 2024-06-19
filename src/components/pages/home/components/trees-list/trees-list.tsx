@@ -9,9 +9,11 @@ import {
   useState,
 } from 'react';
 
-import CreateTreeModal from '@/components/modals/create-tree';
-import DeleteTreeModal from '@/components/modals/delete-tree';
-import UpdateTreeModal from '@/components/modals/update-tree';
+import {
+  CreateTreeModal,
+  DeleteTreeModal,
+  UpdateTreeModal,
+} from '@/components/modals/tree';
 import { FullscreenLoader } from '@/components/ui';
 import { useTrees } from '@/hooks/use-trees';
 import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';

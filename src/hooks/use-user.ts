@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { QueryObserverResult, useQuery, useQueryClient } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
 import { User } from '@/api/user';
@@ -11,7 +11,7 @@ import { ELocalStorageKey } from '@/types/local-storage';
 import { ERoute } from '@/types/routes';
 
 export type TUseUser = {
-  isFetching: boolean;
+  status: QueryObserverResult['status'];
   logout: () => Promise<void>;
 };
 
@@ -34,7 +34,7 @@ export const useUser = (): TUseUser => {
     });
   }, [queryClient, router]);
 
-  const { isFetching } = useQuery({
+  const { status } = useQuery({
     queryKey: ['user.me'],
     queryFn: () => User.getMe(),
     onError: async (err) => {
@@ -44,5 +44,5 @@ export const useUser = (): TUseUser => {
     onSuccess: (user) => setUser(user),
   });
 
-  return { isFetching, logout };
+  return { status, logout };
 };

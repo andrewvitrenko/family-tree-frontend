@@ -8,7 +8,7 @@ import { useUser } from '@/hooks/use-user';
 export const PageProtection: FC<PropsWithChildren> = ({ children }) => {
   const { status } = useUser();
 
-  if (status === 'success') {
+  if (status !== 'success') {
     return <FullscreenLoader />;
   }
 

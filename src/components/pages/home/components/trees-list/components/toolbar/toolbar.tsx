@@ -1,8 +1,10 @@
 import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/ClearRounded';
+import SearchIcon from '@mui/icons-material/SearchRounded';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
-import { ChangeEvent, FC, memo, useEffect, useState } from 'react';
+import { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui';
 import { useDebounce } from '@/hooks/use-debounce';
@@ -17,9 +19,15 @@ const Toolbar: FC = () => {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search);
+  const ref = useRef<HTMLInputElement>();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
+
+  const onClear = () => {
+    setSearch('');
+    ref.current?.focus();
+  };
 
   useEffect(() => {
     setDebounceSearch(debouncedSearch.trim());
@@ -31,8 +39,16 @@ const Toolbar: FC = () => {
         variant="filled"
         placeholder="Search"
         sx={styles.input}
-        InputProps={{ startAdornment: <SearchIcon /> }}
+        InputProps={{
+          startAdornment: <SearchIcon />,
+          endAdornment: (
+            <IconButton onClick={onClear}>
+              <ClearIcon />
+            </IconButton>
+          ),
+        }}
         value={search}
+        inputRef={ref}
         onChange={onChange}
       />
       <Button

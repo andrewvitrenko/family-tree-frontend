@@ -18,6 +18,7 @@ const Input: FC<TInputProps> = ({
   onBlur,
   onChange,
   validate,
+  shouldUnregister,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -25,6 +26,7 @@ const Input: FC<TInputProps> = ({
     name,
     control,
     defaultValue,
+    shouldUnregister,
     rules: {
       required: { value: required, message: 'This field is required' },
       pattern: pattern && { value: pattern, message: 'Invalid format' },

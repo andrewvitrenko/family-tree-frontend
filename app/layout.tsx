@@ -6,8 +6,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import type { Metadata } from 'next';
 import { FC, PropsWithChildren } from 'react';
 
-import { QueryProvider } from '@/components/providers/query';
-import { ToastProvider } from '@/components/providers/toast';
+import { QueryProvider, ToastProvider } from '@/components/providers';
 import theme from '@/theme';
 
 export const metadata: Metadata = {

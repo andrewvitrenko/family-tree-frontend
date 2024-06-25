@@ -9,12 +9,12 @@ import MuiToolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { FC, memo, useRef, useState } from 'react';
 
-import { useUser } from '@/hooks/use-user';
+import { useAuth } from '@/hooks/use-auth';
 
 import * as styles from './styles';
 
 const Toolbar: FC = () => {
-  const { logout } = useUser();
+  const { logout } = useAuth();
 
   const anchor = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);

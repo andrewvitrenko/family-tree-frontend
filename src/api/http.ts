@@ -1,8 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, isAxiosError } from 'axios';
 
-import { LocalStorage } from '@/services';
 import { EMethod, TError } from '@/types/api';
-import { ELocalStorageKey } from '@/types/local-storage';
 
 export class Http {
   private instance: AxiosInstance;
@@ -10,25 +8,49 @@ export class Http {
   constructor() {
     this.instance = axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_HOST,
+      /**
+       * need these fields to send cookies in cross domain XHR requests
+       */
+      withCredentials: true,
+      headers: {
+        'Access-Control-Allow-Origin': ['http://localhost:3000', '*'],
+        'Access-Control-Allow-Credentials': true,
+      },
     });
+
+    this.setupInterceptors();
+  }
+
+  private setupInterceptors() {
+    this.instance.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const status = error.response?.status;
+        const originRequest = error.config;
+        if (status === 403 && !originRequest.retry) {
+          originRequest.retry = true;
+          await this.instance.post('/auth/refresh');
+          return this.instance.request(originRequest);
+        }
+        return Promise.reject(error);
+      },
+    );
   }
 
   public async get<T>(
     url: string,
-    auth?: boolean,
     params?: Record<string, string | number>,
     headers?: AxiosRequestConfig['headers'],
   ): Promise<T> {
-    return this.request(url, EMethod.GET, auth, { params, headers });
+    return this.request(url, EMethod.GET, { params, headers });
   }
 
-  public async post<T, D extends object>(
+  public async post<T, D extends object = object>(
     url: string,
-    data: D,
-    auth?: boolean,
+    data?: D,
     config?: Omit<AxiosRequestConfig<D>, 'data'>,
   ): Promise<T> {
-    return this.request<T, D>(url, EMethod.POST, auth, { data, ...config });
+    return this.request<T, D>(url, EMethod.POST, { data, ...config });
   }
 
   public async put<T, D extends object>(
@@ -36,7 +58,7 @@ export class Http {
     data: D,
     config?: Omit<AxiosRequestConfig<D>, 'data'>,
   ): Promise<T> {
-    return this.request<T, D>(url, EMethod.PUT, true, { data, ...config });
+    return this.request<T, D>(url, EMethod.PUT, { data, ...config });
   }
 
   public async patch<T, D extends object>(
@@ -44,34 +66,25 @@ export class Http {
     data: D,
     config?: Omit<AxiosRequestConfig<D>, 'data'>,
   ): Promise<T> {
-    return this.request<T, D>(url, EMethod.PATCH, true, { data, ...config });
+    return this.request<T, D>(url, EMethod.PATCH, { data, ...config });
   }
 
   public async remove<T>(
     url: string,
     headers?: AxiosRequestConfig['headers'],
   ): Promise<T> {
-    return this.request<T>(url, EMethod.DELETE, true, { headers });
+    return this.request<T>(url, EMethod.DELETE, { headers });
   }
 
   private async request<R, D extends object = object>(
     url: string,
     method: EMethod,
-    auth: boolean = false,
-    { headers, ...config }: AxiosRequestConfig<D> = {},
+    config: AxiosRequestConfig<D> = {},
   ): Promise<R> {
     try {
       const response = await this.instance.request<R>({
         url,
         method,
-        headers: {
-          ...headers,
-          ...(auth && {
-            Authorization: `Bearer ${LocalStorage.get(
-              ELocalStorageKey.ACCESS_TOKEN,
-            )}`,
-          }),
-        },
         ...config,
       });
 

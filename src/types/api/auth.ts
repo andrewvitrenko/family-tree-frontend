@@ -9,8 +9,6 @@ export type TLoginPayload = {
   password: string;
 };
 
-export type TLoginResponse = TTokens;
-
 export type TSignUpPayload = {
   email: string;
   firstName: string;
@@ -19,5 +17,3 @@ export type TSignUpPayload = {
   sex: ESex;
   password: string;
 };
-
-export type TSignUpResponse = TTokens;

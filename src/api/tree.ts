@@ -5,15 +5,15 @@ import { TTree } from '@/types/tree';
 
 class TreeApi extends Api {
   getOne(id: string): Promise<TTree> {
-    return this.http.get<TTree>(`/trees/${id}`, true);
+    return this.http.get<TTree>(`/trees/${id}`);
   }
 
   getMany(params?: TQueryParams): Promise<TPaginatedData<TTree>> {
-    return this.http.get<TPaginatedData<TTree>>('/trees/', true, params);
+    return this.http.get<TPaginatedData<TTree>>('/trees/', params);
   }
 
   create(payload: TCreateTreePayload): Promise<TTree> {
-    return this.http.post<TTree, TCreateTreePayload>('/trees', payload, true);
+    return this.http.post<TTree, TCreateTreePayload>('/trees', payload);
   }
 
   update(id: string, payload: TUpdateTreePayload): Promise<TTree> {

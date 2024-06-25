@@ -5,11 +5,11 @@ import { TUser } from '@/types/user';
 
 class UserApi extends Api {
   getMe(): Promise<TUser> {
-    return this.http.get<TUser>('/users/me', true);
+    return this.http.get<TUser>('/users/me');
   }
 
   get(id: string): Promise<TUser> {
-    return this.http.get<TUser>(`/users/${id}`, true);
+    return this.http.get<TUser>(`/users/${id}`);
   }
 
   update(payload: TUserUpdatePayload): Promise<TUser> {
@@ -17,7 +17,7 @@ class UserApi extends Api {
   }
 
   getMany(params?: TQueryParams): Promise<TPaginatedData<TUser>> {
-    return this.http.get<TPaginatedData<TUser>>('/users', true, params);
+    return this.http.get<TPaginatedData<TUser>>('/users', params);
   }
 }
 

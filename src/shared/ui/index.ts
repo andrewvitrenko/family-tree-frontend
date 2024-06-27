@@ -6,4 +6,3 @@ export { default as Loader } from './loader';
 export { default as Modal } from './modal';
 export { default as PasswordInput } from './password-input';
 export { default as Select } from './select';
-export { default as Toast } from './toast';

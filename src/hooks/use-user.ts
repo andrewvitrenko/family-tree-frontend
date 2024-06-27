@@ -2,7 +2,7 @@ import { QueryObserverResult, useQuery } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
 import { User } from '@/api/user';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/features/toast';
 import { useUserStore } from '@/store/user';
 
 import { useAuth } from './use-auth';

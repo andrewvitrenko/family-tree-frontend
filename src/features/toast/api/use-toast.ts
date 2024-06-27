@@ -2,7 +2,7 @@ import { AlertColor } from '@mui/material/Alert';
 import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { useToastStore } from '@/store/toast';
+import { useToastStore } from '@/features/toast/store';
 
 type TUseToast = {
   [key in AlertColor]: (description: string) => void;

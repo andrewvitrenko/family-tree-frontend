@@ -7,7 +7,7 @@ import {
 import { useShallow } from 'zustand/react/shallow';
 
 import { Tree } from '@/api/tree';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/features/toast';
 import { TTree } from '@/shared/entities/tree';
 import { useTreesStore } from '@/store/trees';
 import { TPaginatedData } from '@/types/api';

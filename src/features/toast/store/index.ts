@@ -2,7 +2,7 @@ import { AlertColor } from '@mui/material/Alert';
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
-import { TToast, TToastStore } from '@/types/store/toast';
+import { TToast, TToastStore } from '../types';
 
 export const useToastStore = create<TToastStore>((set) => ({
   toasts: [],

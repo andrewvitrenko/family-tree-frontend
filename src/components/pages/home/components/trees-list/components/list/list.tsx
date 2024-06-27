@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { PaginationAnchor } from '@/components/utils';
+import { PaginationAnchor } from '@/features';
 import { useTrees } from '@/hooks/use-trees';
 import { Loader } from '@/shared/ui';
 import { useTreesStore } from '@/store/trees';

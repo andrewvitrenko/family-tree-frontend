@@ -3,7 +3,7 @@
 import { FC, PropsWithChildren } from 'react';
 
 import { useUser } from '@/hooks/use-user';
-import { FullscreenLoader } from '@/shared/ui';
+import { FullscreenLoader } from '@/widgets';
 
 export const PageProtection: FC<PropsWithChildren> = ({ children }) => {
   const { status } = useUser();

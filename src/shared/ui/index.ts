@@ -1,6 +1,5 @@
 export { default as Button } from './button';
 export { default as DateInput } from './date-input';
-export { default as FullscreenLoader } from './fullscreen-loader';
 export { default as Input } from './input';
 export { default as Link } from './link';
 export { default as Loader } from './loader';

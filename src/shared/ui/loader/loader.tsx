@@ -7,10 +7,10 @@ import { mergeSx } from '@/utils';
 import * as styles from './styles';
 import { TLoaderProps } from './types';
 
-const Loader: FC<TLoaderProps> = ({ sx, size = 40 }) => {
+const Loader: FC<TLoaderProps> = ({ sx, ...props }) => {
   return (
     <Box sx={mergeSx(styles.container, sx)}>
-      <CircularProgress size={size} />
+      <CircularProgress {...props} />
     </Box>
   );
 };

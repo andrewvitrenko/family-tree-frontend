@@ -1,4 +1,4 @@
-import { ESex } from '@/types/user';
+import { ESex } from '@/shared/entities/user';
 
 export type TSignUpForm = {
   email: string;

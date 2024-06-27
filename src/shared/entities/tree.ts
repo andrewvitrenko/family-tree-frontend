@@ -1,4 +1,4 @@
-import { ESex, TUser } from '@/types/user';
+import { ESex, TUser } from './user';
 
 export type TParentRelationship = {
   id: string;

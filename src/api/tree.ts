@@ -1,7 +1,7 @@
 import { Api } from '@/api/api';
+import { TTree } from '@/shared/entities/tree';
 import { TPaginatedData, TQueryParams } from '@/types/api';
 import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';
-import { TTree } from '@/types/tree';
 
 class TreeApi extends Api {
   getOne(id: string): Promise<TTree> {

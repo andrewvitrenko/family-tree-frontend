@@ -8,10 +8,10 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { Tree } from '@/api/tree';
 import { useToast } from '@/hooks/use-toast';
+import { TTree } from '@/shared/entities/tree';
 import { useTreesStore } from '@/store/trees';
 import { TPaginatedData } from '@/types/api';
 import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';
-import { TTree } from '@/types/tree';
 import { getNextPageParam } from '@/utils';
 
 type TUpdateTreeProps = {

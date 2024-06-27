@@ -1,4 +1,4 @@
-import { TUser } from '@/types/user';
+import { TUser } from '@/shared/entities/user';
 
 export type TUserStore = {
   user: TUser | null;

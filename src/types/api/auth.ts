@@ -1,8 +1,4 @@
-import { ESex } from '../user';
-
-export type TTokens = {
-  access_token: string;
-};
+import { ESex } from '@/shared/entities/user';
 
 export type TLoginPayload = {
   email: string;

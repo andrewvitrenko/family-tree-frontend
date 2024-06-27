@@ -1,7 +1,7 @@
 import { Api } from '@/api/api';
+import { TUser } from '@/shared/entities/user';
 import { TPaginatedData, TQueryParams } from '@/types/api';
 import { TUserUpdatePayload } from '@/types/api/user';
-import { TUser } from '@/types/user';
 
 class UserApi extends Api {
   getMe(): Promise<TUser> {

@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { Toast } from '@/components/ui';
+import { Toast } from '@/shared/ui';
 import { useToastStore } from '@/store/toast';
 
 export const ToastProvider: FC = () => {

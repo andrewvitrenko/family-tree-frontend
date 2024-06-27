@@ -4,15 +4,9 @@ import { Box } from '@mui/material';
 import { FC, memo, useCallback } from 'react';
 import { FieldValues, FormProvider, useForm, Validate } from 'react-hook-form';
 
-import {
-  Button,
-  DateInput,
-  Input,
-  PasswordInput,
-  Select,
-} from '@/components/ui';
 import { PASSWORD_REGEX } from '@/constants/validation';
 import { useAuth } from '@/hooks/use-auth';
+import { Button, DateInput, Input, PasswordInput, Select } from '@/shared/ui';
 import { omit } from '@/utils';
 
 import { TSignUpForm } from '../../types/form';

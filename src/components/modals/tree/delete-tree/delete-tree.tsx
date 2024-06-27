@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 
-import { Button, Modal } from '@/components/ui';
+import { Button, Modal } from '@/shared/ui';
 
 import * as styles from './styles';
 import { TDeleteTreeModalProps } from './types';

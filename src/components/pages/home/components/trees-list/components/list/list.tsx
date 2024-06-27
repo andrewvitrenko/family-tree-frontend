@@ -4,9 +4,9 @@ import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { Loader } from '@/components/ui';
 import { PaginationAnchor } from '@/components/utils';
 import { useTrees } from '@/hooks/use-trees';
+import { Loader } from '@/shared/ui';
 import { useTreesStore } from '@/store/trees';
 import { useUserStore } from '@/store/user';
 

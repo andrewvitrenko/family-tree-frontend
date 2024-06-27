@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input, Modal } from '@/components/ui';
+import { Button, Input, Modal } from '@/shared/ui';
 
 import * as styles from './styles';
 import { TUpdateTreeForm, TUpdateTreeModalProps } from './types';

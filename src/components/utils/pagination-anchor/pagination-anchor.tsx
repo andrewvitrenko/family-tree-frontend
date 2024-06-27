@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { Loader } from '@/components/ui';
+import { Loader } from '@/shared/ui';
 import { mergeSx } from '@/utils';
 
 import * as styles from './styles';

@@ -1,7 +1,7 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import { FC, memo } from 'react';
 
-import { Modal } from '@/components/ui';
+import { Modal } from '@/shared/ui';
 
 const FullscreenLoader: FC = () => {
   return (

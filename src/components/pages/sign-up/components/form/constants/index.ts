@@ -1,4 +1,4 @@
-import { TSelectOption } from '@/components/ui/select';
+import { TSelectOption } from '@/shared/ui/select';
 import { ESex } from '@/types/user';
 
 export const sexes: TSelectOption<ESex>[] = [

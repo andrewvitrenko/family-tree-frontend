@@ -6,8 +6,8 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react';
 
-import { Button } from '@/components/ui';
 import { useDebounce } from '@/hooks/use-debounce';
+import { Button } from '@/shared/ui';
 
 import { useTreesListContext } from '../../trees-list';
 import * as styles from './styles';

@@ -14,8 +14,8 @@ import {
   DeleteTreeModal,
   UpdateTreeModal,
 } from '@/components/modals/tree';
-import { FullscreenLoader } from '@/components/ui';
 import { useTrees } from '@/hooks/use-trees';
+import { FullscreenLoader } from '@/shared/ui';
 import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';
 import { TTree } from '@/types/tree';
 

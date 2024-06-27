@@ -4,9 +4,9 @@ import { Box } from '@mui/material';
 import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input, PasswordInput } from '@/components/ui';
 import { PASSWORD_REGEX } from '@/constants/validation';
 import { useAuth } from '@/hooks/use-auth';
+import { Button, Input, PasswordInput } from '@/shared/ui';
 
 import { TLoginForm } from '../../types/form';
 import * as styles from './styles';

@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
-import { Link } from '@/components/ui';
+import { Link } from '@/shared/ui';
 import { ERoute } from '@/types/routes';
 
 import LoginForm from './components/form';

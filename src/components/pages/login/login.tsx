@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
 import { Link } from '@/shared/ui';
-import { ERoute } from '@/types/routes';
+import { ERoute } from '@/shared/entities/navigation';
 
 import LoginForm from './components/form';
 import * as styles from './styles';

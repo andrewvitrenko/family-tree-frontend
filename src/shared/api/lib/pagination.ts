@@ -1,4 +1,4 @@
-import { TPaginatedData } from '../types';
+import { TPaginatedData } from '@/shared/api/model';
 
 export const getNextPageParam = <T extends object>(
   lastPage: TPaginatedData<T>,

@@ -2,7 +2,7 @@ import { Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { InfiniteQueryObserverResult } from 'react-query';
 
-import { TPaginatedData } from '@/shared/api/types';
+import { TPaginatedData } from '@/shared/api/model';
 
 export type TPaginationAnchorProps = {
   fetchNextPage: () => Promise<

@@ -1,4 +1,4 @@
-import { TPerson, TTree } from './tree';
+import { TPerson, TTree } from '@/entities/trees';
 
 export const enum ESex {
   MALE = 'MALE',

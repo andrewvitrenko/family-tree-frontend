@@ -1,4 +1,4 @@
-import { ESex } from '@/shared/entities/user';
+import { ESex } from '@/entities/user';
 import { TSelectOption } from '@/shared/ui/select';
 
 export const sexes: TSelectOption<ESex>[] = [

@@ -1,4 +1,4 @@
-import { Api } from '../api';
+import { Api } from '../lib';
 import { TLoginPayload, TSignUpPayload } from './types';
 
 class Auth extends Api {

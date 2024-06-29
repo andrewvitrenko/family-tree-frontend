@@ -1,4 +1,4 @@
-import { ESex } from '@/shared/entities/user';
+import { ESex } from '@/entities/user';
 
 export type TLoginPayload = {
   email: string;

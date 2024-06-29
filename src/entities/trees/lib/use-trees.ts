@@ -6,14 +6,14 @@ import {
 } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
+import { TTree } from '@/entities/trees';
 import { useToast } from '@/features/toast';
-import { TPaginatedData } from '@/shared/api/types';
-import { getNextPageParam } from '@/shared/api/utils';
-import { TTree } from '@/shared/entities/tree';
-import { useTreesStore } from '@/store/trees';
+import { getNextPageParam } from '@/shared/api/lib';
+import { TPaginatedData } from '@/shared/api/model';
 
-import { TreesApi } from './api';
-import { TCreateTreePayload, TUpdateTreePayload } from './types';
+import { TreesApi } from '../api';
+import { TCreateTreePayload, TUpdateTreePayload } from '../api/model';
+import { useTreesStore } from '../model';
 
 type TUpdateTreeProps = {
   id: string;

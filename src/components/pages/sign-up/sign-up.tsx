@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { FC } from 'react';
 
-import { ERoute } from '@/shared/entities/navigation';
+import { ERoute } from '@/shared/model/navigation';
 import { Link } from '@/shared/ui';
 
 import SignUpForm from './components/form';

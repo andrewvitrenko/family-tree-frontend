@@ -1,4 +1,4 @@
-import { Http } from './utils';
+import { Http } from './http';
 
 export class Api {
   protected http: Http;

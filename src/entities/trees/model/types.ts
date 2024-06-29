@@ -1,4 +1,4 @@
-import { ESex, TUser } from './user';
+import { ESex, TUser } from '@/entities/user';
 
 export type TParentRelationship = {
   id: string;

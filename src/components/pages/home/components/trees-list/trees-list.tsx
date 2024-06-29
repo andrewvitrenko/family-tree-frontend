@@ -14,12 +14,8 @@ import {
   DeleteTreeModal,
   UpdateTreeModal,
 } from '@/components/modals/tree';
-import { useTrees } from '@/shared/api';
-import {
-  TCreateTreePayload,
-  TUpdateTreePayload,
-} from '@/shared/api/trees/types';
-import { TTree } from '@/shared/entities/tree';
+import { TTree, useTrees } from '@/entities/trees';
+import { TCreateTreePayload, TUpdateTreePayload } from '@/entities/trees/api';
 import { FullscreenLoader } from '@/widgets';
 
 import List from './components/list';

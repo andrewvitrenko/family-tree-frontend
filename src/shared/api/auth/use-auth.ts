@@ -2,9 +2,9 @@ import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
+import { useUserStore } from '@/entities/user';
 import { useToast } from '@/features/toast';
-import { ERoute } from '@/shared/entities/navigation';
-import { useUserStore } from '@/store/user';
+import { ERoute } from '@/shared/model/navigation';
 
 import { AuthApi } from './api';
 import { TLoginPayload, TSignUpPayload } from './types';

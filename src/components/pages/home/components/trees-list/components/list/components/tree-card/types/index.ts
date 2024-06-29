@@ -1,4 +1,4 @@
-import { TTree } from '@/shared/entities/tree';
+import { TTree } from '@/entities/trees';
 
 export type TTreeCardProps = TTree & {
   editable?: boolean;

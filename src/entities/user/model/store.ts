@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 
-import { TUserStore } from '@/types/store/user';
+import { TUser } from '@/entities/user';
+
+type TUserStore = {
+  user: TUser | null;
+  setUser: (user: TUser) => void;
+  clearUser: () => void;
+};
 
 export const useUserStore = create<TUserStore>((set) => ({
   user: null,

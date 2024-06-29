@@ -4,11 +4,10 @@ import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
+import { useTrees, useTreesStore } from '@/entities/trees';
+import { useUserStore } from '@/entities/user';
 import { PaginationAnchor } from '@/features';
-import { useTrees } from '@/shared/api';
 import { Loader } from '@/shared/ui';
-import { useTreesStore } from '@/store/trees';
-import { useUserStore } from '@/store/user';
 
 import TreeCard from './components/tree-card';
 import * as styles from './styles';

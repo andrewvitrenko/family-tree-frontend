@@ -2,10 +2,10 @@ import { QueryObserverResult, useQuery } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useToast } from '@/features/toast';
-import { useUserStore } from '@/store/user';
+import { useAuth } from '@/shared/api';
 
-import { useAuth } from '../auth';
-import { UserApi } from './api';
+import { UserApi } from '../api';
+import { useUserStore } from '../model';
 
 export type TUseUser = {
   status: QueryObserverResult['status'];

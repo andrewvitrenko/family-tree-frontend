@@ -1,4 +1,4 @@
-import { ELocalStorageKey, TLocalStorageData } from '@/types/local-storage';
+import { ELocalStorageKey, TLocalStorageData } from './types';
 
 class LocalStorageService {
   get<K extends ELocalStorageKey>(key: K): TLocalStorageData[K] | null;

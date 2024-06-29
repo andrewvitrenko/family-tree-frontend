@@ -9,7 +9,7 @@ import MuiToolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { FC, memo, useRef, useState } from 'react';
 
-import { useAuth } from '@/shared/api';
+import { useAuth } from '@/features/auth';
 
 import * as styles from './styles';
 

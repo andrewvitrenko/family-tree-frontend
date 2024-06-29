@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 import { FC, PropsWithChildren } from 'react';
 
 import { QueryProvider } from '@/components/providers';
-import { Toast } from '@/features';
+import { Toast } from '@/features/toast';
 import { theme } from '@/shared/config';
 
 export const metadata: Metadata = {

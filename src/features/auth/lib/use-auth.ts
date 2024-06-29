@@ -6,8 +6,8 @@ import { useUserStore } from '@/entities/user';
 import { useToast } from '@/features/toast';
 import { ERoute } from '@/shared/model/navigation';
 
-import { AuthApi } from './api';
-import { TLoginPayload, TSignUpPayload } from './types';
+import { AuthApi } from '../api';
+import { TLoginPayload, TSignUpPayload } from '../model';
 
 export type TUseAuth = {
   isLoggingIn: boolean;

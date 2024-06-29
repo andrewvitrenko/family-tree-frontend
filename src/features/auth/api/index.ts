@@ -1,5 +1,5 @@
-import { Api } from '../lib';
-import { TLoginPayload, TSignUpPayload } from './types';
+import { Api } from '../../../shared/api/lib';
+import { TLoginPayload, TSignUpPayload } from '../model';
 
 class Auth extends Api {
   constructor() {

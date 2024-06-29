@@ -1,0 +1,1 @@
+export { PaginationAnchor } from './ui';

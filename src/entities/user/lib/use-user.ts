@@ -1,8 +1,8 @@
 import { QueryObserverResult, useQuery } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
+import { useAuth } from '@/features/auth';
 import { useToast } from '@/features/toast';
-import { useAuth } from '@/shared/api';
 
 import { UserApi } from '../api';
 import { useUserStore } from '../model';

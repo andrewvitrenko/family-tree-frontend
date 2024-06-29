@@ -6,7 +6,7 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { useTrees, useTreesStore } from '@/entities/trees';
 import { useUserStore } from '@/entities/user';
-import { PaginationAnchor } from '@/features';
+import { PaginationAnchor } from '@/features/pagination';
 import { Loader } from '@/shared/ui';
 
 import TreeCard from './components/tree-card';

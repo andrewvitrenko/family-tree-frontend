@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { TTree } from './types';
 
 // create entities for trees and user
-// move types of them into `model` files
+// move types of them into `types` files
 // rename `utils` into `lib` across the project
 // move api for trees and user to entities
 

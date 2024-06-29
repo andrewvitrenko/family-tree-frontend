@@ -6,7 +6,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import type { Metadata } from 'next';
 import { FC, PropsWithChildren } from 'react';
 
-import { QueryProvider } from '@/components/providers';
+import { QueryProvider } from '@/features/query-provider';
 import { Toast } from '@/features/toast';
 import { theme } from '@/shared/config';
 

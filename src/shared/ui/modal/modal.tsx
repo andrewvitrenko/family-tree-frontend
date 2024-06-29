@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import MuiModal from '@mui/material/Modal';
 import { FC, memo } from 'react';
 
-import { mergeSx } from '@/utils';
+import { mergeSx } from '@/shared/lib';
 
 import * as styles from './styles';
 import { TModalProps } from './types';

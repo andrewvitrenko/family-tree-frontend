@@ -1,7 +1,7 @@
 import { Button as MuiButton, CircularProgress } from '@mui/material';
 import { FC, memo } from 'react';
 
-import { mergeSx } from '@/utils';
+import { mergeSx } from '@/shared/lib';
 
 import * as styles from './styles';
 import { TButtonProps } from './types';

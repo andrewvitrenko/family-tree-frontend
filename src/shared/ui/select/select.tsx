@@ -4,7 +4,7 @@ import { MenuItem, TextField } from '@mui/material';
 import { FC, memo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
-import { mergeSx } from '@/utils';
+import { mergeSx } from '@/shared/lib';
 
 import { TSelectProps } from './types';
 

@@ -2,7 +2,7 @@ import { CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import { FC, memo } from 'react';
 
-import { mergeSx } from '@/utils';
+import { mergeSx } from '@/shared/lib';
 
 import * as styles from './styles';
 import { TLoaderProps } from './types';

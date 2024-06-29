@@ -6,7 +6,7 @@ import { format as dateFnsFormat, formatISO, toDate } from 'date-fns';
 import { FC, memo, useCallback } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
-import { mergeSx } from '@/utils';
+import { mergeSx } from '@/shared/lib';
 
 import * as styles from './styles';
 import { TDateInputProps } from './types';

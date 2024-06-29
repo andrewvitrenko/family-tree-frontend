@@ -3,8 +3,8 @@ import Typography from '@mui/material/Typography';
 import { FC, memo, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { mergeSx } from '@/shared/lib';
 import { Loader } from '@/shared/ui';
-import { mergeSx } from '@/utils';
 
 import * as styles from './styles';
 import { TPaginationAnchorProps } from './types';

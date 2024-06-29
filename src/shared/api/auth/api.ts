@@ -1,6 +1,5 @@
-import { TLoginPayload, TSignUpPayload } from '@/types/api/auth';
-
 import { Api } from '../api';
+import { TLoginPayload, TSignUpPayload } from './types';
 
 class Auth extends Api {
   constructor() {

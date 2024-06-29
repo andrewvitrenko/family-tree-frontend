@@ -15,8 +15,11 @@ import {
   UpdateTreeModal,
 } from '@/components/modals/tree';
 import { useTrees } from '@/shared/api';
+import {
+  TCreateTreePayload,
+  TUpdateTreePayload,
+} from '@/shared/api/trees/types';
 import { TTree } from '@/shared/entities/tree';
-import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';
 import { FullscreenLoader } from '@/widgets';
 
 import List from './components/list';

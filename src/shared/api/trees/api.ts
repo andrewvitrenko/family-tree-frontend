@@ -1,8 +1,8 @@
+import { TPaginatedData, TPaginationParams } from '@/shared/api/types';
 import { TTree } from '@/shared/entities/tree';
-import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';
 
 import { Api } from '../api';
-import { TPaginatedData, TPaginationParams } from '../types';
+import { TCreateTreePayload, TUpdateTreePayload } from './types';
 
 class Trees extends Api {
   constructor() {

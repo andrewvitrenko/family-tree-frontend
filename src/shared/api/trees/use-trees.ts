@@ -7,13 +7,13 @@ import {
 import { useShallow } from 'zustand/react/shallow';
 
 import { useToast } from '@/features/toast';
+import { TPaginatedData } from '@/shared/api/types';
+import { getNextPageParam } from '@/shared/api/utils';
 import { TTree } from '@/shared/entities/tree';
 import { useTreesStore } from '@/store/trees';
-import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';
 
-import { TPaginatedData } from '../types';
-import { getNextPageParam } from '../utils';
 import { TreesApi } from './api';
+import { TCreateTreePayload, TUpdateTreePayload } from './types';
 
 type TUpdateTreeProps = {
   id: string;

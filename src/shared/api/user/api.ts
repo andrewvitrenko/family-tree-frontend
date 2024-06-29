@@ -1,8 +1,8 @@
+import { TPaginatedData, TPaginationParams } from '@/shared/api/types';
 import { TUser } from '@/shared/entities/user';
-import { TUserUpdatePayload } from '@/types/api/user';
 
 import { Api } from '../api';
-import { TPaginatedData, TPaginationParams } from '../types';
+import { TUserUpdatePayload } from './types';
 
 class User extends Api {
   constructor() {

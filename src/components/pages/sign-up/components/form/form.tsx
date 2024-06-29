@@ -5,7 +5,7 @@ import { FC, memo, useCallback } from 'react';
 import { FieldValues, FormProvider, useForm, Validate } from 'react-hook-form';
 
 import { PASSWORD_REGEX } from '@/constants/validation';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@/shared/api';
 import { Button, DateInput, Input, PasswordInput, Select } from '@/shared/ui';
 import { omit } from '@/utils';
 

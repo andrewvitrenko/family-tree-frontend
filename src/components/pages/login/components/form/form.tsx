@@ -5,7 +5,7 @@ import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { PASSWORD_REGEX } from '@/constants/validation';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@/shared/api';
 import { Button, Input, PasswordInput } from '@/shared/ui';
 
 import { TLoginForm } from '../../types/form';

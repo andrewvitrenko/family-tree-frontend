@@ -2,7 +2,7 @@
 
 import { FC, PropsWithChildren } from 'react';
 
-import { useUser } from '@/hooks/use-user';
+import { useUser } from '@/shared/api';
 import { FullscreenLoader } from '@/widgets';
 
 export const PageProtection: FC<PropsWithChildren> = ({ children }) => {

@@ -12,7 +12,7 @@ export const enum EMethod {
   DELETE = 'DELETE',
 }
 
-export type TQueryParams = {
+export type TPaginationParams = {
   search?: string;
   page?: number;
   take?: number;

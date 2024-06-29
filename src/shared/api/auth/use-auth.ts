@@ -2,11 +2,12 @@ import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
-import { Auth } from '@/api/auth';
 import { useToast } from '@/features/toast';
 import { ERoute } from '@/shared/entities/navigation';
 import { useUserStore } from '@/store/user';
 import { TLoginPayload, TSignUpPayload } from '@/types/api/auth';
+
+import { AuthApi } from './api';
 
 export type TUseAuth = {
   isLoggingIn: boolean;
@@ -29,14 +30,14 @@ export const useAuth = (): TUseAuth => {
 
   const { mutate: login, isLoading: isLoggingIn } = useMutation({
     mutationKey: ['auth.login'],
-    mutationFn: (payload: TLoginPayload) => Auth.login(payload),
+    mutationFn: (payload: TLoginPayload) => AuthApi.login(payload),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: () => router.push(ERoute.HOME),
   });
 
   const { mutate: signup, isLoading: isRegistering } = useMutation({
     mutationKey: ['auth.signup'],
-    mutationFn: (payload: TSignUpPayload) => Auth.register(payload),
+    mutationFn: (payload: TSignUpPayload) => AuthApi.register(payload),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: () => {
       toast.success('Welcome to our App!');
@@ -46,7 +47,7 @@ export const useAuth = (): TUseAuth => {
 
   const { mutate: logout, isLoading: isLoggingOut } = useMutation({
     mutationKey: ['auth.logout'],
-    mutationFn: () => Auth.logout(),
+    mutationFn: () => AuthApi.logout(),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: async () => {
       cleanUser();

@@ -1,13 +1,13 @@
 import axios, { AxiosInstance, AxiosRequestConfig, isAxiosError } from 'axios';
 
-import { EMethod, TError } from '@/types/api';
+import { EMethod, TError } from '../types';
 
 export class Http {
-  private instance: AxiosInstance;
+  private axios: AxiosInstance;
 
-  constructor() {
-    this.instance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_API_HOST,
+  constructor(module?: string) {
+    this.axios = axios.create({
+      baseURL: `${process.env.NEXT_PUBLIC_API_HOST}/${module}`,
       /**
        * need these fields to send cookies in cross domain XHR requests
        */
@@ -22,15 +22,18 @@ export class Http {
   }
 
   private setupInterceptors() {
-    this.instance.interceptors.response.use(
+    this.axios.interceptors.response.use(
       (response) => response,
       async (error) => {
         const status = error.response?.status;
         const originRequest = error.config;
         if (status === 403 && !originRequest.retry) {
           originRequest.retry = true;
-          await this.instance.post('/auth/refresh');
-          return this.instance.request(originRequest);
+          await this.axios.request({
+            url: `${process.env.NEXT_PUBLIC_API_HOST}/auth/refresh`,
+            method: EMethod.POST,
+          });
+          return this.axios.request(originRequest);
         }
         return Promise.reject(error);
       },
@@ -82,7 +85,7 @@ export class Http {
     config: AxiosRequestConfig<D> = {},
   ): Promise<R> {
     try {
-      const response = await this.instance.request<R>({
+      const response = await this.axios.request<R>({
         url,
         method,
         ...config,

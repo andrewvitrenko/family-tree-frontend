@@ -6,13 +6,14 @@ import {
 } from 'react-query';
 import { useShallow } from 'zustand/react/shallow';
 
-import { Tree } from '@/api/tree';
 import { useToast } from '@/features/toast';
 import { TTree } from '@/shared/entities/tree';
 import { useTreesStore } from '@/store/trees';
-import { TPaginatedData } from '@/types/api';
 import { TCreateTreePayload, TUpdateTreePayload } from '@/types/api/tree';
-import { getNextPageParam } from '@/utils';
+
+import { TPaginatedData } from '../types';
+import { getNextPageParam } from '../utils';
+import { TreesApi } from './api';
 
 type TUpdateTreeProps = {
   id: string;
@@ -46,7 +47,7 @@ export const useTrees = (search: string = ''): TUseTrees => {
     useInfiniteQuery({
       queryKey: ['trees', { search }],
       queryFn: ({ pageParam = 1 }) =>
-        Tree.getMany({ search, page: pageParam, take: 10 }),
+        TreesApi.getMany({ search, page: pageParam, take: 10 }),
       onError: (err) => toast.error((err as Error).message),
       getNextPageParam: getNextPageParam<TTree>,
       onSuccess: ({ pages }) => setTrees(pages.map(({ data }) => data).flat()),
@@ -55,30 +56,31 @@ export const useTrees = (search: string = ''): TUseTrees => {
 
   const { mutate: create, isLoading: isCreating } = useMutation({
     mutationKey: ['tree.add'],
-    mutationFn: (payload: TCreateTreePayload) => Tree.create(payload),
+    mutationFn: (payload: TCreateTreePayload) => TreesApi.create(payload),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: async (tree) => {
       await queryClient.invalidateQueries('trees');
-      toast.success(`Tree "${tree.name}" was successfully created`);
+      toast.success(`TreesApi "${tree.name}" was successfully created`);
     },
   });
 
   const { mutate: remove, isLoading: isDeleting } = useMutation({
     mutationKey: ['tree.remove'],
-    mutationFn: (id: string) => Tree.remove(id),
+    mutationFn: (id: string) => TreesApi.remove(id),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: async (tree) => {
       await queryClient.invalidateQueries('trees');
-      toast.success(`Tree "${tree.name}" was successfully deleted`);
+      toast.success(`TreesApi "${tree.name}" was successfully deleted`);
     },
   });
 
   const { mutate: update, isLoading: isUpdating } = useMutation({
     mutationKey: ['tree.update'],
-    mutationFn: ({ id, payload }: TUpdateTreeProps) => Tree.update(id, payload),
+    mutationFn: ({ id, payload }: TUpdateTreeProps) =>
+      TreesApi.update(id, payload),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: async (tree) => {
-      toast.success(`Tree ${tree.name} was successfully updated`);
+      toast.success(`TreesApi ${tree.name} was successfully updated`);
       await queryClient.invalidateQueries('trees');
     },
   });

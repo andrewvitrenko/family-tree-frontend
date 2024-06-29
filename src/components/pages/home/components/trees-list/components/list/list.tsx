@@ -5,7 +5,7 @@ import { FC, memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { PaginationAnchor } from '@/features';
-import { useTrees } from '@/hooks/use-trees';
+import { useTrees } from '@/shared/api';
 import { Loader } from '@/shared/ui';
 import { useTreesStore } from '@/store/trees';
 import { useUserStore } from '@/store/user';

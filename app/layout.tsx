@@ -8,7 +8,7 @@ import { FC, PropsWithChildren } from 'react';
 
 import { QueryProvider } from '@/features/query-provider';
 import { Toast } from '@/features/toast';
-import { theme } from '@/shared/config';
+import theme from '@/shared/config/theme';
 
 export const metadata: Metadata = {
   title: 'Family tree',

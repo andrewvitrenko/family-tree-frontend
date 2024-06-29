@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import { FC, memo, useCallback } from 'react';
 import { FieldValues, FormProvider, useForm, Validate } from 'react-hook-form';
 
-import { PASSWORD_REGEX } from '@/constants/validation';
 import { useAuth } from '@/features/auth';
+import { PASSWORD_REGEX } from '@/shared/config/validation';
 import { omit } from '@/shared/lib';
 import { Button, DateInput, Input, PasswordInput, Select } from '@/shared/ui';
 

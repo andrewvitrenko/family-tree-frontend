@@ -6,8 +6,9 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import type { Metadata } from 'next';
 import { FC, PropsWithChildren } from 'react';
 
-import { QueryProvider, ToastProvider } from '@/components/providers';
-import theme from '@/theme';
+import { QueryProvider } from '@/features/query-provider';
+import { Toast } from '@/features/toast';
+import theme from '@/shared/config/theme';
 
 export const metadata: Metadata = {
   title: 'Family tree',
@@ -22,7 +23,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <ToastProvider />
+              <Toast />
               {children}
             </ThemeProvider>
           </AppRouterCacheProvider>

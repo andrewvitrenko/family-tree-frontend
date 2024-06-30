@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 
-import SignUp from '@/components/pages/sign-up';
+import SignUpPage from '@/pages/sign-up';
 
-const SignUpPage: NextPage = () => {
-  return <SignUp />;
+const SignUp: NextPage = () => {
+  return <SignUpPage />;
 };
 
-export default SignUpPage;
+export default SignUp;

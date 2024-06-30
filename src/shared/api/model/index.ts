@@ -1,2 +1,2 @@
-export * from './common';
-export * from './pagination';
+export * from './http.model';
+export * from './pagination.model';

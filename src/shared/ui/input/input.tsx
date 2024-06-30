@@ -6,7 +6,7 @@ import { useController, useFormContext } from 'react-hook-form';
 
 import { mergeSx } from '@/shared/lib';
 
-import { TInputProps } from './types';
+import { TInputProps } from './model/props.model';
 
 const Input: FC<TInputProps> = ({
   name,

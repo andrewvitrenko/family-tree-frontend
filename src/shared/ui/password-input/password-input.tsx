@@ -5,7 +5,7 @@ import { IconButton, InputAdornment } from '@mui/material';
 import { FC, memo, useState } from 'react';
 
 import { Input } from '..';
-import { TPasswordInputProps } from './types';
+import { TPasswordInputProps } from './model/props.model';
 
 const PasswordInput: FC<TPasswordInputProps> = (props) => {
   const [showPassword, setShowPassword] = useState(false);

@@ -4,8 +4,8 @@ import { FC, memo } from 'react';
 
 import { mergeSx } from '@/shared/lib';
 
+import { TModalProps } from './model/props.model';
 import * as styles from './styles';
-import { TModalProps } from './types';
 
 const Modal: FC<TModalProps> = ({ children, sx, contentSx, ...props }) => {
   return (

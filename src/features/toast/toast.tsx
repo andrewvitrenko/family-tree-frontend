@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { FC, memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { useToastStore } from './store';
+import { useToastStore } from './model/store.model';
 import * as styles from './styles';
 
 const Toast: FC = () => {

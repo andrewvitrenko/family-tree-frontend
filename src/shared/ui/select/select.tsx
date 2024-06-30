@@ -6,7 +6,7 @@ import { useController, useFormContext } from 'react-hook-form';
 
 import { mergeSx } from '@/shared/lib';
 
-import { TSelectProps } from './types';
+import { TSelectProps } from './model/props.model';
 
 const Select: FC<TSelectProps> = ({
   defaultValue = '',

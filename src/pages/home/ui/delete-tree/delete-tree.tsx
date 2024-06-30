@@ -4,8 +4,8 @@ import { FC, memo } from 'react';
 
 import { Button, Modal } from '@/shared/ui';
 
+import { TDeleteTreeModalProps } from './model/props.model';
 import * as styles from './styles';
-import { TDeleteTreeModalProps } from './types';
 
 const DeleteTreeModal: FC<TDeleteTreeModalProps> = ({
   onCancel,

@@ -5,8 +5,9 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, Input, Modal } from '@/shared/ui';
 
+import { TCreateTreeForm } from './model/form.model';
+import { TCreateTreeModalProps } from './model/props.model';
 import * as styles from './styles';
-import { TCreateTreeForm, TCreateTreeModalProps } from './types';
 
 const CreateTreeModal: FC<TCreateTreeModalProps> = ({
   open,

@@ -8,8 +8,8 @@ import { useController, useFormContext } from 'react-hook-form';
 
 import { mergeSx } from '@/shared/lib';
 
+import { TDateInputProps } from './model/props.model';
 import * as styles from './styles';
-import { TDateInputProps } from './types';
 
 const DateInput: FC<TDateInputProps> = ({
   name,

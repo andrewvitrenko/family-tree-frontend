@@ -5,10 +5,10 @@ import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useAuth } from '@/features/auth';
+import { TLoginForm } from '@/pages/login/model/form.model';
 import { PASSWORD_REGEX } from '@/shared/config/validation';
 import { Button, Input, PasswordInput } from '@/shared/ui';
 
-import { TLoginForm } from '../../types/form';
 import * as styles from './styles';
 
 const Form: FC = () => {

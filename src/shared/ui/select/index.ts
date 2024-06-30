@@ -1,2 +1,2 @@
+export { type TSelectOption } from './model/props.model';
 export { default } from './select';
-export { type TSelectOption } from './types';

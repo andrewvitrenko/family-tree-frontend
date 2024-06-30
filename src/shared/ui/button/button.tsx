@@ -3,8 +3,8 @@ import { FC, memo } from 'react';
 
 import { mergeSx } from '@/shared/lib';
 
+import { TButtonProps } from './model/props.model';
 import * as styles from './styles';
-import { TButtonProps } from './types';
 
 const Button: FC<TButtonProps> = ({
   loading,

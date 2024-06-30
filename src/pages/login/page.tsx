@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
-import { ERoute } from '@/shared/model/navigation';
+import { ERoute } from '@/shared/model/navigation.model';
 import { Link } from '@/shared/ui';
 
 import * as styles from './styles';

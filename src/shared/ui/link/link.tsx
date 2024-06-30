@@ -2,7 +2,7 @@ import { Link as MuiLink, Typography } from '@mui/material';
 import NextLink from 'next/link';
 import { FC, memo } from 'react';
 
-import { TLinkProps } from './types';
+import { TLinkProps } from './model/props.model';
 
 const Link: FC<TLinkProps> = ({ to, children, ...props }) => {
   return (

@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { FC } from 'react';
 
-import { ERoute } from '@/shared/model/navigation';
+import { ERoute } from '@/shared/model/navigation.model';
 import { Link } from '@/shared/ui';
 
 import * as styles from './styles';

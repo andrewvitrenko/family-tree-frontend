@@ -1,6 +1,4 @@
-export type TUpdateTreeForm = {
-  name: string;
-};
+import { TUpdateTreeForm } from './form.model';
 
 export type TUpdateTreeModalProps = {
   open: boolean;

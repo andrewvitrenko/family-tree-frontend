@@ -1,1 +1,2 @@
-export { default, useTreesListContext } from './trees';
+export { useTreesListContext } from './model/context.model';
+export { default } from './trees';

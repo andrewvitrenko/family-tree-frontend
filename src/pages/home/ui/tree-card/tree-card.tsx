@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 
 import { useTreesListContext } from '../trees';
+import { TTreeCardProps } from './model/props.model';
 import * as styles from './styles';
-import { TTreeCardProps } from './types';
 
 const TreeCard: FC<TTreeCardProps> = ({ editable, ...tree }) => {
   const { openDeleteModal, openUpdateModal } = useTreesListContext();

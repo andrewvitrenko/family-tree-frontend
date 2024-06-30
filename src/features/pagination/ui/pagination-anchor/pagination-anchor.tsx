@@ -6,8 +6,8 @@ import { useInView } from 'react-intersection-observer';
 import { mergeSx } from '@/shared/lib';
 import { Loader } from '@/shared/ui';
 
+import { TPaginationAnchorProps } from './model/props.model';
 import * as styles from './styles';
-import { TPaginationAnchorProps } from './types';
 
 const PaginationAnchor: FC<TPaginationAnchorProps> = ({
   noNextPageText,

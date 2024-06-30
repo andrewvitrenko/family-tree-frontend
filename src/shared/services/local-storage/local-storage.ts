@@ -1,4 +1,4 @@
-import { ELocalStorageKey, TLocalStorageData } from './types';
+import { ELocalStorageKey, TLocalStorageData } from './model';
 
 class LocalStorageService {
   get<K extends ELocalStorageKey>(key: K): TLocalStorageData[K] | null;

@@ -4,8 +4,8 @@ import { FC, memo } from 'react';
 
 import { mergeSx } from '@/shared/lib';
 
+import { TLoaderProps } from './model/props.model';
 import * as styles from './styles';
-import { TLoaderProps } from './types';
 
 const Loader: FC<TLoaderProps> = ({ sx, ...props }) => {
   return (

@@ -4,10 +4,10 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { useUserStore } from '@/entities/user';
 import { useToast } from '@/features/toast';
-import { ERoute } from '@/shared/model/navigation';
+import { ERoute } from '@/shared/model/navigation.model';
 
 import { AuthApi } from '../api';
-import { TLoginPayload, TSignUpPayload } from '../model';
+import { TLoginPayload, TSignUpPayload } from '../model/payload.model';
 
 export type TUseAuth = {
   isLoggingIn: boolean;

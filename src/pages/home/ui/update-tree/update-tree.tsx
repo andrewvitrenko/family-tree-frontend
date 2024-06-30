@@ -5,8 +5,9 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, Input, Modal } from '@/shared/ui';
 
+import { TUpdateTreeForm } from './model/form.model';
+import { TUpdateTreeModalProps } from './model/props.model';
 import * as styles from './styles';
-import { TUpdateTreeForm, TUpdateTreeModalProps } from './types';
 
 const UpdateTreeModal: FC<TUpdateTreeModalProps> = ({
   name,

@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { useTrees, useTreesStore } from '@/entities/trees';
+import { useTrees } from '@/entities/trees';
 import { useUserStore } from '@/entities/user';
 import { PaginationAnchor } from '@/features/pagination';
 import { Loader } from '@/shared/ui';
@@ -13,19 +13,16 @@ import { TreeCard } from '..';
 import * as styles from './styles';
 
 const List: FC = () => {
-  const { isFetching, isFetchingNextPage, hasNextPage, fetchNextPage } =
+  const { trees, isFetching, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useTrees();
 
-  const { trees } = useTreesStore(
-    useShallow((state) => ({ trees: state.trees })),
-  );
   const { user } = useUserStore(useShallow((state) => ({ user: state.user })));
 
   if (isFetching) {
     return <Loader sx={styles.loader} />;
   }
 
-  if (!trees.length) {
+  if (!trees?.length) {
     return (
       <Typography sx={styles.emptyText}>
         No trees currently available

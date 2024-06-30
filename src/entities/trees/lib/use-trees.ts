@@ -1,10 +1,10 @@
+import { useMemo } from 'react';
 import {
   InfiniteQueryObserverResult,
   useInfiniteQuery,
   useMutation,
   useQueryClient,
 } from 'react-query';
-import { useShallow } from 'zustand/react/shallow';
 
 import { TTree } from '@/entities/trees';
 import { useToast } from '@/features/toast';
@@ -13,7 +13,6 @@ import { TPaginatedData } from '@/shared/api/model';
 
 import { TreesApi } from '../api';
 import { TCreateTreePayload, TUpdateTreePayload } from '../api/model';
-import { useTreesStore } from '../model';
 
 type TUpdateTreeProps = {
   id: string;
@@ -21,6 +20,7 @@ type TUpdateTreeProps = {
 };
 
 export type TUseTrees = {
+  trees?: TTree[];
   isFetching: boolean;
   isFetchingNextPage: boolean;
   hasNextPage?: boolean;
@@ -39,19 +39,14 @@ export const useTrees = (search: string = ''): TUseTrees => {
   const queryClient = useQueryClient();
 
   const toast = useToast();
-  const { setTrees } = useTreesStore(
-    useShallow((state) => ({ setTrees: state.setTrees })),
-  );
 
-  const { isFetching, isFetchingNextPage, hasNextPage, fetchNextPage } =
+  const { data, isFetching, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['trees', { search }],
       queryFn: ({ pageParam = 1 }) =>
         TreesApi.getMany({ search, page: pageParam, take: 10 }),
       onError: (err) => toast.error((err as Error).message),
       getNextPageParam: getNextPageParam<TTree>,
-      onSuccess: ({ pages }) => setTrees(pages.map(({ data }) => data).flat()),
-      notifyOnChangeProps: 'tracked',
     });
 
   const { mutate: create, isLoading: isCreating } = useMutation({
@@ -85,7 +80,13 @@ export const useTrees = (search: string = ''): TUseTrees => {
     },
   });
 
+  const trees = useMemo(
+    () => data?.pages.map(({ data }) => data).flat(),
+    [data],
+  );
+
   return {
+    trees,
     isFetching,
     isFetchingNextPage,
     hasNextPage,

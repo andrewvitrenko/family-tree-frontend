@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
 import { PageProtection } from '@/features/page-protection';
-import HomePage from '@/pages/home';
+import HomePage from '@/views/home';
 
 const Home: NextPage = () => {
   return (

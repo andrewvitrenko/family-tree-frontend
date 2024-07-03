@@ -1,13 +1,32 @@
+'use client';
+
 import Box from '@mui/material/Box';
-import { FC, memo, useCallback, useMemo, useState } from 'react';
+import {
+  createContext,
+  FC,
+  memo,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 import { TTree, useTrees } from '@/entities/trees';
 import { TCreateTreePayload, TUpdateTreePayload } from '@/entities/trees/api';
 import { FullscreenLoader } from '@/widgets';
 
 import { CreateTree, DeleteTree, List, Toolbar, UpdateTree } from '..';
-import { TreesListContext, TTreesListContext } from './model/context.model';
+import { TTreesListContext } from './model/context.model';
 import * as styles from './styles';
+
+export const TreesListContext = createContext<TTreesListContext>({
+  setSearch: () => {},
+  openCreateModal: () => {},
+  openDeleteModal: () => {},
+  openUpdateModal: () => {},
+});
+
+export const useTreesListContext = () => useContext(TreesListContext);
 
 const Trees: FC = () => {
   const [search, setSearch] = useState('');

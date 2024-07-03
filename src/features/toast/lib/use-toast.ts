@@ -1,5 +1,5 @@
 import { AlertColor } from '@mui/material/Alert';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useToastStore } from '@/features/toast/model/store.model';
@@ -9,7 +9,7 @@ type TUseToast = {
 };
 
 export const useToast = (): TUseToast => {
-  const { open } = useToastStore(useShallow((state) => ({ open: state.open })));
+  const open = useToastStore(useShallow((state) => state.open));
 
   const success = useCallback(
     (description: string) => open(description, 'success'),
@@ -31,5 +31,8 @@ export const useToast = (): TUseToast => {
     [open],
   );
 
-  return { success, error, info, warning };
+  return useMemo(
+    () => ({ success, error, info, warning }),
+    [error, info, success, warning],
+  );
 };

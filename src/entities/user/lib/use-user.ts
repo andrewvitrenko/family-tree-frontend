@@ -1,4 +1,7 @@
-import { QueryObserverResult, useQuery } from 'react-query';
+'use client';
+
+import { QueryObserverResult, useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useAuth } from '@/features/auth';
@@ -20,15 +23,23 @@ export const useUser = (): TUseUser => {
     useShallow((state) => ({ setUser: state.setUser })),
   );
 
-  const { status } = useQuery({
+  const { status, data, error } = useQuery({
     queryKey: ['user.me'],
     queryFn: () => UserApi.getMe(),
-    onError: (err) => {
-      toast.error((err as Error).message);
-      logout();
-    },
-    onSuccess: (user) => setUser(user),
   });
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message);
+      logout();
+    }
+  }, [error, logout, toast]);
+
+  useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [data, setUser]);
 
   return { status };
 };

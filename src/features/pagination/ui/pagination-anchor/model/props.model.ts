@@ -1,12 +1,15 @@
 import { Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
-import { InfiniteQueryObserverResult } from 'react-query';
+import {
+  InfiniteData,
+  InfiniteQueryObserverResult,
+} from '@tanstack/react-query';
 
 import { TPaginatedData } from '@/shared/api/model';
 
 export type TPaginationAnchorProps = {
   fetchNextPage: () => Promise<
-    InfiniteQueryObserverResult<TPaginatedData<object>, unknown>
+    InfiniteQueryObserverResult<InfiniteData<TPaginatedData<object>, unknown>>
   >;
   isLoading?: boolean;
   hasNextPage?: boolean;

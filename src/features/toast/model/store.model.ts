@@ -1,28 +1,18 @@
 import { AlertColor } from '@mui/material/Alert';
-import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
 import { TToast } from './toast.model';
 
 type TToastStore = {
-  toasts: TToast[];
+  toast: TToast;
   open: (description: string, severity: AlertColor) => void;
-  close: (id: string) => void;
+  close: () => void;
 };
 
 export const useToastStore = create<TToastStore>((set) => ({
-  toasts: [],
+  toast: { open: false, description: '', severity: 'info' },
   open: (description: string, severity: AlertColor) =>
-    set((state) => {
-      const toast: TToast = { description, severity, open: true, id: uuidv4() };
-      const toasts = [toast, ...state.toasts].slice(0, 5);
-
-      return { toasts };
-    }),
-  close: (id: string) =>
-    set((state) => {
-      const toasts = state.toasts.filter((toast) => toast.id !== id);
-
-      return { toasts };
-    }),
+    set({ toast: { open: true, description, severity } }),
+  close: () =>
+    set({ toast: { open: false, description: '', severity: 'info' } }),
 }));

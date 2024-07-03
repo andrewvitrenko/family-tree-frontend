@@ -1,3 +1,5 @@
+'use client';
+
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { FC, memo } from 'react';
@@ -7,20 +9,21 @@ import { useToastStore } from './model/store.model';
 import * as styles from './styles';
 
 const Toast: FC = () => {
-  const { toasts, close } = useToastStore(
-    useShallow((state) => ({ toasts: state.toasts, close: state.close })),
+  const { toast, close } = useToastStore(
+    useShallow((state) => ({ toast: state.toast, close: state.close })),
   );
 
-  return toasts.map(({ description, id, open, severity }) => (
+  const { open, description, severity } = toast;
+
+  return (
     <Snackbar
-      onClose={() => close(id)}
+      onClose={close}
       open={open}
       autoHideDuration={3000}
-      key={id}
       anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
     >
       <Alert
-        onClose={() => close(id)}
+        onClose={close}
         severity={severity}
         variant="filled"
         sx={styles.alert}
@@ -28,7 +31,7 @@ const Toast: FC = () => {
         {description}
       </Alert>
     </Snackbar>
-  ));
+  );
 };
 
 export default memo(Toast);

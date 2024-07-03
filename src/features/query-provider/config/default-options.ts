@@ -1,4 +1,4 @@
-import { DefaultOptions } from 'react-query';
+import { DefaultOptions } from '@tanstack/react-query';
 
 const defaultOptions: DefaultOptions = {
   mutations: { retry: false },
@@ -6,6 +6,7 @@ const defaultOptions: DefaultOptions = {
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    throwOnError: false,
   },
 };
 

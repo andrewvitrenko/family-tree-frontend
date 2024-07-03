@@ -5,10 +5,10 @@ import { FC, memo, useCallback } from 'react';
 import { FieldValues, FormProvider, useForm, Validate } from 'react-hook-form';
 
 import { useAuth } from '@/features/auth';
-import { TSignUpForm } from '@/pages/sign-up/model/form.model';
 import { PASSWORD_REGEX } from '@/shared/config/validation';
 import { omit } from '@/shared/lib';
 import { Button, DateInput, Input, PasswordInput, Select } from '@/shared/ui';
+import { TSignUpForm } from '@/views/sign-up/model/form.model';
 
 import { sexes } from './constants';
 import * as styles from './styles';

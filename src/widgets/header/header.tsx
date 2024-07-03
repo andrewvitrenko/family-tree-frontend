@@ -1,3 +1,5 @@
+'use client';
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import IconPerson from '@mui/icons-material/Person';
 import AppBar from '@mui/material/AppBar';

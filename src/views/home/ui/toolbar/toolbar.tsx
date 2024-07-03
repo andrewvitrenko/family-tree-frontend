@@ -1,3 +1,5 @@
+'use client';
+
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/ClearRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';

@@ -1,5 +1,8 @@
+'use client';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useMutation, useQueryClient } from 'react-query';
+import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useUserStore } from '@/entities/user';
@@ -28,35 +31,39 @@ export const useAuth = (): TUseAuth => {
     useShallow((state) => ({ cleanUser: state.clearUser })),
   );
 
-  const { mutate: login, isLoading: isLoggingIn } = useMutation({
+  const cleanUp = useCallback(async () => {
+    cleanUser();
+    await queryClient.invalidateQueries({
+      refetchType: 'none',
+    });
+    router.push(ERoute.LOGIN);
+  }, [cleanUser, queryClient, router]);
+
+  const { mutate: login, isPending: isLoggingIn } = useMutation({
     mutationKey: ['auth.login'],
     mutationFn: (payload: TLoginPayload) => AuthApi.login(payload),
-    onError: (err) => toast.error((err as Error).message),
+    onError: (error) => toast.error(error.message),
     onSuccess: () => router.push(ERoute.HOME),
   });
 
-  const { mutate: signup, isLoading: isRegistering } = useMutation({
+  const { mutate: signup, isPending: isRegistering } = useMutation({
     mutationKey: ['auth.signup'],
     mutationFn: (payload: TSignUpPayload) => AuthApi.register(payload),
-    onError: (err) => toast.error((err as Error).message),
+    onError: (error) => toast.error(error.message),
     onSuccess: () => {
       toast.success('Welcome to our App!');
       router.push(ERoute.HOME);
     },
   });
 
-  const { mutate: logout, isLoading: isLoggingOut } = useMutation({
+  const { mutate: logout, isPending: isLoggingOut } = useMutation({
     mutationKey: ['auth.logout'],
     mutationFn: () => AuthApi.logout(),
-    onError: (err) => toast.error((err as Error).message),
-    onSuccess: async () => {
-      cleanUser();
-      await queryClient.invalidateQueries({
-        refetchActive: false,
-        refetchInactive: false,
-      });
-      router.push(ERoute.LOGIN);
+    onError: async (error) => {
+      toast.error(error.message);
+      await cleanUp();
     },
+    onSuccess: cleanUp,
   });
 
   return {

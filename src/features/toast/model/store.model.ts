@@ -13,7 +13,6 @@ export const useToastStore = create<TToastStore>((set) => ({
   toast: { open: false, description: '', severity: 'info' },
   open: (description: string, severity: AlertColor) =>
     set({ toast: { open: true, description, severity } }),
-  // open: openToast(set),
   close: () =>
     set({ toast: { open: false, description: '', severity: 'info' } }),
 }));

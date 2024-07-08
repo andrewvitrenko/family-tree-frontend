@@ -1,0 +1,7 @@
+.git
+.husky
+.idea
+.vscode
+node_modules
+.env.example
+.next

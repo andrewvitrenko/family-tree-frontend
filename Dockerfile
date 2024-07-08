@@ -9,7 +9,7 @@ RUN npm ci
 RUN npm run build
 
 # This stage will go to production, make sure node images are same
-FROM node:22-alpine AS builder
+FROM node:22-alpine AS production
 
 WORKDIR /app
 

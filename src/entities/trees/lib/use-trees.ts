@@ -8,8 +8,10 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
 import { TTree } from '@/entities/trees';
+import { useTreesStore } from '@/entities/trees/model';
 import { useToast } from '@/features/toast';
 import { getNextPageParam } from '@/shared/api/lib';
 import { TPaginatedData } from '@/shared/api/model';
@@ -38,7 +40,11 @@ export type TUseTrees = {
   >;
 };
 
-export const useTrees = (search: string = ''): TUseTrees => {
+export const useTrees = (): TUseTrees => {
+  const { search } = useTreesStore(
+    useShallow((state) => ({ search: state.search })),
+  );
+
   const queryClient = useQueryClient();
 
   const toast = useToast();

@@ -1,99 +1,86 @@
 'use client';
 
 import Box from '@mui/material/Box';
-import {
-  createContext,
-  FC,
-  memo,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
+import { FC, memo, useCallback } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
-import { TTree, useTrees } from '@/entities/trees';
+import { useTrees } from '@/entities/trees';
 import { TCreateTreePayload, TUpdateTreePayload } from '@/entities/trees/api';
+import { useTreesStore } from '@/entities/trees/model';
 import { FullscreenLoader } from '@/widgets';
 
-import { CreateTree, DeleteTree, List, Toolbar, UpdateTree } from '..';
-import { TTreesListContext } from './model/context.model';
+import { CreateTree, DeleteTree, EditTree, List, Toolbar } from '..';
 import * as styles from './styles';
 
-export const TreesListContext = createContext<TTreesListContext>({
-  setSearch: () => {},
-  openCreateModal: () => {},
-  openDeleteModal: () => {},
-  openUpdateModal: () => {},
-});
-
-export const useTreesListContext = () => useContext(TreesListContext);
-
 const Trees: FC = () => {
-  const [search, setSearch] = useState('');
-  const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [updateModalOpen, setUpdateModalOpen] = useState(false);
-  const [currentTree, setCurrentTree] = useState<TTree | null>(null);
-
   const { isCreating, isDeleting, isUpdating, create, remove, update } =
-    useTrees(search);
+    useTrees();
 
-  const openCreateModal = useCallback(() => setCreateModalOpen(true), []);
-  const closeCreateModal = useCallback(() => setCreateModalOpen(false), []);
+  const {
+    currentTree,
+    setTree,
+    createModalOpen,
+    deleteModalOpen,
+    editModalOpen,
+    toggleCreateModal,
+    toggleDeleteModal,
+    toggleEditModal,
+  } = useTreesStore(
+    useShallow((state) => ({
+      currentTree: state.currentTree,
+      setTree: state.setTree,
+      createModalOpen: state.createModalOpen,
+      editModalOpen: state.editModalOpen,
+      deleteModalOpen: state.deleteModalOpen,
+      toggleCreateModal: state.toggleCreatModal,
+      toggleEditModal: state.toggleEditModal,
+      toggleDeleteModal: state.toggleDeleteModal,
+    })),
+  );
 
-  const openDeleteModal = useCallback((tree: TTree) => {
-    setCurrentTree(tree);
-    setDeleteModalOpen(true);
-  }, []);
+  const closeCreateModal = useCallback(
+    () => toggleCreateModal(false),
+    [toggleCreateModal],
+  );
 
   const closeDeleteModal = useCallback(() => {
-    setDeleteModalOpen(false);
-    setCurrentTree(null);
-  }, []);
+    toggleDeleteModal(false);
+    setTree(null);
+  }, [setTree, toggleDeleteModal]);
 
-  const openUpdateModal = useCallback((tree: TTree) => {
-    setCurrentTree(tree);
-    setUpdateModalOpen(true);
-  }, []);
-
-  const closeUpdateModal = useCallback(() => {
-    setUpdateModalOpen(false);
-    setCurrentTree(null);
-  }, []);
+  const closeEditModal = useCallback(() => {
+    toggleEditModal(false);
+    setTree(null);
+  }, [setTree, toggleEditModal]);
 
   const createTree = useCallback(
     (payload: TCreateTreePayload) => {
-      setCreateModalOpen(false);
+      toggleCreateModal(false);
       create(payload);
     },
-    [create],
+    [create, toggleCreateModal],
   );
 
   const deleteTree = useCallback(() => {
     if (!currentTree) return;
 
-    setDeleteModalOpen(false);
+    toggleDeleteModal(false);
     remove(currentTree.id);
-    setCurrentTree(null);
-  }, [currentTree, remove]);
+    setTree(null);
+  }, [currentTree, setTree, remove, toggleDeleteModal]);
 
-  const updateTree = useCallback(
+  const editTree = useCallback(
     (payload: TUpdateTreePayload) => {
       if (!currentTree) return;
 
-      setUpdateModalOpen(false);
+      toggleEditModal(false);
       update({ id: currentTree.id, payload });
     },
-    [update, currentTree],
-  );
-
-  const value: TTreesListContext = useMemo(
-    () => ({ setSearch, openCreateModal, openDeleteModal, openUpdateModal }),
-    [openCreateModal, openDeleteModal, openUpdateModal],
+    [update, currentTree, toggleEditModal],
   );
 
   return (
-    <TreesListContext.Provider value={value}>
+    <>
       <Box sx={styles.wrapper}>
         <Box sx={styles.container}>
           <Toolbar />
@@ -109,16 +96,14 @@ const Trees: FC = () => {
         open={deleteModalOpen}
         onCancel={closeDeleteModal}
         onSubmit={deleteTree}
-        name={currentTree?.name}
       />
-      <UpdateTree
-        open={updateModalOpen}
-        onSubmit={updateTree}
-        onCancel={closeUpdateModal}
-        name={currentTree?.name}
+      <EditTree
+        open={editModalOpen}
+        onSubmit={editTree}
+        onCancel={closeEditModal}
       />
       {(isCreating || isDeleting || isUpdating) && <FullscreenLoader />}
-    </TreesListContext.Provider>
+    </>
   );
 };
 

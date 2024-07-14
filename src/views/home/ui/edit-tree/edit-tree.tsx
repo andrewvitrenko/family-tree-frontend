@@ -4,30 +4,35 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useShallow } from 'zustand/react/shallow';
 
+import { useTreesStore } from '@/entities/trees/model';
 import { Button, Input, Modal } from '@/shared/ui';
 
-import { TUpdateTreeForm } from './model/form.model';
-import { TUpdateTreeModalProps } from './model/props.model';
+import { TEditTreeForm } from './model/form.model';
+import { TEditTreeModalProps } from './model/props.model';
 import * as styles from './styles';
 
-const UpdateTreeModal: FC<TUpdateTreeModalProps> = ({
-  name,
+const EditTreeModal: FC<TEditTreeModalProps> = ({
   onCancel,
   onSubmit,
   open,
 }) => {
-  const formMethods = useForm<TUpdateTreeForm>();
+  const { tree } = useTreesStore(
+    useShallow((state) => ({ tree: state.currentTree })),
+  );
+
+  const formMethods = useForm<TEditTreeForm>();
 
   return (
     <Modal open={open} onClose={onCancel}>
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-          <Typography sx={styles.title}>Update tree {name}</Typography>
+          <Typography sx={styles.title}>Update tree {tree?.name}</Typography>
           <Input
             required
             shouldUnregister
-            defaultValue={name}
+            defaultValue={tree?.name}
             name="name"
             label="Name"
             placeholder="Enter new name"
@@ -47,4 +52,4 @@ const UpdateTreeModal: FC<TUpdateTreeModalProps> = ({
   );
 };
 
-export default memo(UpdateTreeModal);
+export default memo(EditTreeModal);

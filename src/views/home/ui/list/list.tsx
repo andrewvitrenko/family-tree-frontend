@@ -35,7 +35,7 @@ const List: FC = () => {
       <Grid container spacing={4}>
         {trees.map((tree) => (
           <Grid key={tree.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
-            <TreeCard {...tree} editable={tree.ownerId === user?.id} />
+            <TreeCard tree={tree} editable={tree.ownerId === user?.id} />
           </Grid>
         ))}
       </Grid>

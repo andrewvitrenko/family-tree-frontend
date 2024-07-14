@@ -1,3 +1,5 @@
+'use client';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Card from '@mui/material/Card';
@@ -5,17 +7,32 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { FC, memo } from 'react';
+import { FC, memo, useCallback } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
-import { useTreesListContext } from '../trees';
+import { useTreesStore } from '@/entities/trees/model';
+
 import { TTreeCardProps } from './model/props.model';
 import * as styles from './styles';
 
-const TreeCard: FC<TTreeCardProps> = ({ editable, ...tree }) => {
-  const { openDeleteModal, openUpdateModal } = useTreesListContext();
+const TreeCard: FC<TTreeCardProps> = ({ editable, tree }) => {
+  const { toggleDeleteModal, toggleEditModal, setTree } = useTreesStore(
+    useShallow((state) => ({
+      toggleEditModal: state.toggleEditModal,
+      toggleDeleteModal: state.toggleDeleteModal,
+      setTree: state.setTree,
+    })),
+  );
 
-  const onDeleteClick = () => openDeleteModal(tree);
-  const onEditClick = () => openUpdateModal(tree);
+  const onDeleteClick = useCallback(() => {
+    setTree(tree);
+    toggleDeleteModal(true);
+  }, [toggleDeleteModal, setTree, tree]);
+
+  const onEditClick = useCallback(() => {
+    setTree(tree);
+    toggleEditModal(true);
+  }, [setTree, toggleEditModal, tree]);
 
   return (
     <Card>

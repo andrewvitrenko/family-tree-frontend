@@ -6,7 +6,7 @@ type TTreesStore = {
   search: string;
   setSearch: (search: string) => void;
   createModalOpen: boolean;
-  toggleCreatModal: (value: boolean) => void;
+  toggleCreateModal: (value: boolean) => void;
   editModalOpen: boolean;
   toggleEditModal: (value: boolean) => void;
   deleteModalOpen: boolean;
@@ -23,7 +23,8 @@ export const useTreesStore = create<TTreesStore>((set) => ({
   currentTree: null,
   setSearch: (search: string) => set(() => ({ search })),
   setTree: (tree: TTree | null) => set(() => ({ currentTree: tree })),
-  toggleCreatModal: (value: boolean) => set(() => ({ createModalOpen: value })),
+  toggleCreateModal: (value: boolean) =>
+    set(() => ({ createModalOpen: value })),
   toggleEditModal: (value: boolean) => set(() => ({ editModalOpen: value })),
   toggleDeleteModal: (value: boolean) =>
     set(() => ({ deleteModalOpen: value })),

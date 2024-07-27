@@ -19,7 +19,7 @@ const Toolbar: FC = () => {
   const { setQuerySearch, toggleCreateModal } = useTreesStore(
     useShallow((state) => ({
       setQuerySearch: state.setSearch,
-      toggleCreateModal: state.toggleCreatModal,
+      toggleCreateModal: state.toggleCreateModal,
     })),
   );
 

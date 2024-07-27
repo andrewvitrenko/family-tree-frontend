@@ -13,8 +13,19 @@ import { CreateTree, DeleteTree, EditTree, List, Toolbar } from '..';
 import * as styles from './styles';
 
 const Trees: FC = () => {
-  const { isCreating, isDeleting, isUpdating, create, remove, update } =
-    useTrees();
+  const {
+    isCreating,
+    isDeleting,
+    isUpdating,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+    trees,
+    fetchNextPage,
+    create,
+    remove,
+    update,
+  } = useTrees();
 
   const {
     currentTree,
@@ -32,7 +43,7 @@ const Trees: FC = () => {
       createModalOpen: state.createModalOpen,
       editModalOpen: state.editModalOpen,
       deleteModalOpen: state.deleteModalOpen,
-      toggleCreateModal: state.toggleCreatModal,
+      toggleCreateModal: state.toggleCreateModal,
       toggleEditModal: state.toggleEditModal,
       toggleDeleteModal: state.toggleDeleteModal,
     })),
@@ -58,7 +69,7 @@ const Trees: FC = () => {
       toggleCreateModal(false);
       create(payload);
     },
-    [create, toggleCreateModal],
+    [toggleCreateModal, create],
   );
 
   const deleteTree = useCallback(() => {
@@ -67,7 +78,7 @@ const Trees: FC = () => {
     toggleDeleteModal(false);
     remove(currentTree.id);
     setTree(null);
-  }, [currentTree, setTree, remove, toggleDeleteModal]);
+  }, [currentTree, setTree, toggleDeleteModal, remove]);
 
   const editTree = useCallback(
     (payload: TUpdateTreePayload) => {
@@ -76,7 +87,7 @@ const Trees: FC = () => {
       toggleEditModal(false);
       update({ id: currentTree.id, payload });
     },
-    [update, currentTree, toggleEditModal],
+    [currentTree, toggleEditModal, update],
   );
 
   return (
@@ -84,7 +95,13 @@ const Trees: FC = () => {
       <Box sx={styles.wrapper}>
         <Box sx={styles.container}>
           <Toolbar />
-          <List />
+          <List
+            trees={trees}
+            isFetching={isFetching}
+            isFetchingNextPage={isFetchingNextPage}
+            hasNextPage={hasNextPage}
+            fetchNextPage={fetchNextPage}
+          />
         </Box>
       </Box>
       <CreateTree

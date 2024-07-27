@@ -105,7 +105,7 @@ export const useTrees = (): TUseTrees => {
 
   const trees = useMemo(
     () => data?.pages.map(({ data }) => data).flat(),
-    [data],
+    [data?.pages],
   );
 
   return {

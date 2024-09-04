@@ -1,16 +1,4 @@
-import { ESex, TUser } from '@/entities/user';
-
-export type TParentRelationship = {
-  id: string;
-  parent: TUser;
-  child: TUser;
-};
-
-export type TSpouseRelationship = {
-  id: string;
-  wife: TUser;
-  husband: TUser;
-};
+import { ESex } from '@/entities/user';
 
 export type TPerson = {
   id: string;
@@ -19,17 +7,28 @@ export type TPerson = {
   sex: ESex;
   dateOfBirth: string;
   dateOfDeath?: string;
+  nodeId: string;
+};
+
+export type TRelation = {
+  id: string;
+  sourceId: string;
+  targetId: string;
+};
+
+export type TNode = {
+  id: string;
   treeId: string;
-  userId?: string;
-  parents: TParentRelationship[];
-  children: TParentRelationship[];
-  wife?: TSpouseRelationship;
-  husband?: TSpouseRelationship;
+  person: TPerson;
+  x: number;
+  y: number;
+  inRelations: TRelation[];
+  outRelations: TRelation[];
 };
 
 export type TTree = {
   id: string;
   name: string;
   ownerId: string;
-  people: TPerson[];
+  nodes: TNode[];
 };

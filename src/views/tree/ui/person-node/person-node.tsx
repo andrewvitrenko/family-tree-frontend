@@ -14,11 +14,11 @@ import Name from '../name';
 import * as styles from './styles';
 
 const PersonNode: FC<TNodeProps<TPerson>> = ({ data }) => {
-  const { firstName, lastName, sex, dateOfBirth, dateOfDeath } = data;
+  const { firstName, lastName, dateOfBirth, dateOfDeath } = data;
 
   return (
     <Card sx={styles.container}>
-      <Handlers sex={sex} />
+      <Handlers />
       <CardContent>
         <Name firstName={firstName} lastName={lastName} />
         <Divider sx={styles.divider} />

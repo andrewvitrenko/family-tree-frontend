@@ -20,12 +20,14 @@ import { TFlowProps } from '../../model/props.model';
 import * as styles from './styles';
 
 const Flow: FC<TFlowProps> = ({
-  nodes: initialNodes,
+  nodes: initialNodes = [],
+  edges: initialEdges = [],
   onNodesChange: handleNodesChange,
   ...props
 }) => {
   const [nodes, , onNodesStateChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesStateChange] = useEdgesState<Edge>([]);
+  const [edges, setEdges, onEdgesStateChange] =
+    useEdgesState<Edge>(initialEdges);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {

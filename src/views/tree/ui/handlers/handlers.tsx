@@ -1,15 +1,20 @@
-import { Handle } from '@xyflow/react';
-import { FC, memo, useMemo } from 'react';
+import { styled } from '@mui/material';
+import { Handle as ReactFlowHandle } from '@xyflow/react';
+import { FC, memo } from 'react';
 
-import { sexBasedHandlers } from './config/handlers.config';
-import { THandlersProps } from './model/props.model';
+import { handlers } from './config/handlers.config';
 
-const Handlers: FC<THandlersProps> = ({ sex }) => {
-  const handlersConfig = useMemo(() => sexBasedHandlers[sex], [sex]);
+const Handle = styled(ReactFlowHandle)({
+  width: 0,
+  height: 0,
+  minHeight: 'unset',
+  maxHeight: 'unset',
+});
 
+const Handlers: FC = () => {
   return (
     <>
-      {handlersConfig.map((handler) => (
+      {handlers.map((handler) => (
         <Handle key={handler.id} {...handler} />
       ))}
     </>

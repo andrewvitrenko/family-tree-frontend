@@ -12,8 +12,8 @@ export type TPerson = {
 
 export type TRelation = {
   id: string;
-  sourceId: string;
-  targetId: string;
+  parentId: string;
+  childId: string;
 };
 
 export type TNode = {
@@ -22,8 +22,8 @@ export type TNode = {
   person: TPerson;
   x: number;
   y: number;
-  inRelations: TRelation[];
-  outRelations: TRelation[];
+  parents: TRelation[];
+  children: TRelation[];
 };
 
 export type TTree = {

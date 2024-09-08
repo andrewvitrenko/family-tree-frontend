@@ -8,7 +8,7 @@ export type TUpdateTreePayload = {
   name: string;
 };
 
-export type TAddNodePayload = {
+export type TAddRelativePayload = {
   firstName: string;
   lastName: string;
   dateOfBirth: string;

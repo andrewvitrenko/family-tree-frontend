@@ -1,30 +1,32 @@
 'use client';
 
-import { CardContent } from '@mui/material';
-import Card from '@mui/material/Card';
+import { Box } from '@mui/material';
 import { FC, memo } from 'react';
 
 import { TPerson } from '@/entities/trees';
 import { TNodeProps } from '@/features/flow/model/node.model';
-import { Divider } from '@/shared/ui';
 
-import Dates from '../dates';
+import ConnectionButton from '../connection-button';
 import Handlers from '../handlers';
-import Name from '../name';
+import PersonInfo from '../person-info';
 import * as styles from './styles';
 
-const PersonNode: FC<TNodeProps<TPerson>> = ({ data }) => {
-  const { firstName, lastName, dateOfBirth, dateOfDeath } = data;
-
+const PersonNode: FC<TNodeProps<TPerson>> = ({ id, data }) => {
   return (
-    <Card sx={styles.container}>
+    <Box sx={styles.container}>
       <Handlers />
-      <CardContent>
-        <Name firstName={firstName} lastName={lastName} />
-        <Divider sx={styles.divider} />
-        <Dates dateOfBirth={dateOfBirth} dateOfDeath={dateOfDeath} />
-      </CardContent>
-    </Card>
+      <ConnectionButton
+        sx={styles.addParentButton}
+        connectionType="parent"
+        sourceId={id}
+      />
+      <PersonInfo {...data} />
+      <ConnectionButton
+        sx={styles.addChildButton}
+        connectionType="child"
+        sourceId={id}
+      />
+    </Box>
   );
 };
 

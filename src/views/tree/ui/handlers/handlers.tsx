@@ -1,15 +1,21 @@
 import { styled } from '@mui/material';
-import { Handle as ReactFlowHandle } from '@xyflow/react';
+import {
+  Handle as ReactFlowHandle,
+  HandleProps,
+  Position,
+} from '@xyflow/react';
 import { FC, memo } from 'react';
 
 import { handlers } from './config/handlers.config';
 
-const Handle = styled(ReactFlowHandle)({
+const Handle = styled(ReactFlowHandle)<HandleProps>(({ position }) => ({
   width: 0,
   height: 0,
   minHeight: 'unset',
   maxHeight: 'unset',
-});
+  ...(position === Position.Top && { top: '1rem' }),
+  ...(position === Position.Bottom && { bottom: '1rem' }),
+}));
 
 const Handlers: FC = () => {
   return (

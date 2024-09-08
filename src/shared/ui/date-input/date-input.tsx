@@ -14,7 +14,7 @@ import * as styles from './styles';
 const DateInput: FC<TDateInputProps> = ({
   name,
   format,
-  defaultValue = new Date(),
+  defaultValue,
   onChange,
   required,
   disabled,

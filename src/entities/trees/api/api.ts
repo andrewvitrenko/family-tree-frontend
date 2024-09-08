@@ -5,7 +5,7 @@ import { TPaginatedData, TPaginationParams } from '@/shared/api/model';
 
 import { TNode, TTree } from '../model';
 import {
-  TAddNodePayload,
+  TAddRelativePayload,
   TCreateTreePayload,
   TUpdateNodePayload,
   TUpdateTreePayload,
@@ -36,8 +36,26 @@ class Trees extends Api {
     return this.http.remove<TTree>(`/${id}`);
   }
 
-  addNode(treeId: string, payload: TAddNodePayload): Promise<TNode> {
-    return this.http.post<TNode, TAddNodePayload>(`/${treeId}/node`, payload);
+  addParent(
+    treeId: string,
+    childId: string,
+    payload: TAddRelativePayload,
+  ): Promise<TNode> {
+    return this.http.post<TNode, TAddRelativePayload>(
+      `/${treeId}/${childId}/add-parent`,
+      payload,
+    );
+  }
+
+  addChild(
+    treeId: string,
+    parentId: string,
+    payload: TAddRelativePayload,
+  ): Promise<TNode> {
+    return this.http.post<TNode, TAddRelativePayload>(
+      `/${treeId}/${parentId}/add-child`,
+      payload,
+    );
   }
 
   updateNode(

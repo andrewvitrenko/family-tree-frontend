@@ -1,11 +1,27 @@
-import { SxProps, Theme } from '@mui/material';
+import { SxProps } from '@mui/material';
+import { Theme } from '@mui/system';
 
 export const container: SxProps<Theme> = {
-  width: '15rem',
-  height: '15rem',
-  borderRadius: '0.5rem',
+  padding: '1rem',
+  borderRadius: '1rem',
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'relative',
+
+  '&:hover > .MuiButton-root': {
+    transform: 'scale(1)',
+  },
+
+  '&:hover .MuiCard-root': {
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+  },
 };
 
-export const divider: SxProps<Theme> = {
-  my: '0.5rem',
+export const addParentButton: SxProps<Theme> = {
+  top: 0,
+};
+
+export const addChildButton: SxProps<Theme> = {
+  bottom: 0,
 };

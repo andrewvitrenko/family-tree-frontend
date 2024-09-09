@@ -18,6 +18,7 @@ const TreePage: FC<TTreePageProps> = ({ tree }) => {
         position: { x: node.x, y: node.y },
         type: ENodeType.PERSON,
         data: node.person,
+        draggable: false,
       })),
     [tree.nodes],
   );

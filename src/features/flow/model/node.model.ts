@@ -6,7 +6,7 @@ import { ComponentType } from 'react';
  * It is needed for the React Flow to understand the types.
  * */
 export type TNode<
-  D extends Record<string, unknown>,
+  D extends Record<string, unknown> = Record<string, unknown>,
   T extends string = string,
 > = Node<D, T>;
 

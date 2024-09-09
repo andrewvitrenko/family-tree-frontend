@@ -36,7 +36,9 @@ const ConnectionModal: FC<TConnectionModalProps> = ({
               label="Death date"
               maxDate={new Date()}
             />
-            <Button type="submit">Add</Button>
+            <Button disabled={methods.formState.isValid} type="submit">
+              Add
+            </Button>
           </Box>
         </form>
       </FormProvider>

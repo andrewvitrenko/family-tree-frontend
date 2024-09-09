@@ -28,11 +28,8 @@ const DateInput: FC<TDateInputProps> = ({
     rules: { onChange, required },
   });
 
-  console.log('useEffect', field.value);
-
   const onDateChange = useCallback(
     (date: Date | null) => {
-      console.log('onChange', date);
       const value = date ? formatISO(date) : null;
 
       setValue(name, value, {

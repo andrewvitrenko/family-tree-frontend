@@ -29,6 +29,7 @@ const ConnectionModal: FC<TConnectionModalProps> = ({
               label="Birth date"
               required
               maxDate={new Date()}
+              defaultValue={new Date()}
             />
             <DateInput
               name="dateOfDeath"

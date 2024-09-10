@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { FC, memo } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, DateInput, Input, Modal, Select } from '@/shared/ui';
@@ -13,8 +13,15 @@ const ConnectionModal: FC<TConnectionModalProps> = ({
   onClose,
   onSubmit,
   open,
+  isLoading,
 }) => {
   const methods = useForm<TConnectionForm>();
+
+  useEffect(() => {
+    if (methods.formState.isSubmitSuccessful && !isLoading) {
+      onClose();
+    }
+  }, [methods.formState.isSubmitSuccessful, isLoading, onClose]);
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -36,7 +43,11 @@ const ConnectionModal: FC<TConnectionModalProps> = ({
               label="Death date"
               maxDate={new Date()}
             />
-            <Button disabled={!methods.formState.isValid} type="submit">
+            <Button
+              disabled={!methods.formState.isValid}
+              loading={isLoading}
+              type="submit"
+            >
               Add
             </Button>
           </Box>

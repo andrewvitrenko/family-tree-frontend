@@ -16,7 +16,6 @@ type TTreeStore = {
   setEdges: (edges: Edge[]) => void;
   onNodesChange: (changes: NodeChange<TPersonNode>[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
-  addNode: (node: TPersonNode) => void;
 };
 
 export const useTreeStore = create<TTreeStore>((set, get) => ({
@@ -28,5 +27,4 @@ export const useTreeStore = create<TTreeStore>((set, get) => ({
     set({ nodes: applyNodeChanges<TPersonNode>(changes, get().nodes) }),
   onEdgesChange: (changes) =>
     set({ edges: applyEdgeChanges(changes, get().edges) }),
-  addNode: (node) => set({ nodes: [...get().nodes, node] }),
 }));

@@ -3,7 +3,8 @@ import { FC, useMemo } from 'react';
 
 import { TTree } from '@/entities/trees';
 
-import { ENodeType, TPersonNode } from './model/flow.model';
+import { Adapter } from './lib';
+import { TPersonNode } from './model/flow.model';
 import TreeFlow from './ui/tree-flow';
 
 type TTreePageProps = {
@@ -12,27 +13,14 @@ type TTreePageProps = {
 
 const TreePage: FC<TTreePageProps> = ({ tree }) => {
   const nodes: TPersonNode[] = useMemo(
-    () =>
-      tree.nodes.map((node) => ({
-        id: node.id,
-        position: { x: node.x, y: node.y },
-        type: ENodeType.PERSON,
-        data: node.person,
-        draggable: false,
-      })),
+    () => tree.nodes.map(Adapter.adaptNode),
     [tree.nodes],
   );
 
   const edges: Edge[] = useMemo(() => {
-    const relations = tree.nodes.flatMap(({ children }) => children);
-
-    return relations.map(({ childId, parentId, id }) => ({
-      id,
-      source: parentId,
-      target: childId,
-      sourceHandle: 'source-bottom',
-      targetHandle: 'target-top',
-    }));
+    return tree.nodes
+      .flatMap(({ children }) => children)
+      .map(Adapter.adaptEdge);
   }, [tree.nodes]);
 
   return <TreeFlow nodes={nodes} edges={edges} />;

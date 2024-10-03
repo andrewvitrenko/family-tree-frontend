@@ -7,7 +7,6 @@ export const button: SxProps<Theme> = {
   borderRadius: '99rem',
   padding: 0,
   minWidth: 'unset',
-  position: 'absolute',
   backgroundColor: 'primary.light',
   transform: 'scale(0)',
   transition: 'transform 0.3s ease-in-out',

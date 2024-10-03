@@ -7,7 +7,7 @@ import {
 } from '@xyflow/react';
 import { create } from 'zustand';
 
-import { TPersonNode } from './flow.model';
+import { TPersonNode } from '../model/flow.model';
 
 type TTreeStore = {
   nodes: TPersonNode[];

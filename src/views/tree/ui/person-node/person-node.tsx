@@ -1,31 +1,37 @@
 'use client';
 
 import { Box } from '@mui/material';
-import { FC, memo } from 'react';
+import { FC, memo, useMemo } from 'react';
 
 import { TPerson } from '@/entities/trees';
 import { TNodeProps } from '@/features/flow/model/node.model';
+import AddChild from '@/views/tree/ui/add-child';
+import AddParent from '@/views/tree/ui/add-parent';
 
-import ConnectionButton from '../connection-button';
 import Handlers from '../handlers';
 import PersonInfo from '../person-info';
 import * as styles from './styles';
 
-const PersonNode: FC<TNodeProps<TPerson>> = ({ id, data }) => {
+const PersonNode: FC<TNodeProps<TPerson>> = ({
+  id,
+  positionAbsoluteX,
+  positionAbsoluteY,
+  data,
+}) => {
+  const position = useMemo(
+    () => ({
+      x: positionAbsoluteX,
+      y: positionAbsoluteY,
+    }),
+    [positionAbsoluteX, positionAbsoluteY],
+  );
+
   return (
     <Box sx={styles.container}>
+      <AddParent sourceId={id} position={position} />
       <Handlers />
-      <ConnectionButton
-        sx={styles.addParentButton}
-        connectionType="parent"
-        sourceId={id}
-      />
       <PersonInfo {...data} />
-      <ConnectionButton
-        sx={styles.addChildButton}
-        connectionType="child"
-        sourceId={id}
-      />
+      <AddChild sourceId={id} position={position} />
     </Box>
   );
 };

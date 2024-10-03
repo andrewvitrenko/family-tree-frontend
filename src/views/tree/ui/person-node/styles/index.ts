@@ -17,11 +17,3 @@ export const container: SxProps<Theme> = {
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
   },
 };
-
-export const addParentButton: SxProps<Theme> = {
-  top: 0,
-};
-
-export const addChildButton: SxProps<Theme> = {
-  bottom: 0,
-};

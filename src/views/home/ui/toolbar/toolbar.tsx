@@ -1,6 +1,5 @@
 'use client';
 
-import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/ClearRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
 import Box from '@mui/material/Box';
@@ -11,15 +10,14 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { useTreesStore } from '@/entities/trees/model';
 import { useDebounce } from '@/shared/hooks';
-import { Button } from '@/shared/ui';
+import { CreateTree } from '@/views/home/ui';
 
 import * as styles from './styles';
 
 const Toolbar: FC = () => {
-  const { setQuerySearch, toggleCreateModal } = useTreesStore(
+  const { setQuerySearch } = useTreesStore(
     useShallow((state) => ({
       setQuerySearch: state.setSearch,
-      toggleCreateModal: state.toggleCreateModal,
     })),
   );
 
@@ -35,8 +33,6 @@ const Toolbar: FC = () => {
     setSearch('');
     ref.current?.focus();
   };
-
-  const onCreateClick = () => toggleCreateModal(true);
 
   useEffect(() => {
     setQuerySearch(debouncedSearch.trim());
@@ -60,14 +56,7 @@ const Toolbar: FC = () => {
         inputRef={ref}
         onChange={onChange}
       />
-      <Button
-        variant="text"
-        sx={styles.button}
-        onClick={onCreateClick}
-        startIcon={<AddIcon />}
-      >
-        Create
-      </Button>
+      <CreateTree />
     </Box>
   );
 };

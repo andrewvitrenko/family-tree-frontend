@@ -26,12 +26,3 @@ export const input: SxProps<Theme> = {
     marginRight: 1,
   },
 };
-
-export const button: SxProps<Theme> = {
-  fontSize: '0.75rem',
-  paddingBottom: 0,
-
-  '.MuiButton-startIcon': {
-    marginRight: 1,
-  },
-};

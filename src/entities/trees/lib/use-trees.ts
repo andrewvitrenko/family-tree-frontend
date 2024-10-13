@@ -15,9 +15,10 @@ import { useTreesStore } from '@/entities/trees/model';
 import { useToast } from '@/features/toast';
 import { getNextPageParam } from '@/shared/api/lib';
 import { TPaginatedData } from '@/shared/api/model';
+import { EApiKey } from '@/views/home/api/model';
 
 import { TreesApi } from '../api';
-import { TCreateTreePayload, TUpdateTreePayload } from '../api/model';
+import { TUpdateTreePayload } from '../api/model';
 
 type TUpdateTreeProps = {
   id: string;
@@ -29,10 +30,8 @@ export type TUseTrees = {
   isFetching: boolean;
   isFetchingNextPage: boolean;
   hasNextPage?: boolean;
-  isCreating: boolean;
   isDeleting: boolean;
   isUpdating: boolean;
-  create: (payload: TCreateTreePayload) => void;
   remove: (id: string) => void;
   update: (props: TUpdateTreeProps) => void;
   fetchNextPage: () => Promise<
@@ -57,23 +56,11 @@ export const useTrees = (): TUseTrees => {
     error,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ['trees', { search }],
+    queryKey: [EApiKey.TREES_LIST, { search }],
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       TreesApi.getMany({ search, page: pageParam, take: 10 }),
     getNextPageParam: getNextPageParam<TTree>,
-  });
-
-  const { mutate: create, isPending: isCreating } = useMutation({
-    mutationKey: ['tree.add'],
-    mutationFn: (payload: TCreateTreePayload) => TreesApi.create(payload),
-    onError: (err) => toast.error((err as Error).message),
-    onSuccess: async (tree) => {
-      await queryClient.invalidateQueries({
-        queryKey: ['trees'],
-      });
-      toast.success(`TreesApi "${tree.name}" was successfully created`);
-    },
   });
 
   const { mutate: remove, isPending: isDeleting } = useMutation({
@@ -81,8 +68,8 @@ export const useTrees = (): TUseTrees => {
     mutationFn: (id: string) => TreesApi.remove(id),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: async (tree) => {
-      await queryClient.invalidateQueries({ queryKey: ['trees'] });
-      toast.success(`TreesApi "${tree.name}" was successfully deleted`);
+      await queryClient.invalidateQueries({ queryKey: [EApiKey.TREES_LIST] });
+      toast.success(`Tree "${tree.name}" was successfully deleted`);
     },
   });
 
@@ -92,8 +79,8 @@ export const useTrees = (): TUseTrees => {
       TreesApi.update(id, payload),
     onError: (err) => toast.error((err as Error).message),
     onSuccess: async (tree) => {
-      toast.success(`TreesApi ${tree.name} was successfully updated`);
-      await queryClient.invalidateQueries({ queryKey: ['trees'] });
+      await queryClient.invalidateQueries({ queryKey: [EApiKey.TREES_LIST] });
+      toast.success(`Tree ${tree.name} was successfully updated`);
     },
   });
 
@@ -113,10 +100,8 @@ export const useTrees = (): TUseTrees => {
     isFetching,
     isFetchingNextPage,
     hasNextPage,
-    isCreating,
     isDeleting,
     isUpdating,
-    create,
     remove,
     update,
     fetchNextPage,

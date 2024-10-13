@@ -8,7 +8,7 @@ import { useTrees } from '@/entities/trees';
 import { TUpdateTreePayload } from '@/entities/trees/api';
 import { useTreesStore } from '@/entities/trees/model';
 
-import { DeleteTree, EditTree, List, Toolbar } from '..';
+import { EditTree, List, Toolbar } from '..';
 import * as styles from './styles';
 
 const Trees: FC = () => {
@@ -18,45 +18,23 @@ const Trees: FC = () => {
     hasNextPage,
     trees,
     fetchNextPage,
-    remove,
     update,
   } = useTrees();
 
-  const {
-    currentTree,
-    setTree,
-    deleteModalOpen,
-    editModalOpen,
-    toggleDeleteModal,
-    toggleEditModal,
-  } = useTreesStore(
-    useShallow((state) => ({
-      currentTree: state.currentTree,
-      setTree: state.setTree,
-      editModalOpen: state.editModalOpen,
-      deleteModalOpen: state.deleteModalOpen,
-      toggleEditModal: state.toggleEditModal,
-      toggleDeleteModal: state.toggleDeleteModal,
-    })),
-  );
-
-  const closeDeleteModal = useCallback(() => {
-    toggleDeleteModal(false);
-    setTree(null);
-  }, [setTree, toggleDeleteModal]);
+  const { currentTree, setTree, editModalOpen, toggleEditModal } =
+    useTreesStore(
+      useShallow((state) => ({
+        currentTree: state.currentTree,
+        setTree: state.setTree,
+        editModalOpen: state.editModalOpen,
+        toggleEditModal: state.toggleEditModal,
+      })),
+    );
 
   const closeEditModal = useCallback(() => {
     toggleEditModal(false);
     setTree(null);
   }, [setTree, toggleEditModal]);
-
-  const deleteTree = useCallback(() => {
-    if (!currentTree) return;
-
-    toggleDeleteModal(false);
-    remove(currentTree.id);
-    setTree(null);
-  }, [currentTree, setTree, toggleDeleteModal, remove]);
 
   const editTree = useCallback(
     (payload: TUpdateTreePayload) => {
@@ -82,11 +60,6 @@ const Trees: FC = () => {
           />
         </Box>
       </Box>
-      <DeleteTree
-        open={deleteModalOpen}
-        onCancel={closeDeleteModal}
-        onSubmit={deleteTree}
-      />
       <EditTree
         open={editModalOpen}
         onSubmit={editTree}

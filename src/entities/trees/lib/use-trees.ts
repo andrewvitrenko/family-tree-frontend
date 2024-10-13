@@ -30,9 +30,7 @@ export type TUseTrees = {
   isFetching: boolean;
   isFetchingNextPage: boolean;
   hasNextPage?: boolean;
-  isDeleting: boolean;
   isUpdating: boolean;
-  remove: (id: string) => void;
   update: (props: TUpdateTreeProps) => void;
   fetchNextPage: () => Promise<
     InfiniteQueryObserverResult<InfiniteData<TPaginatedData<TTree>>>
@@ -63,16 +61,6 @@ export const useTrees = (): TUseTrees => {
     getNextPageParam: getNextPageParam<TTree>,
   });
 
-  const { mutate: remove, isPending: isDeleting } = useMutation({
-    mutationKey: ['tree.remove'],
-    mutationFn: (id: string) => TreesApi.remove(id),
-    onError: (err) => toast.error((err as Error).message),
-    onSuccess: async (tree) => {
-      await queryClient.invalidateQueries({ queryKey: [EApiKey.TREES_LIST] });
-      toast.success(`Tree "${tree.name}" was successfully deleted`);
-    },
-  });
-
   const { mutate: update, isPending: isUpdating } = useMutation({
     mutationKey: ['tree.update'],
     mutationFn: ({ id, payload }: TUpdateTreeProps) =>
@@ -100,9 +88,7 @@ export const useTrees = (): TUseTrees => {
     isFetching,
     isFetchingNextPage,
     hasNextPage,
-    isDeleting,
     isUpdating,
-    remove,
     update,
     fetchNextPage,
   };

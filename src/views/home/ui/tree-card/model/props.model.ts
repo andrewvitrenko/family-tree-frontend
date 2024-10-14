@@ -1,5 +1,6 @@
 import { TTree } from '@/entities/trees';
 
-export type TTreeCardProps = TTree & {
+export type TTreeCardProps = {
   editable?: boolean;
+  tree: TTree;
 };

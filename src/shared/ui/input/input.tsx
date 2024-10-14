@@ -2,7 +2,7 @@
 
 import { TextField } from '@mui/material';
 import { FC, memo } from 'react';
-import { useController, useFormContext } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 
 import { mergeSx } from '@/shared/lib';
 
@@ -21,10 +21,8 @@ const Input: FC<TInputProps> = ({
   shouldUnregister,
   ...props
 }) => {
-  const { control } = useFormContext();
   const { field, fieldState } = useController({
     name,
-    control,
     defaultValue,
     shouldUnregister,
     rules: {

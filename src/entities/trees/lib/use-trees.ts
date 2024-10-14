@@ -4,8 +4,6 @@ import {
   InfiniteData,
   InfiniteQueryObserverResult,
   useInfiniteQuery,
-  useMutation,
-  useQueryClient,
 } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
@@ -18,20 +16,12 @@ import { TPaginatedData } from '@/shared/api/model';
 import { EApiKey } from '@/views/home/api/model';
 
 import { TreesApi } from '../api';
-import { TUpdateTreePayload } from '../api/model';
-
-type TUpdateTreeProps = {
-  id: string;
-  payload: TUpdateTreePayload;
-};
 
 export type TUseTrees = {
   trees?: TTree[];
   isFetching: boolean;
   isFetchingNextPage: boolean;
   hasNextPage?: boolean;
-  isUpdating: boolean;
-  update: (props: TUpdateTreeProps) => void;
   fetchNextPage: () => Promise<
     InfiniteQueryObserverResult<InfiniteData<TPaginatedData<TTree>>>
   >;
@@ -41,8 +31,6 @@ export const useTrees = (): TUseTrees => {
   const { search } = useTreesStore(
     useShallow((state) => ({ search: state.search })),
   );
-
-  const queryClient = useQueryClient();
 
   const toast = useToast();
 
@@ -61,17 +49,6 @@ export const useTrees = (): TUseTrees => {
     getNextPageParam: getNextPageParam<TTree>,
   });
 
-  const { mutate: update, isPending: isUpdating } = useMutation({
-    mutationKey: ['tree.update'],
-    mutationFn: ({ id, payload }: TUpdateTreeProps) =>
-      TreesApi.update(id, payload),
-    onError: (err) => toast.error((err as Error).message),
-    onSuccess: async (tree) => {
-      await queryClient.invalidateQueries({ queryKey: [EApiKey.TREES_LIST] });
-      toast.success(`Tree ${tree.name} was successfully updated`);
-    },
-  });
-
   useEffect(() => {
     if (error) {
       toast.error(error.message);
@@ -88,8 +65,6 @@ export const useTrees = (): TUseTrees => {
     isFetching,
     isFetchingNextPage,
     hasNextPage,
-    isUpdating,
-    update,
     fetchNextPage,
   };
 };

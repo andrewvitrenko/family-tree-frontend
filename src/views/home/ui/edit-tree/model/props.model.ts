@@ -1,8 +1,4 @@
-import { TEditTreeForm } from './form.model';
-
-export type TEditTreeModalProps = {
-  open: boolean;
-  onSubmit: (values: TEditTreeForm) => void;
-  onCancel: () => void;
-  name?: string;
+export type TEditTreeProps = {
+  id: string;
+  name: string;
 };

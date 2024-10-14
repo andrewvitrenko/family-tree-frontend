@@ -6,21 +6,14 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react';
-import { useShallow } from 'zustand/react/shallow';
 
-import { useTreesStore } from '@/entities/trees/model';
 import { useDebounce } from '@/shared/hooks';
 import { CreateTree } from '@/views/home/ui';
 
+import { TToolbarProps } from './model/props.model';
 import * as styles from './styles';
 
-const Toolbar: FC = () => {
-  const { setQuerySearch } = useTreesStore(
-    useShallow((state) => ({
-      setQuerySearch: state.setSearch,
-    })),
-  );
-
+const Toolbar: FC<TToolbarProps> = ({ setDebouncedSearch }) => {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search);
@@ -35,8 +28,8 @@ const Toolbar: FC = () => {
   };
 
   useEffect(() => {
-    setQuerySearch(debouncedSearch.trim());
-  }, [debouncedSearch, setQuerySearch]);
+    setDebouncedSearch(debouncedSearch.trim());
+  }, [debouncedSearch, setDebouncedSearch]);
 
   return (
     <Box sx={styles.container}>

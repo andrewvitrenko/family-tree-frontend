@@ -1,10 +1,9 @@
-import { TUseTrees } from '@/entities/trees';
+import { TTree } from '@/entities/trees';
 
-export type TListProps = Pick<
-  TUseTrees,
-  | 'trees'
-  | 'isFetching'
-  | 'isFetchingNextPage'
-  | 'hasNextPage'
-  | 'fetchNextPage'
->;
+export type TListProps = {
+  trees?: TTree[];
+  isFetching: boolean;
+  isFetchingNextPage: boolean;
+  hasNextPage: boolean;
+  fetchNextPage: () => Promise<unknown>;
+};

@@ -1,23 +1,25 @@
 'use client';
 
 import Box from '@mui/material/Box';
-import { FC, memo } from 'react';
+import { FC, memo, useState } from 'react';
 
-import { useTrees } from '@/entities/trees';
+import { useTreesList } from '@/views/home/api';
 
 import { List, Toolbar } from '..';
 import * as styles from './styles';
 
 const Trees: FC = () => {
-  const { isFetching, isFetchingNextPage, hasNextPage, trees, fetchNextPage } =
-    useTrees();
+  const [search, setSearch] = useState('');
+
+  const { isFetching, isFetchingNextPage, hasNextPage, data, fetchNextPage } =
+    useTreesList(search);
 
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.container}>
-        <Toolbar />
+        <Toolbar setDebouncedSearch={setSearch} />
         <List
-          trees={trees}
+          trees={data}
           isFetching={isFetching}
           isFetchingNextPage={isFetchingNextPage}
           hasNextPage={hasNextPage}

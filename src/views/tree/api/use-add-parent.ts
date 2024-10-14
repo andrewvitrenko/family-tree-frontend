@@ -7,7 +7,7 @@ import { TreesApi } from '@/entities/trees/api';
 import { useToast } from '@/features/toast';
 import { EApiKey, TAddRelativeVariables } from '@/views/tree/api/model';
 import { Adapter } from '@/views/tree/lib';
-import { useTreeStore } from '@/views/tree/store/tree.model';
+import { useTreeStore } from '@/views/tree/store/tree.store';
 
 type TUseAddParent = UseMutationResult<TNode, Error, TAddRelativeVariables>;
 

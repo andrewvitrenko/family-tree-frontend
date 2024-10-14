@@ -8,7 +8,7 @@ import { TNode } from '@/entities/trees';
 import { TreesApi } from '@/entities/trees/api';
 import { useToast } from '@/features/toast';
 import { EApiKey, TRemoveNodeVariables } from '@/views/tree/api/model';
-import { useTreeStore } from '@/views/tree/store/tree.model';
+import { useTreeStore } from '@/views/tree/store/tree.store';
 
 type TUseRemoveNode = UseMutationResult<TNode, Error, TRemoveNodeVariables>;
 

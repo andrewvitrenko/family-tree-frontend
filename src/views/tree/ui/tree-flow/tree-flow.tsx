@@ -6,7 +6,7 @@ import { useShallow } from 'zustand/react/shallow';
 
 import Flow from '@/features/flow';
 import { nodeTypes } from '@/views/tree/config/flow.config';
-import { useTreeStore } from '@/views/tree/store/tree.model';
+import { useTreeStore } from '@/views/tree/store/tree.store';
 
 import { TPersonNode } from '../../model/flow.model';
 import { TTreeFlowProps } from './model/props.model';

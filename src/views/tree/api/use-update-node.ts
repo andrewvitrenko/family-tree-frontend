@@ -7,7 +7,7 @@ import { TreesApi } from '@/entities/trees/api';
 import { useToast } from '@/features/toast';
 import { EApiKey, TUpdateNodeVariables } from '@/views/tree/api/model';
 import { Adapter } from '@/views/tree/lib';
-import { useTreeStore } from '@/views/tree/store/tree.model';
+import { useTreeStore } from '@/views/tree/store/tree.store';
 
 type TUseUpdateNode = UseMutationResult<TNode, Error, TUpdateNodeVariables>;
 

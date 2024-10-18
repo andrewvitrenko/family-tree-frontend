@@ -59,6 +59,7 @@ const Form: FC = () => {
             label="Birth date"
             required
             maxDate={new Date()}
+            defaultValue={new Date()}
           />
           <PasswordInput
             pattern={PASSWORD_REGEX}

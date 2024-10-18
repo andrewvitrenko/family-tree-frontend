@@ -1,6 +1,4 @@
-export type TDeleteTreeModalProps = {
-  open: boolean;
-  onSubmit: () => void;
-  onCancel: () => void;
-  name?: string;
+export type TDeleteTreeProps = {
+  id: string;
+  name: string;
 };

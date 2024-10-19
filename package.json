@@ -2,12 +2,15 @@
   "name": "family-tree-frontend",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "eslint": "$eslint"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint {src,app}/**/*{.ts,.tsx}",
+    "lint:fix": "eslint {src,app}/**/*{.ts,.tsx} --fix",
     "prepare": "husky install",
     "typecheck": "tsc",
     "check-updates": "npx npm-check-updates"
@@ -33,23 +36,24 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.1",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.13.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "7.16.0",
-    "@typescript-eslint/parser": "^7.16.0",
-    "eslint": "^8.56.0",
+    "eslint": "^9.13.0",
     "eslint-config-next": "^14.2.15",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-import-resolver-typescript": "^3.6.3",
-    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-unused-imports": "^3.0.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^15.11.0",
     "husky": "^9.1.6",
     "prettier": "^3.3.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^8.10.0"
   }
 }

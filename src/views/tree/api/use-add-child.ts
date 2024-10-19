@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { TNode } from '@/entities/trees';
-import { TreesApi } from '@/entities/trees/api';
+import { NodesApi } from '@/entities/trees/api/nodes';
 import { useToast } from '@/features/toast';
 import { EApiKey, TAddRelativeVariables } from '@/views/tree/api/model';
 import { Adapter } from '@/views/tree/lib';
@@ -38,7 +38,7 @@ export const useAddChild = (): TUseAddChild => {
   return useMutation<TNode, Error, TAddRelativeVariables>({
     mutationKey: [EApiKey.TREE_ADD_CHILD],
     mutationFn: ({ data, nodeId, treeId }) =>
-      TreesApi.addChild(treeId, nodeId, data),
+      NodesApi.addChild(treeId, nodeId, data),
     onError: (err) => toast.error(err.message),
     onSuccess: addChild,
   });

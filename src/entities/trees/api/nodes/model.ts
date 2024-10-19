@@ -1,13 +1,5 @@
 import { ESex } from '@/entities/user';
 
-export type TCreateTreePayload = {
-  name: string;
-};
-
-export type TUpdateTreePayload = {
-  name: string;
-};
-
 export type TAddRelativePayload = {
   firstName: string;
   lastName: string;

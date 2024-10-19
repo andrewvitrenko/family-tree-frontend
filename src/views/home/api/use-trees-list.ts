@@ -8,7 +8,7 @@ import {
 import { useEffect, useMemo } from 'react';
 
 import { TTree } from '@/entities/trees';
-import { TreesApi } from '@/entities/trees/api';
+import { TreesApi } from '@/entities/trees/api/trees';
 import { useToast } from '@/features/toast';
 import { TPaginatedData } from '@/shared/api';
 import { getNextPageParam } from '@/shared/api/lib';

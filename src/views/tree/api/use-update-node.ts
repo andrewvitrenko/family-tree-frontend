@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { TNode } from '@/entities/trees';
-import { TreesApi } from '@/entities/trees/api';
+import { NodesApi } from '@/entities/trees/api/nodes';
 import { useToast } from '@/features/toast';
 import { EApiKey, TUpdateNodeVariables } from '@/views/tree/api/model';
 import { Adapter } from '@/views/tree/lib';
@@ -30,7 +30,7 @@ export const useUpdateNode = (): TUseUpdateNode => {
   return useMutation<TNode, Error, TUpdateNodeVariables>({
     mutationKey: [EApiKey.TREE_UPDATE],
     mutationFn: ({ data, nodeId, treeId }) =>
-      TreesApi.updateNode(treeId, nodeId, data),
+      NodesApi.update(treeId, nodeId, data),
     onError: (err) => toast.error(err.message),
     onSuccess: updateNode,
   });

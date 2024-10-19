@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query';
 
 import { TTree } from '@/entities/trees';
-import { TreesApi } from '@/entities/trees/api';
+import { TreesApi } from '@/entities/trees/api/trees';
 import { useToast } from '@/features/toast';
 import { EApiKey } from '@/views/home/api/model';
 

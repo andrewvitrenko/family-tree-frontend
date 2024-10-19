@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
 import { TNode } from '@/entities/trees';
-import { TreesApi } from '@/entities/trees/api';
+import { NodesApi } from '@/entities/trees/api/nodes';
 import { useToast } from '@/features/toast';
 import { EApiKey, TRemoveNodeVariables } from '@/views/tree/api/model';
 import { useTreeStore } from '@/views/tree/store/tree.store';
@@ -28,7 +28,7 @@ export const useRemoveNode = (): TUseRemoveNode => {
 
   return useMutation<TNode, Error, TRemoveNodeVariables>({
     mutationKey: [EApiKey.TREE_DELETE],
-    mutationFn: ({ nodeId, treeId }) => TreesApi.removeNode(treeId, nodeId),
+    mutationFn: ({ nodeId, treeId }) => NodesApi.remove(treeId, nodeId),
     onError: (err) => toast.error(err.message),
     onSuccess: removeNode,
   });

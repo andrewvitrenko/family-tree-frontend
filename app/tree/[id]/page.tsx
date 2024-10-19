@@ -1,6 +1,6 @@
 import { Metadata, NextPage } from 'next';
 
-import { TreesApi } from '@/entities/trees/api';
+import { TreesApi } from '@/entities/trees/api/trees';
 import { getSsrCookies } from '@/shared/lib';
 import TreePage from '@/views/tree';
 

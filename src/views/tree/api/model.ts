@@ -1,7 +1,7 @@
 import {
   TAddRelativePayload,
   TUpdateNodePayload,
-} from '@/entities/trees/api/model';
+} from '@/entities/trees/api/nodes';
 
 export enum EApiKey {
   TREE_UPDATE = 'tree.update',

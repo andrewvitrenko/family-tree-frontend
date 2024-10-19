@@ -4,8 +4,6 @@ import { TextField } from '@mui/material';
 import { FC, memo } from 'react';
 import { useController } from 'react-hook-form';
 
-import { mergeSx } from '@/shared/lib';
-
 import { TInputProps } from './model/props.model';
 
 const Input: FC<TInputProps> = ({
@@ -13,7 +11,6 @@ const Input: FC<TInputProps> = ({
   required = false,
   pattern,
   helperText,
-  sx,
   defaultValue = '',
   onBlur,
   onChange,
@@ -44,7 +41,6 @@ const Input: FC<TInputProps> = ({
       error={!!fieldState.error}
       helperText={fieldState.error?.message ?? helperText}
       required={required}
-      sx={mergeSx(sx)}
       {...props}
     />
   );

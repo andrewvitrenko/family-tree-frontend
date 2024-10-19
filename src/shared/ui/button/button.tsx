@@ -10,17 +10,11 @@ const Button: FC<TButtonProps> = ({
   loading,
   disabled,
   spinnerProps,
-  sx,
   children,
   ...props
 }) => {
   return (
-    <MuiButton
-      disabled={loading || disabled}
-      variant="contained"
-      sx={mergeSx(styles.button, sx)}
-      {...props}
-    >
+    <MuiButton disabled={loading || disabled} variant="contained" {...props}>
       {children}
       {loading && (
         <CircularProgress

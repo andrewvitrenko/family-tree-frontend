@@ -1,5 +1,5 @@
-import { SxProps } from '@mui/material';
-import { Theme } from '@mui/system';
+import { Theme } from '@mui/material';
+import { SxProps } from '@mui/system';
 
 export const button: SxProps<Theme> = {
   width: '2rem',

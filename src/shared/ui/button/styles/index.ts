@@ -1,6 +1,5 @@
-import { SxProps, Theme } from '@mui/material';
-
-export const button: SxProps<Theme> = {};
+import { Theme } from '@mui/material';
+import { SxProps } from '@mui/system';
 
 export const progress: SxProps<Theme> = {
   position: 'absolute',

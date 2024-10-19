@@ -11,15 +11,24 @@ export const input: SxProps<Theme> = {
   width: '18.75rem',
 };
 
-export const buttons: SxProps<Theme> = {
+export const actions: SxProps<Theme> = {
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',
   marginTop: 4,
 };
 
-export const button: SxProps<Theme> = {
+export const action: SxProps<Theme> = {
   textTransform: 'none',
   fontSize: '0.75rem',
   fontWeight: 600,
+};
+
+export const trigger: SxProps<Theme> = {
+  fontSize: '0.75rem',
+  paddingBottom: 0,
+
+  '.MuiButton-startIcon': {
+    marginRight: 1,
+  },
 };

@@ -2,7 +2,7 @@
 
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
-import { format as dateFnsFormat, formatISO, toDate } from 'date-fns';
+import { formatISO } from 'date-fns';
 import { FC, memo, useCallback } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
@@ -13,8 +13,7 @@ import * as styles from './styles';
 
 const DateInput: FC<TDateInputProps> = ({
   name,
-  format,
-  defaultValue = new Date(),
+  defaultValue = null,
   onChange,
   required,
   disabled,
@@ -30,24 +29,22 @@ const DateInput: FC<TDateInputProps> = ({
   });
 
   const onDateChange = useCallback(
-    (value: Date | null) => {
-      if (!value) return;
+    (date: Date | null) => {
+      const value = date ? formatISO(date) : null;
 
-      const date = format ? dateFnsFormat(value, format) : formatISO(value);
-
-      setValue(name, date, {
+      setValue(name, value, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       });
     },
-    [format, name, setValue],
+    [name, setValue],
   );
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
-        value={toDate(field.value)}
+        value={field.value}
         format="dd/MM/yyyy"
         inputRef={field.ref}
         onChange={onDateChange}

@@ -1,6 +1,5 @@
 'use client';
 
-import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/ClearRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
 import Box from '@mui/material/Box';
@@ -9,15 +8,12 @@ import TextField from '@mui/material/TextField';
 import { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react';
 
 import { useDebounce } from '@/shared/hooks';
-import { Button } from '@/shared/ui';
+import { CreateTree } from '@/views/home/ui';
 
-import { useTreesListContext } from '../trees';
+import { TToolbarProps } from './model/props.model';
 import * as styles from './styles';
 
-const Toolbar: FC = () => {
-  const { openCreateModal, setSearch: setDebounceSearch } =
-    useTreesListContext();
-
+const Toolbar: FC<TToolbarProps> = ({ setDebouncedSearch }) => {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search);
@@ -32,8 +28,8 @@ const Toolbar: FC = () => {
   };
 
   useEffect(() => {
-    setDebounceSearch(debouncedSearch.trim());
-  }, [debouncedSearch, setDebounceSearch]);
+    setDebouncedSearch(debouncedSearch.trim());
+  }, [debouncedSearch, setDebouncedSearch]);
 
   return (
     <Box sx={styles.container}>
@@ -53,14 +49,7 @@ const Toolbar: FC = () => {
         inputRef={ref}
         onChange={onChange}
       />
-      <Button
-        variant="text"
-        sx={styles.button}
-        onClick={openCreateModal}
-        startIcon={<AddIcon />}
-      >
-        Create
-      </Button>
+      <CreateTree />
     </Box>
   );
 };

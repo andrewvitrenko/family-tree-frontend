@@ -4,8 +4,6 @@ import { MenuItem, TextField } from '@mui/material';
 import { FC, memo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
-import { mergeSx } from '@/shared/lib';
-
 import { TSelectProps } from './model/props.model';
 
 const Select: FC<TSelectProps> = ({
@@ -13,7 +11,6 @@ const Select: FC<TSelectProps> = ({
   name,
   options,
   helperText,
-  sx,
   onBlur,
   onChange,
   required,
@@ -38,7 +35,6 @@ const Select: FC<TSelectProps> = ({
       required={required}
       inputRef={field.ref}
       error={!!fieldState.error}
-      sx={mergeSx(sx)}
       {...props}
     >
       {options.map((option) => (

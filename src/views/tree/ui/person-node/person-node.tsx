@@ -10,7 +10,6 @@ import AddParent from '@/views/tree/ui/add-parent';
 
 import Handlers from '../handlers';
 import PersonInfo from '../person-info';
-import RemoveNode from '../remove-node';
 import * as styles from './styles';
 
 const PersonNode: FC<TNodeProps<TPerson>> = ({
@@ -29,7 +28,6 @@ const PersonNode: FC<TNodeProps<TPerson>> = ({
 
   return (
     <Box sx={styles.container}>
-      <RemoveNode id={id} firstName={data.firstName} lastName={data.lastName} />
       <AddParent sourceId={id} position={position} />
       <Handlers />
       <PersonInfo {...data} />

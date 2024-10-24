@@ -2,9 +2,8 @@
 
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
-import { formatISO } from 'date-fns';
-import { FC, memo, useCallback } from 'react';
-import { useController, useFormContext } from 'react-hook-form';
+import { FC, memo } from 'react';
+import { useController } from 'react-hook-form';
 
 import { mergeSx } from '@/shared/lib';
 
@@ -16,30 +15,17 @@ const DateInput: FC<TDateInputProps> = ({
   defaultValue = null,
   onChange,
   required,
-  disabled,
   sx,
+  shouldUnregister,
+  helperText,
   ...props
 }) => {
-  const { control, setValue } = useFormContext();
   const { field, fieldState } = useController({
     name,
     defaultValue,
-    control,
+    shouldUnregister,
     rules: { onChange, required },
   });
-
-  const onDateChange = useCallback(
-    (date: Date | null) => {
-      const value = date ? formatISO(date) : null;
-
-      setValue(name, value, {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      });
-    },
-    [name, setValue],
-  );
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -47,9 +33,14 @@ const DateInput: FC<TDateInputProps> = ({
         value={field.value}
         format="dd/MM/yyyy"
         inputRef={field.ref}
-        onChange={onDateChange}
-        disabled={disabled}
+        onChange={field.onChange}
         sx={mergeSx(fieldState.error && styles.error, sx)}
+        slotProps={{
+          textField: {
+            error: !!fieldState.error,
+            helperText: fieldState.error?.message ?? helperText,
+          },
+        }}
         {...props}
       />
     </LocalizationProvider>

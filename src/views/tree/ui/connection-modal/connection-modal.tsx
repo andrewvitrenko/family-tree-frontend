@@ -1,7 +1,8 @@
 'use client';
 
+import { FormControlLabel, Switch } from '@mui/material';
 import Box from '@mui/material/Box';
-import { FC, memo, useEffect } from 'react';
+import { FC, memo, useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, DateInput, Input, Modal, Select } from '@/shared/ui';
@@ -17,6 +18,10 @@ const ConnectionModal: FC<TConnectionModalProps> = ({
   open,
 }) => {
   const methods = useForm<TConnectionForm>();
+
+  const [alive, setAlive] = useState(false);
+
+  const onToggleAlive = useCallback(() => setAlive((prev) => !prev), []);
 
   useEffect(() => {
     if (methods.formState.isSubmitSuccessful) onClose();
@@ -37,11 +42,18 @@ const ConnectionModal: FC<TConnectionModalProps> = ({
               maxDate={new Date()}
               defaultValue={new Date()}
             />
-            <DateInput
-              name="dateOfDeath"
-              label="Death date"
-              maxDate={new Date()}
+            <FormControlLabel
+              control={<Switch checked={alive} onChange={onToggleAlive} />}
+              label="Still alive"
             />
+            {!alive && (
+              <DateInput
+                name="dateOfDeath"
+                label="Death date"
+                maxDate={new Date()}
+                shouldUnregister
+              />
+            )}
             <Button
               disabled={!methods.formState.isValid}
               loading={methods.formState.isSubmitting}

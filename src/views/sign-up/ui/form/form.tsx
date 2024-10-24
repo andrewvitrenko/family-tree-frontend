@@ -1,6 +1,7 @@
 'use client';
 
 import { Box } from '@mui/material';
+import { formatISO } from 'date-fns';
 import { FC, memo, useCallback } from 'react';
 import { FieldValues, FormProvider, useForm, Validate } from 'react-hook-form';
 
@@ -34,7 +35,12 @@ const Form: FC = () => {
   );
 
   const onSubmit = useCallback(
-    (values: TSignUpForm) => signup(omit(values, 'confirmPassword')),
+    ({ dateOfBirth, ...payload }: TSignUpForm) => {
+      signup({
+        dateOfBirth: formatISO(dateOfBirth),
+        ...omit(payload, ['confirmPassword']),
+      });
+    },
     [signup],
   );
 

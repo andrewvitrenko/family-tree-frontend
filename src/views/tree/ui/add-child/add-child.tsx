@@ -1,6 +1,7 @@
 'use client';
 
 import Box from '@mui/material/Box';
+import { formatISO } from 'date-fns';
 import { useParams } from 'next/navigation';
 import { FC, memo, useCallback, useState } from 'react';
 
@@ -26,14 +27,20 @@ const AddChild: FC<TAddChildProps> = ({ position, sourceId }) => {
   const onClose = () => setOpen(false);
 
   const onSubmit = useCallback(
-    async (data: TConnectionForm) => {
+    async ({ dateOfBirth, dateOfDeath, ...data }: TConnectionForm) => {
       const x = data.sex === ESex.FEMALE ? position.x - 200 : position.x + 200;
       const y = position.y + 300;
 
       await mutateAsync({
         treeId: params.id,
         nodeId: sourceId,
-        data: { ...data, x, y },
+        data: {
+          ...data,
+          x,
+          y,
+          dateOfBirth: formatISO(dateOfBirth),
+          dateOfDeath: dateOfDeath && formatISO(dateOfDeath),
+        },
       });
     },
     [mutateAsync, params.id, position.x, position.y, sourceId],

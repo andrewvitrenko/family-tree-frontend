@@ -9,10 +9,9 @@ import { FC, memo, useCallback, useState } from 'react';
 
 import { ESex } from '@/entities/user';
 import { useAddChild } from '@/views/tree/api/use-add-child';
-import { TConnectionForm } from '@/views/tree/model/connection-form.model';
 import { TRouteParams } from '@/views/tree/model/route.model';
-import ConnectionModal from '@/views/tree/ui/connection-modal';
 
+import CreateNode, { TCreateNodeForm } from '../create-node';
 import { TAddChildProps } from './model/props.model';
 import * as styles from './styles';
 
@@ -28,7 +27,7 @@ const AddChild: FC<TAddChildProps> = ({ position, sourceId }) => {
   const onClose = () => setOpen(false);
 
   const onSubmit = useCallback(
-    async ({ dateOfBirth, dateOfDeath, ...data }: TConnectionForm) => {
+    async ({ dateOfBirth, dateOfDeath, ...data }: TCreateNodeForm) => {
       const x = data.sex === ESex.FEMALE ? position.x - 200 : position.x + 200;
       const y = position.y + 300;
 
@@ -52,7 +51,7 @@ const AddChild: FC<TAddChildProps> = ({ position, sourceId }) => {
       <IconButton sx={styles.trigger} onClick={onOpen}>
         <AddRoundedIcon />
       </IconButton>
-      <ConnectionModal onClose={onClose} onSubmit={onSubmit} open={open} />
+      <CreateNode onClose={onClose} onSubmit={onSubmit} open={open} />
     </Box>
   );
 };

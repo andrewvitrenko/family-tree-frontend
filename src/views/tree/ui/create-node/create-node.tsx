@@ -7,17 +7,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, DateInput, Input, Modal, Select } from '@/shared/ui';
 
-import { TConnectionForm } from '../../model/connection-form.model';
 import { sexes } from './config/form.config';
-import { TConnectionModalProps } from './model/props.model';
+import { TCreateNodeForm } from './model/form.model';
+import { TCreateNodeProps } from './model/props.model';
 import * as styles from './styles';
 
-const ConnectionModal: FC<TConnectionModalProps> = ({
-  onClose,
-  onSubmit,
-  open,
-}) => {
-  const methods = useForm<TConnectionForm>();
+const CreateNode: FC<TCreateNodeProps> = ({ onClose, onSubmit, open }) => {
+  const methods = useForm<TCreateNodeForm>();
 
   const [alive, setAlive] = useState(false);
 
@@ -68,4 +64,4 @@ const ConnectionModal: FC<TConnectionModalProps> = ({
   );
 };
 
-export default memo(ConnectionModal);
+export default memo(CreateNode);

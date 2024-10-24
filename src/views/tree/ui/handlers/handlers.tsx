@@ -13,6 +13,7 @@ const Handle = styled(ReactFlowHandle)<HandleProps>(({ position }) => ({
   height: 0,
   minHeight: 'unset',
   maxHeight: 'unset',
+  border: 'none',
   ...(position === Position.Top && { top: '1rem' }),
   ...(position === Position.Bottom && { bottom: '1rem' }),
 }));

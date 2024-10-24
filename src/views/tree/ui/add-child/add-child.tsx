@@ -1,6 +1,8 @@
 'use client';
 
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 import { formatISO } from 'date-fns';
 import { useParams } from 'next/navigation';
 import { FC, memo, useCallback, useState } from 'react';
@@ -9,7 +11,6 @@ import { ESex } from '@/entities/user';
 import { useAddChild } from '@/views/tree/api/use-add-child';
 import { TConnectionForm } from '@/views/tree/model/connection-form.model';
 import { TRouteParams } from '@/views/tree/model/route.model';
-import ConnectionButton from '@/views/tree/ui/connection-button';
 import ConnectionModal from '@/views/tree/ui/connection-modal';
 
 import { TAddChildProps } from './model/props.model';
@@ -48,7 +49,9 @@ const AddChild: FC<TAddChildProps> = ({ position, sourceId }) => {
 
   return (
     <Box sx={styles.container}>
-      <ConnectionButton onClick={onOpen} />
+      <IconButton sx={styles.trigger} onClick={onOpen}>
+        <AddRoundedIcon />
+      </IconButton>
       <ConnectionModal onClose={onClose} onSubmit={onSubmit} open={open} />
     </Box>
   );

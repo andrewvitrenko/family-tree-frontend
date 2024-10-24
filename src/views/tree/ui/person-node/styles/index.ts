@@ -9,7 +9,7 @@ export const container: SxProps<Theme> = {
   flexDirection: 'column',
   position: 'relative',
 
-  '&:hover .MuiButton-root': {
+  '&:hover .MuiIconButton-root': {
     transform: 'scale(1)',
   },
 

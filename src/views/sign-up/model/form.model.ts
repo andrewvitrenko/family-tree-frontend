@@ -7,5 +7,5 @@ export type TSignUpForm = {
   firstName: string;
   lastName: string;
   sex: ESex;
-  dateOfBirth: string;
+  dateOfBirth: Date;
 };

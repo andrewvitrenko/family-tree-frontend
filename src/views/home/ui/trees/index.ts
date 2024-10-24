@@ -1,1 +1,1 @@
-export { default, useTreesListContext } from './trees';
+export { default } from './trees';

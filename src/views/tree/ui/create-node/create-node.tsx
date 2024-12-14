@@ -2,7 +2,7 @@
 
 import { FormControlLabel, Switch } from '@mui/material';
 import Box from '@mui/material/Box';
-import { FC, memo, useCallback, useEffect, useState } from 'react';
+import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, DateInput, Input, Modal, Select } from '@/shared/ui';
@@ -12,12 +12,21 @@ import { TCreateNodeForm } from './model/form.model';
 import { TCreateNodeProps } from './model/props.model';
 import * as styles from './styles';
 
-const CreateNode: FC<TCreateNodeProps> = ({ onClose, onSubmit, open }) => {
+const CreateNode: FC<TCreateNodeProps> = ({
+  onClose,
+  onSubmit,
+  open,
+  maxDate,
+  minDate,
+}) => {
   const methods = useForm<TCreateNodeForm>();
 
   const [alive, setAlive] = useState(false);
 
-  const onToggleAlive = useCallback(() => setAlive((prev) => !prev), []);
+  const onToggleAlive = () => setAlive((prev) => !prev);
+
+  const dateOfBirth = useMemo(() => methods.watch('dateOfBirth'), [methods]);
+  const dateOfDeath = useMemo(() => methods.watch('dateOfDeath'), [methods]);
 
   useEffect(() => {
     if (methods.formState.isSubmitSuccessful) onClose();
@@ -35,7 +44,8 @@ const CreateNode: FC<TCreateNodeProps> = ({ onClose, onSubmit, open }) => {
               name="dateOfBirth"
               label="Birth date"
               required
-              maxDate={new Date()}
+              maxDate={maxDate ?? dateOfDeath ?? new Date()}
+              minDate={minDate}
               defaultValue={new Date()}
             />
             <FormControlLabel
@@ -47,6 +57,8 @@ const CreateNode: FC<TCreateNodeProps> = ({ onClose, onSubmit, open }) => {
                 name="dateOfDeath"
                 label="Death date"
                 maxDate={new Date()}
+                minDate={dateOfBirth}
+                defaultValue={new Date()}
                 shouldUnregister
               />
             )}

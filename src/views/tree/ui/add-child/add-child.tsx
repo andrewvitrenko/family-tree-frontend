@@ -15,7 +15,7 @@ import CreateNode, { TCreateNodeForm } from '../create-node';
 import { TAddChildProps } from './model/props.model';
 import * as styles from './styles';
 
-const AddChild: FC<TAddChildProps> = ({ position, sourceId }) => {
+const AddChild: FC<TAddChildProps> = ({ position, sourceId, maxDate }) => {
   const { mutateAsync } = useAddChild();
 
   const params = useParams<TRouteParams>();
@@ -51,7 +51,12 @@ const AddChild: FC<TAddChildProps> = ({ position, sourceId }) => {
       <IconButton sx={styles.trigger} onClick={onOpen}>
         <AddRoundedIcon />
       </IconButton>
-      <CreateNode onClose={onClose} onSubmit={onSubmit} open={open} />
+      <CreateNode
+        onClose={onClose}
+        onSubmit={onSubmit}
+        open={open}
+        maxDate={maxDate}
+      />
     </Box>
   );
 };

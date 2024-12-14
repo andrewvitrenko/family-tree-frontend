@@ -1,36 +1,39 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+'use client';
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { FC, memo } from 'react';
+import { useRouter } from 'next/navigation';
+import { FC, memo, MouseEvent, useCallback } from 'react';
 
-import { useTreesListContext } from '../trees';
+import { ERoute } from '@/shared/model/navigation.model';
+import { DeleteTree, EditTree } from '@/views/home/ui';
+
 import { TTreeCardProps } from './model/props.model';
 import * as styles from './styles';
 
-const TreeCard: FC<TTreeCardProps> = ({ editable, ...tree }) => {
-  const { openDeleteModal, openUpdateModal } = useTreesListContext();
+const TreeCard: FC<TTreeCardProps> = ({ editable, tree }) => {
+  const router = useRouter();
 
-  const onDeleteClick = () => openDeleteModal(tree);
-  const onEditClick = () => openUpdateModal(tree);
+  const onClick = useCallback(
+    () => router.push(`${ERoute.TREE}/${tree.id}`),
+    [router, tree.id],
+  );
+
+  const onActionsClick = useCallback(
+    (e: MouseEvent) => e.stopPropagation(),
+    [],
+  );
 
   return (
-    <Card>
+    <Card sx={styles.container} onClick={onClick}>
       <CardContent>
         <Typography variant="h5">{tree.name}</Typography>
       </CardContent>
-      <CardActions sx={styles.actions}>
-        {editable && (
-          <IconButton color="primary" onClick={onEditClick}>
-            <EditIcon />
-          </IconButton>
-        )}
-        <IconButton color="warning" onClick={onDeleteClick}>
-          <DeleteIcon />
-        </IconButton>
+      <CardActions sx={styles.actions} onClick={onActionsClick}>
+        {editable && <EditTree id={tree.id} name={tree.name} />}
+        <DeleteTree id={tree.id} name={tree.name} />
       </CardActions>
     </Card>
   );

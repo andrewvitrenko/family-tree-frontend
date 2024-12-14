@@ -1,4 +1,4 @@
-import { TPerson, TTree } from '@/entities/trees';
+import { TTree } from '@/entities/trees';
 
 export const enum ESex {
   MALE = 'MALE',
@@ -12,6 +12,5 @@ export type TUser = {
   lastName: string;
   dateOfBirth: string;
   sex: ESex;
-  persons: TPerson[];
   trees: TTree[];
 };

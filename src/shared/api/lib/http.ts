@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, isAxiosError } from 'axios';
 
-import { EMethod, TError } from '../model/http.model';
+import { EMethod, TError } from '@/shared/api';
 
 export class Http {
   private axios: AxiosInstance;

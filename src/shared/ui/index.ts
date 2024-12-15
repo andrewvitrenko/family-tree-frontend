@@ -1,4 +1,4 @@
-export { default as Button } from './button';
+export { default as ButtonOld } from './button-old';
 export { default as DateInput } from './date-input';
 export { default as Divider } from './divider';
 export { default as Input } from './input';

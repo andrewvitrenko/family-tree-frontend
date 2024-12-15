@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, DateInput, Input, Modal, Select } from '@/shared/ui';
+import { ButtonOld, DateInput, Input, Modal, Select } from '@/shared/ui';
 
 import { sexes } from './config/form.config';
 import { TCreateNodeForm } from './model/form.model';
@@ -62,13 +62,13 @@ const CreateNode: FC<TCreateNodeProps> = ({
                 shouldUnregister
               />
             )}
-            <Button
+            <ButtonOld
               disabled={!methods.formState.isValid}
               loading={methods.formState.isSubmitting}
               type="submit"
             >
               Add
-            </Button>
+            </ButtonOld>
           </Box>
         </form>
       </FormProvider>

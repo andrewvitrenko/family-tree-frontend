@@ -8,7 +8,13 @@ import { FieldValues, FormProvider, useForm, Validate } from 'react-hook-form';
 import { useAuth } from '@/features/auth';
 import { PASSWORD_REGEX } from '@/shared/config/validation';
 import { omit } from '@/shared/lib';
-import { Button, DateInput, Input, PasswordInput, Select } from '@/shared/ui';
+import {
+  ButtonOld,
+  DateInput,
+  Input,
+  PasswordInput,
+  Select,
+} from '@/shared/ui';
 import { TSignUpForm } from '@/views/sign-up/model/form.model';
 
 import { sexes } from './constants';
@@ -80,14 +86,14 @@ const Form: FC = () => {
             label="Confirm password"
             validate={onConfirmPasswordValidate}
           />
-          <Button
+          <ButtonOld
             type="submit"
             sx={styles.button}
             disabled={!formState.isValid}
             loading={isRegistering}
           >
             Sign up
-          </Button>
+          </ButtonOld>
         </Box>
       </form>
     </FormProvider>

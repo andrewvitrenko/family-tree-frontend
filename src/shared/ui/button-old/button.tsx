@@ -6,6 +6,9 @@ import { mergeSx } from '@/shared/lib';
 import { TButtonProps } from './model/props.model';
 import * as styles from './styles';
 
+/**
+ * @deprecated
+ */
 const Button: FC<TButtonProps> = ({
   loading,
   disabled,

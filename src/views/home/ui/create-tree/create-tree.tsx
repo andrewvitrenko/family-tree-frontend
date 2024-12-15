@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input, Modal } from '@/shared/ui';
+import { ButtonOld, Input, Modal } from '@/shared/ui';
 import { useCreateTree } from '@/views/home/api';
 
 import { TCreateTreeForm } from './model/form.model';
@@ -33,14 +33,14 @@ const CreateTree: FC = () => {
 
   return (
     <Box>
-      <Button
+      <ButtonOld
         variant="text"
         sx={styles.trigger}
         onClick={onOpen}
         startIcon={<AddIcon />}
       >
         Create
-      </Button>
+      </ButtonOld>
       <Modal open={open} onClose={onClose}>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -54,22 +54,22 @@ const CreateTree: FC = () => {
               shouldUnregister
             />
             <Box sx={styles.actions}>
-              <Button
+              <ButtonOld
                 variant="text"
                 onClick={onClose}
                 disabled={methods.formState.isSubmitting}
                 sx={styles.action}
               >
                 Cancel
-              </Button>
-              <Button
+              </ButtonOld>
+              <ButtonOld
                 variant="text"
                 type="submit"
                 loading={methods.formState.isSubmitting}
                 sx={styles.action}
               >
                 Create
-              </Button>
+              </ButtonOld>
             </Box>
           </form>
         </FormProvider>

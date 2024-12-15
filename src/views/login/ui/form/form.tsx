@@ -6,7 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { useAuth } from '@/features/auth';
 import { PASSWORD_REGEX } from '@/shared/config/validation';
-import { Button, Input, PasswordInput } from '@/shared/ui';
+import { ButtonOld, Input, PasswordInput } from '@/shared/ui';
 import { TLoginForm } from '@/views/login/model/form.model';
 
 import * as styles from './styles';
@@ -37,14 +37,14 @@ const Form: FC = () => {
             required
             pattern={PASSWORD_REGEX}
           />
-          <Button
+          <ButtonOld
             disabled={!formState.isValid}
             type="submit"
             loading={isLoggingIn}
             sx={styles.button}
           >
             Login
-          </Button>
+          </ButtonOld>
         </Box>
       </form>
     </FormProvider>

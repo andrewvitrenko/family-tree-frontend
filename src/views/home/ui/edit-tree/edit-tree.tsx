@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input, Modal } from '@/shared/ui';
+import { ButtonOld, Input, Modal } from '@/shared/ui';
 import { useUpdateTree } from '@/views/home/api';
 
 import { TEditTreeForm } from './model/form.model';
@@ -53,7 +53,7 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
               sx={styles.input}
             />
             <Box sx={styles.actions}>
-              <Button
+              <ButtonOld
                 onClick={onClose}
                 type="reset"
                 variant="text"
@@ -61,15 +61,15 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
                 sx={styles.button}
               >
                 Cancel
-              </Button>
-              <Button
+              </ButtonOld>
+              <ButtonOld
                 variant="text"
                 type="submit"
                 loading={methods.formState.isSubmitting}
                 sx={styles.button}
               >
                 Save
-              </Button>
+              </ButtonOld>
             </Box>
           </form>
         </FormProvider>

@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { FC, memo, useCallback, useState } from 'react';
 
-import { Button, Modal } from '@/shared/ui';
+import { ButtonOld, Modal } from '@/shared/ui';
 import { useDeleteTree } from '@/views/home/api';
 
 import { TDeleteTreeProps } from './model/props.model';
@@ -37,22 +37,22 @@ const DeleteTree: FC<TDeleteTreeProps> = ({ id, name }) => {
             Are you sure you want to delete {name} tree?
           </Typography>
           <Box sx={styles.actions}>
-            <Button
+            <ButtonOld
               variant="text"
               sx={styles.button}
               disabled={isPending}
               onClick={onClose}
             >
               Cancel
-            </Button>
-            <Button
+            </ButtonOld>
+            <ButtonOld
               variant="text"
               sx={styles.button}
               loading={isPending}
               onClick={onDelete}
             >
               Delete
-            </Button>
+            </ButtonOld>
           </Box>
         </Box>
       </Modal>

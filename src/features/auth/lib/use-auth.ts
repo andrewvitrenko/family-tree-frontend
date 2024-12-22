@@ -13,10 +13,9 @@ import { AuthApi } from '../api';
 import { TLoginPayload, TSignUpPayload } from '../model/payload.model';
 
 export type TUseAuth = {
-  isLoggingIn: boolean;
   isRegistering: boolean;
   isLoggingOut: boolean;
-  login: (payload: TLoginPayload) => void;
+  login: (payload: TLoginPayload) => Promise<void>;
   signup: (payload: TSignUpPayload) => void;
   logout: () => void;
 };
@@ -39,7 +38,7 @@ export const useAuth = (): TUseAuth => {
     router.push(ERoute.LOGIN);
   }, [cleanUser, queryClient, router]);
 
-  const { mutate: login, isPending: isLoggingIn } = useMutation({
+  const { mutateAsync: login } = useMutation({
     mutationKey: ['auth.login'],
     mutationFn: (payload: TLoginPayload) => AuthApi.login(payload),
     onError: (error) => toast.error(error.message),
@@ -67,7 +66,6 @@ export const useAuth = (): TUseAuth => {
   });
 
   return {
-    isLoggingIn,
     isRegistering,
     isLoggingOut,
     login,

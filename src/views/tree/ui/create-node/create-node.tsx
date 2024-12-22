@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ButtonOld, DateInput, Input, Modal, Select } from '@/shared/ui';
+import { ButtonOld, DateInput, InputOld, Modal, Select } from '@/shared/ui';
 
 import { sexes } from './config/form.config';
 import { TCreateNodeForm } from './model/form.model';
@@ -37,8 +37,8 @@ const CreateNode: FC<TCreateNodeProps> = ({
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Box sx={styles.form}>
-            <Input name="firstName" label="First name" required />
-            <Input name="lastName" label="Last name" required />
+            <InputOld name="firstName" label="First name" required />
+            <InputOld name="lastName" label="Last name" required />
             <Select name="sex" label="Sex" required options={sexes} />
             <DateInput
               name="dateOfBirth"

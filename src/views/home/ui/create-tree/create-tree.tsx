@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ButtonOld, Input, Modal } from '@/shared/ui';
+import { ButtonOld, InputOld, Modal } from '@/shared/ui';
 import { useCreateTree } from '@/views/home/api';
 
 import { TCreateTreeForm } from './model/form.model';
@@ -45,7 +45,7 @@ const CreateTree: FC = () => {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <Typography sx={styles.title}>Create tree</Typography>
-            <Input
+            <InputOld
               name="name"
               required
               label="Name"

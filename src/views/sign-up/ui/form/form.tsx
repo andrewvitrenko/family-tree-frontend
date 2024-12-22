@@ -11,7 +11,7 @@ import { omit } from '@/shared/lib';
 import {
   ButtonOld,
   DateInput,
-  Input,
+  InputOld,
   PasswordInput,
   Select,
 } from '@/shared/ui';
@@ -54,7 +54,7 @@ const Form: FC = () => {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={styles.container}>
-          <Input
+          <InputOld
             label="Email"
             placeholder="Enter email"
             name="email"
@@ -62,8 +62,13 @@ const Form: FC = () => {
             required
           />
           <Box sx={styles.names}>
-            <Input type="text" label="First name" name="firstName" required />
-            <Input type="text" name="lastName" label="Last name" required />
+            <InputOld
+              type="text"
+              label="First name"
+              name="firstName"
+              required
+            />
+            <InputOld type="text" name="lastName" label="Last name" required />
           </Box>
           <Select name="sex" label="Sex" required options={sexes} />
           <DateInput

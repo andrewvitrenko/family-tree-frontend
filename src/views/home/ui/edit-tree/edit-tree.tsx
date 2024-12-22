@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ButtonOld, Input, Modal } from '@/shared/ui';
+import { ButtonOld, InputOld, Modal } from '@/shared/ui';
 import { useUpdateTree } from '@/views/home/api';
 
 import { TEditTreeForm } from './model/form.model';
@@ -45,7 +45,7 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <Typography sx={styles.title}>Update tree {name}</Typography>
-            <Input
+            <InputOld
               required
               name="name"
               label="Name"

@@ -1,6 +1,5 @@
 import './global.css';
 
-import CssBaseline from '@mui/material/CssBaseline';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import type { Metadata } from 'next';
@@ -22,7 +21,6 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
         <QueryProvider>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
-              <CssBaseline />
               <Toast />
               {children}
             </ThemeProvider>

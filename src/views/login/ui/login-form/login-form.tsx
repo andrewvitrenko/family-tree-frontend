@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react';
 import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { useAuth } from '@/features/auth';
+import { useLogin } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 import { Input, PasswordInput } from '@/shared/ui/form';
 
@@ -13,7 +13,7 @@ import { validationSchema } from './config/form.config';
 import { TLoginForm } from './model/form.model';
 
 export const LoginForm: FC = memo(() => {
-  const { login } = useAuth();
+  const { mutateAsync, isPending } = useLogin();
 
   const form = useForm<TLoginForm>({
     defaultValues: { email: '', password: '' },
@@ -21,8 +21,8 @@ export const LoginForm: FC = memo(() => {
   });
 
   const onSubmit = useCallback(
-    async (values: TLoginForm) => console.log('submitted', values),
-    [],
+    async (values: TLoginForm) => await mutateAsync(values),
+    [mutateAsync],
   );
 
   return (
@@ -44,9 +44,8 @@ export const LoginForm: FC = memo(() => {
           name="password"
           required
         />
-        <Button type="submit">
-          {/* {form.formState.isSubmitting && <Loader2 className="animate-spin" />}{' '} */}
-          Login
+        <Button type="submit" disabled={isPending}>
+          {isPending && <Loader2 className="animate-spin" />} Login
         </Button>
       </form>
     </FormProvider>

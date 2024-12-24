@@ -10,12 +10,11 @@ import { useToast } from '@/features/toast';
 import { ERoute } from '@/shared/model/navigation.model';
 
 import { AuthApi } from '../api';
-import { TLoginPayload, TSignUpPayload } from '../model/payload.model';
+import { TSignUpPayload } from '../model/payload.model';
 
 export type TUseAuth = {
   isRegistering: boolean;
   isLoggingOut: boolean;
-  login: (payload: TLoginPayload) => Promise<void>;
   signup: (payload: TSignUpPayload) => void;
   logout: () => void;
 };
@@ -37,13 +36,6 @@ export const useAuth = (): TUseAuth => {
     });
     router.push(ERoute.LOGIN);
   }, [cleanUser, queryClient, router]);
-
-  const { mutateAsync: login } = useMutation({
-    mutationKey: ['auth.login'],
-    mutationFn: (payload: TLoginPayload) => AuthApi.login(payload),
-    onError: (error) => toast.error(error.message),
-    onSuccess: () => router.push(ERoute.HOME),
-  });
 
   const { mutate: signup, isPending: isRegistering } = useMutation({
     mutationKey: ['auth.signup'],
@@ -68,7 +60,6 @@ export const useAuth = (): TUseAuth => {
   return {
     isRegistering,
     isLoggingOut,
-    login,
     signup,
     logout,
   };

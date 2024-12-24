@@ -18,8 +18,6 @@ export const InputBase: FC<TInputBaseProps> = memo(
   }) => {
     const { register } = useFormContext();
 
-    console.log('rerender', name);
-
     return (
       <div className="flex gap-2">
         <input

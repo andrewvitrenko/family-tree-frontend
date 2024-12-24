@@ -21,8 +21,8 @@ export const LoginForm: FC = memo(() => {
   });
 
   const onSubmit = useCallback(
-    async (values: TLoginForm) => await login(values),
-    [login],
+    async (values: TLoginForm) => console.log('submitted', values),
+    [],
   );
 
   return (
@@ -44,8 +44,8 @@ export const LoginForm: FC = memo(() => {
           name="password"
           required
         />
-        <Button disabled={form.formState.isSubmitting} type="submit">
-          {form.formState.isSubmitting && <Loader2 className="animate-spin" />}{' '}
+        <Button type="submit">
+          {/* {form.formState.isSubmitting && <Loader2 className="animate-spin" />}{' '} */}
           Login
         </Button>
       </form>

@@ -2,10 +2,10 @@
 
 import { QueryObserverResult, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useAuth } from '@/features/auth';
-import { useToast } from '@/features/toast';
 
 import { UserApi } from '../api';
 import { useUserStore } from '../model';
@@ -15,8 +15,6 @@ export type TUseUser = {
 };
 
 export const useUser = (): TUseUser => {
-  const toast = useToast();
-
   const { logout } = useAuth();
 
   const { setUser } = useUserStore(
@@ -29,11 +27,11 @@ export const useUser = (): TUseUser => {
   });
 
   useEffect(() => {
-    if (error) {
+    if (error?.message) {
       toast.error(error.message);
       logout();
     }
-  }, [error, logout, toast]);
+  }, [error?.message, logout]);
 
   useEffect(() => {
     if (data) {

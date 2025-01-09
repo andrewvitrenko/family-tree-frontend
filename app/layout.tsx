@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import { FC, PropsWithChildren } from 'react';
 
 import { QueryProvider } from '@/features/query-provider';
-import { Toast } from '@/features/toast';
+import { Toaster } from '@/features/toaster';
 import theme from '@/shared/config/theme';
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
         <QueryProvider>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
-              <Toast />
+              <Toaster position="bottom-center" />
               {children}
             </ThemeProvider>
           </AppRouterCacheProvider>

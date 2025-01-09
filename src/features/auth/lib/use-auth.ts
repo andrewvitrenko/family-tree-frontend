@@ -3,10 +3,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useUserStore } from '@/entities/user';
-import { useToast } from '@/features/toast';
 import { ERoute } from '@/shared/model/navigation.model';
 
 import { AuthApi } from '../api';
@@ -20,7 +20,6 @@ export type TUseAuth = {
 };
 
 export const useAuth = (): TUseAuth => {
-  const toast = useToast();
   const router = useRouter();
 
   const queryClient = useQueryClient();

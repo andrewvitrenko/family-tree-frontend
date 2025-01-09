@@ -6,10 +6,10 @@ import {
   UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
+import { toast } from 'sonner';
 
 import { TTree } from '@/entities/trees';
 import { TreesApi } from '@/entities/trees/api/trees';
-import { useToast } from '@/features/toast';
 import { TPaginatedData } from '@/shared/api';
 import { getNextPageParam } from '@/shared/api/lib';
 import { EApiKey } from '@/views/home/api/model';
@@ -22,8 +22,6 @@ type TUseTreesList = Omit<
 };
 
 export const useTreesList = (search: string): TUseTreesList => {
-  const toast = useToast();
-
   const { data, error, ...queryResult } = useInfiniteQuery({
     queryKey: [EApiKey.TREES_LIST, { search }],
     initialPageParam: 1,
@@ -33,10 +31,10 @@ export const useTreesList = (search: string): TUseTreesList => {
   });
 
   useEffect(() => {
-    if (error) {
+    if (error?.message) {
       toast.error(error.message);
     }
-  }, [error, toast]);
+  }, [error?.message]);
 
   const trees = useMemo(
     () => data?.pages.map(({ data }) => data).flat(),

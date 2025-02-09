@@ -10,12 +10,9 @@ import { useUserStore } from '@/entities/user';
 import { ERoute } from '@/shared/model/navigation.model';
 
 import { AuthApi } from '../api';
-import { TSignUpPayload } from '../model/payload.model';
 
 export type TUseAuth = {
-  isRegistering: boolean;
   isLoggingOut: boolean;
-  signup: (payload: TSignUpPayload) => void;
   logout: () => void;
 };
 
@@ -36,16 +33,6 @@ export const useAuth = (): TUseAuth => {
     router.push(ERoute.LOGIN);
   }, [cleanUser, queryClient, router]);
 
-  const { mutate: signup, isPending: isRegistering } = useMutation({
-    mutationKey: ['auth.signup'],
-    mutationFn: (payload: TSignUpPayload) => AuthApi.register(payload),
-    onError: (error) => toast.error(error.message),
-    onSuccess: () => {
-      toast.success('Welcome to our App!');
-      router.push(ERoute.HOME);
-    },
-  });
-
   const { mutate: logout, isPending: isLoggingOut } = useMutation({
     mutationKey: ['auth.logout'],
     mutationFn: () => AuthApi.logout(),
@@ -57,9 +44,7 @@ export const useAuth = (): TUseAuth => {
   });
 
   return {
-    isRegistering,
     isLoggingOut,
-    signup,
     logout,
   };
 };

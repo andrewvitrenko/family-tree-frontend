@@ -1,50 +1,68 @@
 'use client';
 
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
 import { FC, memo } from 'react';
 import { useController } from 'react-hook-form';
 
-import { mergeSx } from '@/shared/lib';
+import { cn } from '@/shared/lib/utils';
+import { Button } from '@/shared/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
 
+import { ErrorMessage } from '../error-message';
 import { TDateInputProps } from './model/props.model';
-import * as styles from './styles';
+import { Calendar } from './ui/calendar';
 
-const DateInput: FC<TDateInputProps> = ({
-  name,
-  defaultValue = null,
-  onChange,
-  required,
-  sx,
-  shouldUnregister,
-  helperText,
-  ...props
-}) => {
-  const { field, fieldState } = useController({
+export const DateInput: FC<TDateInputProps> = memo(
+  ({
     name,
-    defaultValue,
+    onChange,
+    required,
     shouldUnregister,
-    rules: { onChange, required },
-  });
+    onBlur,
+    placeholder,
+    maxDate,
+    minDate,
+  }) => {
+    const { field } = useController({
+      name,
+      shouldUnregister,
+      rules: { onChange, onBlur, required },
+    });
 
-  return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker
-        value={field.value}
-        format="dd/MM/yyyy"
-        inputRef={field.ref}
-        onChange={field.onChange}
-        sx={mergeSx(fieldState.error && styles.error, sx)}
-        slotProps={{
-          textField: {
-            error: !!fieldState.error,
-            helperText: fieldState.error?.message ?? helperText,
-          },
-        }}
-        {...props}
-      />
-    </LocalizationProvider>
-  );
-};
+    return (
+      <div className="space-y-2">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className={cn('w-full justify-start text-left font-normal', {
+                ['text-muted-foreground']: !field.value,
+              })}
+            >
+              <CalendarIcon />
+              {field.value ? (
+                format(field.value, 'PPP')
+              ) : (
+                <span>{placeholder}</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={field.value}
+              onSelect={field.onChange}
+              fromDate={minDate}
+              toDate={maxDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        <ErrorMessage name={name} />
+      </div>
+    );
+  },
+);
 
-export default memo(DateInput);
+DateInput.displayName = 'DateInput';

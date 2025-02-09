@@ -1,11 +1,14 @@
-import { TextFieldProps } from '@mui/material/TextField';
-
-export type TSelectOption<K extends string = string> = {
+export type TSelectOption<T extends string = string> = {
   label: string;
-  value: K;
+  value: T;
 };
 
-export type TSelectProps = Omit<TextFieldProps, 'select'> & {
+export type TSelectProps = {
   name: string;
   options: TSelectOption[];
+  placeholder?: string;
+  required?: boolean;
+  shouldUnregister?: boolean;
+  onChange?: (value: string) => void | Promise<void>;
+  onBlur?: () => void | Promise<void>;
 };

@@ -3,9 +3,9 @@
 import { FC, memo } from 'react';
 
 import { ErrorMessage } from '../error-message';
-import { InputBase } from '../input-base';
-import { Label } from '../label/label';
+import { Label } from '../label';
 import { TInputProps } from './model/props.model';
+import { InputBase } from './ui/input-base';
 
 export const Input: FC<TInputProps> = memo((props) => {
   return (

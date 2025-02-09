@@ -1,49 +1,44 @@
 'use client';
 
-import { MenuItem, TextField } from '@mui/material';
+import * as SelectPrimitive from '@radix-ui/react-select';
 import { FC, memo } from 'react';
-import { useController, useFormContext } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 
+import { ErrorMessage } from '../error-message';
 import { TSelectProps } from './model/props.model';
+import { Content } from './ui/content';
+import { Item } from './ui/item';
+import { Trigger } from './ui/trigger';
 
-const Select: FC<TSelectProps> = ({
-  defaultValue = '',
-  name,
-  options,
-  helperText,
-  onBlur,
-  onChange,
-  required,
-  ...props
-}) => {
-  const { control } = useFormContext();
-  const { field, fieldState } = useController({
-    name,
-    defaultValue,
-    control,
-    rules: { required, onBlur, onChange },
-  });
+export const Select: FC<TSelectProps> = memo(
+  ({ name, options, placeholder, onBlur, onChange, shouldUnregister }) => {
+    const { field } = useController({
+      name,
+      shouldUnregister,
+      rules: { onBlur, onChange },
+    });
 
-  return (
-    <TextField
-      name={field.name}
-      onChange={field.onChange}
-      onBlur={field.onBlur}
-      value={field.value}
-      helperText={fieldState.error?.message ?? helperText}
-      select
-      required={required}
-      inputRef={field.ref}
-      error={!!fieldState.error}
-      {...props}
-    >
-      {options.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </TextField>
-  );
-};
+    return (
+      <div className="space-y-2">
+        <SelectPrimitive.Select
+          value={field.value}
+          onValueChange={field.onChange}
+        >
+          <Trigger>
+            <SelectPrimitive.Value placeholder={placeholder} />
+          </Trigger>
+          <Content>
+            {options.map(({ label, value }) => (
+              <Item key={value} value={value}>
+                {label}
+              </Item>
+            ))}
+          </Content>
+        </SelectPrimitive.Select>
+        <ErrorMessage name={name} />
+      </div>
+    );
+  },
+);
 
-export default memo(Select);
+Select.displayName = 'Select';

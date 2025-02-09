@@ -5,7 +5,8 @@ import Box from '@mui/material/Box';
 import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ButtonOld, DateInput, InputOld, Modal, Select } from '@/shared/ui';
+import { ButtonOld, Modal } from '@/shared/ui';
+import { DateInput, Input, Select } from '@/shared/ui/form';
 
 import { sexes } from './config/form.config';
 import { TCreateNodeForm } from './model/form.model';
@@ -37,16 +38,20 @@ const CreateNode: FC<TCreateNodeProps> = ({
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Box sx={styles.form}>
-            <InputOld name="firstName" label="First name" required />
-            <InputOld name="lastName" label="Last name" required />
-            <Select name="sex" label="Sex" required options={sexes} />
+            <Input name="firstName" label="First name" required />
+            <Input name="lastName" label="Last name" required />
+            <Select
+              name="sex"
+              placeholder="Please select your gender"
+              required
+              options={sexes}
+            />
             <DateInput
               name="dateOfBirth"
-              label="Birth date"
+              placeholder="Birth date"
               required
               maxDate={maxDate ?? dateOfDeath ?? new Date()}
               minDate={minDate}
-              defaultValue={new Date()}
             />
             <FormControlLabel
               control={<Switch checked={alive} onChange={onToggleAlive} />}
@@ -55,10 +60,9 @@ const CreateNode: FC<TCreateNodeProps> = ({
             {!alive && (
               <DateInput
                 name="dateOfDeath"
-                label="Death date"
+                placeholder="Death date"
                 maxDate={new Date()}
                 minDate={dateOfBirth}
-                defaultValue={new Date()}
                 shouldUnregister
               />
             )}

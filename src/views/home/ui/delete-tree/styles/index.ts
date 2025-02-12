@@ -11,9 +11,3 @@ export const actions: SxProps<Theme> = {
   alignItems: 'center',
   marginTop: 4,
 };
-
-export const button: SxProps<Theme> = {
-  textTransform: 'none',
-  fontSize: '0.75rem',
-  fontWeight: 600,
-};

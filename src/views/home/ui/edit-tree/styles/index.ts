@@ -15,9 +15,3 @@ export const actions: SxProps<Theme> = {
   justifyContent: 'flex-end',
   marginTop: 4,
 };
-
-export const button: SxProps<Theme> = {
-  fontSize: '0.75rem',
-  fontWeight: 600,
-  textTransform: 'none',
-};

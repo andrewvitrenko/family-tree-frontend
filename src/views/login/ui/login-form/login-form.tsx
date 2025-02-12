@@ -6,7 +6,7 @@ import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useLogin } from '@/features/auth';
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button/button';
 import { Input, PasswordInput } from '@/shared/ui/form';
 
 import { validationSchema } from './config/form.config';

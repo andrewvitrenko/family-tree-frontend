@@ -16,18 +16,3 @@ export const actions: SxProps<Theme> = {
   alignItems: 'center',
   marginTop: 4,
 };
-
-export const action: SxProps<Theme> = {
-  textTransform: 'none',
-  fontSize: '0.75rem',
-  fontWeight: 600,
-};
-
-export const trigger: SxProps<Theme> = {
-  fontSize: '0.75rem',
-  paddingBottom: 0,
-
-  '.MuiButton-startIcon': {
-    marginRight: 1,
-  },
-};

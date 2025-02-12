@@ -1,12 +1,13 @@
 'use client';
 
-import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { Loader2, Plus } from 'lucide-react';
 import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ButtonOld, InputOld, Modal } from '@/shared/ui';
+import { InputOld, Modal } from '@/shared/ui';
+import { Button } from '@/shared/ui/button';
 import { useCreateTree } from '@/views/home/api';
 
 import { TCreateTreeForm } from './model/form.model';
@@ -17,7 +18,7 @@ const CreateTree: FC = () => {
 
   const [open, setOpen] = useState(false);
 
-  const methods = useForm<TCreateTreeForm>();
+  const form = useForm<TCreateTreeForm>();
 
   const onOpen = () => setOpen(true);
 
@@ -33,17 +34,12 @@ const CreateTree: FC = () => {
 
   return (
     <Box>
-      <ButtonOld
-        variant="text"
-        sx={styles.trigger}
-        onClick={onOpen}
-        startIcon={<AddIcon />}
-      >
-        Create
-      </ButtonOld>
+      <Button onClick={onOpen}>
+        <Plus /> Create
+      </Button>
       <Modal open={open} onClose={onClose}>
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <Typography sx={styles.title}>Create tree</Typography>
             <InputOld
               name="name"
@@ -54,22 +50,15 @@ const CreateTree: FC = () => {
               shouldUnregister
             />
             <Box sx={styles.actions}>
-              <ButtonOld
-                variant="text"
-                onClick={onClose}
-                disabled={methods.formState.isSubmitting}
-                sx={styles.action}
-              >
+              <Button onClick={onClose} disabled={form.formState.isSubmitting}>
                 Cancel
-              </ButtonOld>
-              <ButtonOld
-                variant="text"
-                type="submit"
-                loading={methods.formState.isSubmitting}
-                sx={styles.action}
-              >
+              </Button>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting && (
+                  <Loader2 className="animate-spin" />
+                )}{' '}
                 Create
-              </ButtonOld>
+              </Button>
             </Box>
           </form>
         </FormProvider>

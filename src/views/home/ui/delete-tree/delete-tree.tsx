@@ -4,9 +4,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { Loader2 } from 'lucide-react';
 import { FC, memo, useCallback, useState } from 'react';
 
-import { ButtonOld, Modal } from '@/shared/ui';
+import { Modal } from '@/shared/ui';
+import { Button } from '@/shared/ui/button';
 import { useDeleteTree } from '@/views/home/api';
 
 import { TDeleteTreeProps } from './model/props.model';
@@ -37,22 +39,12 @@ const DeleteTree: FC<TDeleteTreeProps> = ({ id, name }) => {
             Are you sure you want to delete {name} tree?
           </Typography>
           <Box sx={styles.actions}>
-            <ButtonOld
-              variant="text"
-              sx={styles.button}
-              disabled={isPending}
-              onClick={onClose}
-            >
+            <Button disabled={isPending} onClick={onClose}>
               Cancel
-            </ButtonOld>
-            <ButtonOld
-              variant="text"
-              sx={styles.button}
-              loading={isPending}
-              onClick={onDelete}
-            >
-              Delete
-            </ButtonOld>
+            </Button>
+            <Button disabled={isPending} onClick={onDelete}>
+              {isPending && <Loader2 className="animate-spin" />} Delete
+            </Button>
           </Box>
         </Box>
       </Modal>

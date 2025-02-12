@@ -6,7 +6,7 @@ import { FC, memo } from 'react';
 import { useController } from 'react-hook-form';
 
 import { cn } from '@/shared/lib/utils';
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
 
 import { ErrorMessage } from '../error-message';

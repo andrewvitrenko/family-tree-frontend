@@ -4,10 +4,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { Loader2 } from 'lucide-react';
 import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ButtonOld, InputOld, Modal } from '@/shared/ui';
+import { InputOld, Modal } from '@/shared/ui';
+import { Button } from '@/shared/ui/button';
 import { useUpdateTree } from '@/views/home/api';
 
 import { TEditTreeForm } from './model/form.model';
@@ -19,12 +21,12 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
 
   const [open, setOpen] = useState(false);
 
-  const methods = useForm<TEditTreeForm>({ defaultValues: { name } });
+  const form = useForm<TEditTreeForm>({ defaultValues: { name } });
 
   const onOpen = () => setOpen(true);
 
   const onClose = () => {
-    methods.reset();
+    form.reset();
     setOpen(false);
   };
 
@@ -42,8 +44,8 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
         <EditIcon />
       </IconButton>
       <Modal open={open} onClose={onClose}>
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <Typography sx={styles.title}>Update tree {name}</Typography>
             <InputOld
               required
@@ -53,23 +55,19 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
               sx={styles.input}
             />
             <Box sx={styles.actions}>
-              <ButtonOld
+              <Button
                 onClick={onClose}
                 type="reset"
-                variant="text"
-                disabled={methods.formState.isSubmitting}
-                sx={styles.button}
+                disabled={form.formState.isSubmitting}
               >
                 Cancel
-              </ButtonOld>
-              <ButtonOld
-                variant="text"
-                type="submit"
-                loading={methods.formState.isSubmitting}
-                sx={styles.button}
-              >
+              </Button>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting && (
+                  <Loader2 className="animate-spin" />
+                )}{' '}
                 Save
-              </ButtonOld>
+              </Button>
             </Box>
           </form>
         </FormProvider>

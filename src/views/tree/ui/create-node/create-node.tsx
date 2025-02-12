@@ -2,10 +2,12 @@
 
 import { FormControlLabel, Switch } from '@mui/material';
 import Box from '@mui/material/Box';
+import { Loader2 } from 'lucide-react';
 import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { ButtonOld, Modal } from '@/shared/ui';
+import { Modal } from '@/shared/ui';
+import { Button } from '@/shared/ui/button';
 import { DateInput, Input, Select } from '@/shared/ui/form';
 
 import { sexes } from './config/form.config';
@@ -20,23 +22,23 @@ const CreateNode: FC<TCreateNodeProps> = ({
   maxDate,
   minDate,
 }) => {
-  const methods = useForm<TCreateNodeForm>();
+  const form = useForm<TCreateNodeForm>();
 
   const [alive, setAlive] = useState(false);
 
   const onToggleAlive = () => setAlive((prev) => !prev);
 
-  const dateOfBirth = useMemo(() => methods.watch('dateOfBirth'), [methods]);
-  const dateOfDeath = useMemo(() => methods.watch('dateOfDeath'), [methods]);
+  const dateOfBirth = useMemo(() => form.watch('dateOfBirth'), [form]);
+  const dateOfDeath = useMemo(() => form.watch('dateOfDeath'), [form]);
 
   useEffect(() => {
-    if (methods.formState.isSubmitSuccessful) onClose();
-  }, [methods.formState.isSubmitSuccessful, onClose]);
+    if (form.formState.isSubmitSuccessful) onClose();
+  }, [form.formState.isSubmitSuccessful, onClose]);
 
   return (
     <Modal open={open} onClose={onClose}>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <FormProvider {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <Box sx={styles.form}>
             <Input name="firstName" label="First name" required />
             <Input name="lastName" label="Last name" required />
@@ -66,13 +68,12 @@ const CreateNode: FC<TCreateNodeProps> = ({
                 shouldUnregister
               />
             )}
-            <ButtonOld
-              disabled={!methods.formState.isValid}
-              loading={methods.formState.isSubmitting}
-              type="submit"
-            >
+            <Button disabled={!form.formState.isValid} type="submit">
+              {form.formState.isSubmitting && (
+                <Loader2 className="animate-spin" />
+              )}{' '}
               Add
-            </ButtonOld>
+            </Button>
           </Box>
         </form>
       </FormProvider>

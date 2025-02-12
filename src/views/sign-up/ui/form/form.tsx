@@ -8,7 +8,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { useSignUp } from '@/features/auth';
 import { omit } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { Button } from '@/shared/ui/button';
 import { DateInput, Input, PasswordInput, Select } from '@/shared/ui/form';
 import { TSignUpForm } from '@/views/sign-up/ui/form/model/form.model';
 

@@ -3,7 +3,7 @@
 import { Eye, EyeOff } from 'lucide-react';
 import { FC, memo, useState } from 'react';
 
-import { Button } from '@/shared/ui';
+import { Button } from '@/shared/ui/button';
 
 import { Input } from '../input';
 import { TPasswordInputProps } from './model/props.model';

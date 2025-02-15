@@ -2,7 +2,8 @@
 
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
-import { FC, memo } from 'react';
+import { FC, memo, useMemo } from 'react';
+import { Matcher } from 'react-day-picker';
 import { useController } from 'react-hook-form';
 
 import { cn } from '@/shared/lib/utils';
@@ -30,6 +31,11 @@ export const DateInput: FC<TDateInputProps> = memo(
       rules: { onChange, onBlur, required },
     });
 
+    const disabledDates: Matcher[] = useMemo(
+      () => [!!minDate && { before: minDate }, !!maxDate && { after: maxDate }],
+      [maxDate, minDate],
+    );
+
     return (
       <div className="space-y-2">
         <Popover>
@@ -53,9 +59,10 @@ export const DateInput: FC<TDateInputProps> = memo(
               mode="single"
               selected={field.value}
               onSelect={field.onChange}
-              fromDate={minDate}
-              toDate={maxDate}
-              initialFocus
+              startMonth={minDate}
+              endMonth={maxDate}
+              disabled={disabledDates}
+              autoFocus
             />
           </PopoverContent>
         </Popover>

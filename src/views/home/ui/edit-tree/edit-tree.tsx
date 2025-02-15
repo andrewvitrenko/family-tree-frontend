@@ -5,11 +5,12 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { Loader2 } from 'lucide-react';
-import { FC, memo, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { InputOld, Modal } from '@/shared/ui';
+import { Modal } from '@/shared/ui';
 import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/form';
 import { useUpdateTree } from '@/views/home/api';
 
 import { TEditTreeForm } from './model/form.model';
@@ -22,6 +23,11 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
   const [open, setOpen] = useState(false);
 
   const form = useForm<TEditTreeForm>({ defaultValues: { name } });
+
+  const isSubmitting = useMemo(
+    () => form.formState.isSubmitting,
+    [form.formState.isSubmitting],
+  );
 
   const onOpen = () => setOpen(true);
 
@@ -47,26 +53,19 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Typography sx={styles.title}>Update tree {name}</Typography>
-            <InputOld
+            <Input
               required
               name="name"
               label="Name"
               placeholder="Enter new name"
-              sx={styles.input}
+              className="mt-2 max-w-[18.75rem]"
             />
             <Box sx={styles.actions}>
-              <Button
-                onClick={onClose}
-                type="reset"
-                disabled={form.formState.isSubmitting}
-              >
+              <Button onClick={onClose} type="reset" disabled={isSubmitting}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting && (
-                  <Loader2 className="animate-spin" />
-                )}{' '}
-                Save
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting && <Loader2 className="animate-spin" />} Save
               </Button>
             </Box>
           </form>

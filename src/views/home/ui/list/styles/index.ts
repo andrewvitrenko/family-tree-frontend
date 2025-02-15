@@ -19,7 +19,3 @@ export const pagination: SxProps<Theme> = (theme) => ({
     marginTop: 8,
   },
 });
-
-export const loader: SxProps<Theme> = {
-  marginTop: 4,
-};

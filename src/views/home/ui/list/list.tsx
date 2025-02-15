@@ -24,7 +24,7 @@ const List: FC<TListProps> = ({
   const { user } = useUserStore(useShallow((state) => ({ user: state.user })));
 
   if (isFetching) {
-    return <Loader sx={styles.loader} />;
+    return <Loader className="mt-4" />;
   }
 
   if (!trees?.length) {

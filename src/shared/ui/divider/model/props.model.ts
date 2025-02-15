@@ -1,5 +1,7 @@
-import { SxProps, Theme } from '@mui/material';
+import { VariantProps } from 'class-variance-authority';
+import { HTMLAttributes } from 'react';
 
-export type TDividerProps = {
-  sx?: SxProps<Theme>;
-};
+import { dividerVariants } from '../config/styles.config';
+
+export type TDividerProps = HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof dividerVariants>;

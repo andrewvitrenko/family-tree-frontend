@@ -19,7 +19,7 @@ const PersonInfo: FC<TPersonInfoProps> = ({
     <Card sx={styles.container}>
       <CardContent>
         <Name firstName={firstName} lastName={lastName} />
-        <Divider sx={styles.divider} />
+        <Divider className="my-2" />
         <Dates dateOfBirth={dateOfBirth} dateOfDeath={dateOfDeath} />
       </CardContent>
     </Card>

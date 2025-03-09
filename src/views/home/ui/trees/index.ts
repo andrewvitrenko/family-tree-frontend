@@ -1,1 +1,1 @@
-export { default } from './trees';
+export { Trees } from './trees';

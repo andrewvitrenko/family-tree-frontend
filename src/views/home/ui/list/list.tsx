@@ -1,8 +1,6 @@
 'use client';
 
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import { FC, memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -28,15 +26,11 @@ const List: FC<TListProps> = ({
   }
 
   if (!trees?.length) {
-    return (
-      <Typography sx={styles.emptyText}>
-        No trees currently available
-      </Typography>
-    );
+    return <p className="mt-5 text-center">No trees currently available</p>;
   }
 
   return (
-    <Box sx={styles.container}>
+    <div className="mt-5 md:mt-8">
       <Grid container spacing={4}>
         {trees.map((tree) => (
           <Grid key={tree.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
@@ -51,7 +45,7 @@ const List: FC<TListProps> = ({
         noNextPageText="No more trees for now"
         fetchNextPage={fetchNextPage}
       />
-    </Box>
+    </div>
   );
 };
 

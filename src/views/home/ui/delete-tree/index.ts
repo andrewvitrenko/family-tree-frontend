@@ -1,1 +1,1 @@
-export { default } from './delete-tree';
+export { DeleteTree } from './delete-tree';

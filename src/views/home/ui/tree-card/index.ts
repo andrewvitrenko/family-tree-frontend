@@ -1,1 +1,1 @@
-export { default } from './tree-card';
+export { TreeCard } from './tree-card';

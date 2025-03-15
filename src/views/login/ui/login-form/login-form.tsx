@@ -1,19 +1,17 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2 } from 'lucide-react';
 import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useLogin } from '@/features/auth';
-import { Button } from '@/shared/ui/button/button';
-import { Input, PasswordInput } from '@/shared/ui/form';
+import { Input, PasswordInput, SubmitButton } from '@/shared/ui/form';
 
 import { validationSchema } from './config/form.config';
 import { TLoginForm } from './model/form.model';
 
 export const LoginForm: FC = memo(() => {
-  const { mutateAsync, isPending } = useLogin();
+  const { mutateAsync } = useLogin();
 
   const form = useForm<TLoginForm>({
     defaultValues: { email: '', password: '' },
@@ -21,7 +19,7 @@ export const LoginForm: FC = memo(() => {
   });
 
   const onSubmit = useCallback(
-    async (values: TLoginForm) => await mutateAsync(values),
+    (values: TLoginForm) => mutateAsync(values),
     [mutateAsync],
   );
 
@@ -44,9 +42,7 @@ export const LoginForm: FC = memo(() => {
           name="password"
           required
         />
-        <Button type="submit" disabled={isPending}>
-          {isPending && <Loader2 className="animate-spin" />} Login
-        </Button>
+        <SubmitButton text="Login" />
       </form>
     </FormProvider>
   );

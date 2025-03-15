@@ -1,10 +1,14 @@
 import { useMemo } from 'react';
-import { FieldError, useFormState } from 'react-hook-form';
+import { useFormState } from 'react-hook-form';
 
-export const useFieldError = (name: string): string | undefined => {
-  const { errors } = useFormState({ name });
+export const useFieldError = (name: string): string | null => {
+  const { errors } = useFormState({ name, exact: true });
 
-  const error = errors[name] as FieldError | undefined;
+  return useMemo(() => {
+    const error = errors[name];
 
-  return useMemo(() => error?.message, [error]);
+    if (!error?.message) return null;
+
+    return error.message as string;
+  }, [errors, name]);
 };

@@ -2,14 +2,18 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formatISO } from 'date-fns';
-import { Loader2 } from 'lucide-react';
 import { FC, memo, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useSignUp } from '@/features/auth';
 import { omit } from '@/shared/lib';
-import { Button } from '@/shared/ui/button';
-import { DateInput, Input, PasswordInput, Select } from '@/shared/ui/form';
+import {
+  DateInput,
+  Input,
+  PasswordInput,
+  Select,
+  SubmitButton,
+} from '@/shared/ui/form';
 import { TSignUpForm } from '@/views/sign-up/ui/form/model/form.model';
 
 import { sexes, validationSchema } from './config/form.config';
@@ -65,12 +69,7 @@ const Form: FC = () => {
             required
             label="Confirm password"
           />
-          <Button type="submit" disabled={methods.formState.isSubmitting}>
-            {methods.formState.isSubmitting && (
-              <Loader2 className="animate-spin" />
-            )}{' '}
-            Sign up
-          </Button>
+          <SubmitButton text="Sign up" />
         </div>
       </form>
     </FormProvider>

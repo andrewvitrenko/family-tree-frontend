@@ -27,7 +27,7 @@ export const TreeCard: FC<TTreeCardProps> = memo(({ editable, tree }) => {
       <CardHeader>
         <CardTitle>{tree.name}</CardTitle>
       </CardHeader>
-      <CardFooter className="justify-end" onClick={onActionsClick}>
+      <CardFooter className="justify-end gap-2" onClick={onActionsClick}>
         {editable && <EditTree id={tree.id} name={tree.name} />}
         <DeleteTree id={tree.id} name={tree.name} />
       </CardFooter>

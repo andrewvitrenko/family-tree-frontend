@@ -2,7 +2,6 @@
 
 import ClearIcon from '@mui/icons-material/ClearRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
-import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react';
@@ -13,7 +12,7 @@ import { CreateTree } from '@/views/home/ui';
 import { TToolbarProps } from './model/props.model';
 import * as styles from './styles';
 
-const Toolbar: FC<TToolbarProps> = ({ setDebouncedSearch }) => {
+export const Toolbar: FC<TToolbarProps> = memo(({ setDebouncedSearch }) => {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search);
@@ -32,7 +31,7 @@ const Toolbar: FC<TToolbarProps> = ({ setDebouncedSearch }) => {
   }, [debouncedSearch, setDebouncedSearch]);
 
   return (
-    <Box sx={styles.container}>
+    <div className="flex items-end justify-between gap-4 border-b border-b-border pb-3">
       <TextField
         variant="filled"
         placeholder="Search"
@@ -50,8 +49,8 @@ const Toolbar: FC<TToolbarProps> = ({ setDebouncedSearch }) => {
         onChange={onChange}
       />
       <CreateTree />
-    </Box>
+    </div>
   );
-};
+});
 
-export default memo(Toolbar);
+Toolbar.displayName = 'Toolbar';

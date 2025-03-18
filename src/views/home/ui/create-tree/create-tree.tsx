@@ -1,37 +1,52 @@
 'use client';
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { Loader2, Plus } from 'lucide-react';
-import { FC, memo, useCallback, useMemo, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Plus } from 'lucide-react';
+import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Modal } from '@/shared/ui';
 import { Button } from '@/shared/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/dialog';
 import { Input } from '@/shared/ui/form';
+import { SubmitButton } from '@/shared/ui/form';
 import { useCreateTree } from '@/views/home/api';
 
+import { validationSchema } from './config/form.config';
 import { TCreateTreeForm } from './model/form.model';
-import * as styles from './styles';
 
-const CreateTree: FC = () => {
+export const CreateTree: FC = memo(() => {
   const { mutateAsync } = useCreateTree();
 
   const [open, setOpen] = useState(false);
 
-  const form = useForm<TCreateTreeForm>();
+  const form = useForm<TCreateTreeForm>({
+    resolver: zodResolver(validationSchema),
+  });
+  const { reset } = form;
 
-  const isSubmitting = useMemo(
-    () => form.formState.isSubmitting,
-    [form.formState.isSubmitting],
+  const onOpenChange = useCallback(
+    (value: boolean) => {
+      if (!value) {
+        reset();
+      }
+
+      setOpen(value);
+    },
+    [reset],
   );
 
-  const onOpen = () => setOpen(true);
-
-  const onClose = () => {
-    form.reset();
+  const onClose = useCallback(() => {
     setOpen(false);
-  };
+    reset();
+  }, [reset]);
 
   const onSubmit = useCallback(
     async (data: TCreateTreeForm) => {
@@ -42,34 +57,38 @@ const CreateTree: FC = () => {
   );
 
   return (
-    <Box>
-      <Button onClick={onOpen}>
-        <Plus /> Create
-      </Button>
-      <Modal open={open} onClose={onClose}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>
+        <Button>
+          <Plus /> Create
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create tree</DialogTitle>
+          <DialogDescription className="sr-only">
+            Create new tree
+          </DialogDescription>
+        </DialogHeader>
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Typography sx={styles.title}>Create tree</Typography>
             <Input
               name="name"
               required
               label="Name"
               placeholder="Enter tree name"
-              className="mt-4 max-w-[18.75rem]"
             />
-            <Box sx={styles.actions}>
-              <Button onClick={onClose} disabled={isSubmitting}>
+            <DialogFooter className="mt-4">
+              <Button variant="secondary" type="reset" onClick={onClose}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting && <Loader2 className="animate-spin" />} Create
-              </Button>
-            </Box>
+              <SubmitButton text="Create" />
+            </DialogFooter>
           </form>
         </FormProvider>
-      </Modal>
-    </Box>
+      </DialogContent>
+    </Dialog>
   );
-};
+});
 
-export default memo(CreateTree);
+CreateTree.displayName = 'CreateTree';

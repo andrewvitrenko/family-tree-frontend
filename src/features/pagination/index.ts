@@ -1,1 +1,1 @@
-export { PaginationAnchor } from './ui';
+export { PaginationAnchor } from './ui/pagination-anchor';

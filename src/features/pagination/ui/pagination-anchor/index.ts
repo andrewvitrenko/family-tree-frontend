@@ -1,1 +1,2 @@
-export { default } from './pagination-anchor';
+export { type TPaginationAnchorProps } from './model/props.model';
+export { PaginationAnchor } from './pagination-anchor';

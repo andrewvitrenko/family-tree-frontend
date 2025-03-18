@@ -10,5 +10,5 @@ export const useFieldError = (name: string): string | null => {
     if (!error?.message) return null;
 
     return error.message as string;
-  }, [errors, name]);
+  }, [errors[name], name]);
 };

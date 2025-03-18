@@ -1,1 +1,2 @@
-export { default } from './list';
+export { List } from './list';
+export { type TListProps } from './models/props.model';

@@ -5,7 +5,7 @@ import { TTree } from '@/entities/trees';
 
 import { Adapter } from './lib';
 import { TPersonNode } from './model/flow.model';
-import TreeFlow from './ui/tree-flow';
+import { TreeFlow } from './ui/tree-flow';
 
 type TTreePageProps = {
   tree: TTree;

@@ -6,7 +6,3 @@ export const container: SxProps<Theme> = {
   borderRadius: '0.5rem',
   transition: 'box-shadow 0.3s ease-in-out',
 };
-
-export const divider: SxProps<Theme> = {
-  my: '0.5rem',
-};

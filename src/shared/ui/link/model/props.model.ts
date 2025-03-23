@@ -1,7 +1,9 @@
-import { LinkProps as MuiLinkProps } from '@mui/material/Link';
+import { LinkProps } from 'next/link';
+import { HTMLProps } from 'react';
 
 import { ERoute } from '@/shared/model/navigation.model';
 
-export type TLinkProps = Omit<MuiLinkProps, 'href'> & {
-  to: ERoute;
-};
+export type TLinkProps = HTMLProps<HTMLAnchorElement> &
+  Omit<LinkProps, 'href'> & {
+    href: ERoute;
+  };

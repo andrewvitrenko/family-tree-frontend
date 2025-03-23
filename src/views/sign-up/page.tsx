@@ -1,27 +1,37 @@
-import { Box, Card, CardContent, Typography } from '@mui/material';
 import { FC } from 'react';
 
 import { ERoute } from '@/shared/model/navigation.model';
 import { Link } from '@/shared/ui';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/shared/ui/card';
 
-import * as styles from './styles';
 import { Form } from './ui';
 
 const SignUpPage: FC = () => {
   return (
-    <Box sx={styles.container}>
-      <Card sx={styles.card}>
+    <div className="flex min-h-dvh flex-col items-center justify-center gap-8 p-4">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle>Sign up</CardTitle>
+          <CardDescription>
+            Sign up and use our latest features for free
+          </CardDescription>
+        </CardHeader>
         <CardContent>
-          <Typography sx={styles.title}>Sign up</Typography>
           <Form />
         </CardContent>
+        <CardFooter className="flex-col">
+          <p>Already have an account?</p>
+          <Link href={ERoute.LOGIN}>Log in</Link>
+        </CardFooter>
       </Card>
-
-      <Box sx={styles.footer}>
-        <Typography>Already have an account?</Typography>
-        <Link to={ERoute.LOGIN}>Log in</Link>
-      </Box>
-    </Box>
+    </div>
   );
 };
 

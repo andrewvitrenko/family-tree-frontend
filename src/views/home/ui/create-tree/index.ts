@@ -1,1 +1,1 @@
-export { default } from './create-tree';
+export { CreateTree } from './create-tree';

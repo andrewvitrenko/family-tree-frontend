@@ -1,11 +1,9 @@
-import { Theme } from '@mui/material';
-import { ButtonProps as MuiButtonProps } from '@mui/material/Button';
-import { CircularProgressProps } from '@mui/material/CircularProgress';
-import { SxProps } from '@mui/system';
+import type { VariantProps } from 'class-variance-authority';
+import { ButtonHTMLAttributes } from 'react';
 
-type TSpinnerProps = CircularProgressProps & { sx?: SxProps<Theme> };
+import { buttonVariants } from '../config/styles.config';
 
-export type TButtonProps = MuiButtonProps & {
-  loading?: boolean;
-  spinnerProps?: TSpinnerProps;
-};
+export type TButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+  };

@@ -1,32 +1,53 @@
 'use client';
 
-import EditIcon from '@mui/icons-material/Edit';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { PenLine } from 'lucide-react';
 import { FC, memo, useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button, Input, Modal } from '@/shared/ui';
+import { Button } from '@/shared/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/dialog';
+import { Input, SubmitButton } from '@/shared/ui/form';
 import { useUpdateTree } from '@/views/home/api';
 
+import { validationSchema } from './config/form.config';
 import { TEditTreeForm } from './model/form.model';
 import { TEditTreeProps } from './model/props.model';
-import * as styles from './styles';
 
-const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
+export const EditTree: FC<TEditTreeProps> = memo(({ id, name }) => {
   const { mutateAsync } = useUpdateTree(id);
 
   const [open, setOpen] = useState(false);
 
-  const methods = useForm<TEditTreeForm>({ defaultValues: { name } });
+  const form = useForm<TEditTreeForm>({
+    defaultValues: { name },
+    resolver: zodResolver(validationSchema),
+  });
+  const { reset } = form;
 
-  const onOpen = () => setOpen(true);
+  const onOpenChange = useCallback(
+    (value: boolean) => {
+      if (!value) {
+        reset();
+      }
 
-  const onClose = () => {
-    methods.reset();
+      setOpen(value);
+    },
+    [reset],
+  );
+
+  const onClose = useCallback(() => {
     setOpen(false);
-  };
+    reset();
+  }, [reset]);
 
   const onSubmit = useCallback(
     async (data: TEditTreeForm) => {
@@ -37,45 +58,36 @@ const EditTree: FC<TEditTreeProps> = ({ id, name }) => {
   );
 
   return (
-    <Box>
-      <IconButton color="primary" onClick={onOpen}>
-        <EditIcon />
-      </IconButton>
-      <Modal open={open} onClose={onClose}>
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Typography sx={styles.title}>Update tree {name}</Typography>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="icon">
+          <PenLine />
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit tree</DialogTitle>
+          <DialogDescription>Change the tree&apos;s name</DialogDescription>
+        </DialogHeader>
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <Input
               required
               name="name"
               label="Name"
               placeholder="Enter new name"
-              sx={styles.input}
             />
-            <Box sx={styles.actions}>
-              <Button
-                onClick={onClose}
-                type="reset"
-                variant="text"
-                disabled={methods.formState.isSubmitting}
-                sx={styles.button}
-              >
+            <DialogFooter className="mt-4">
+              <Button variant="secondary" onClick={onClose} type="reset">
                 Cancel
               </Button>
-              <Button
-                variant="text"
-                type="submit"
-                loading={methods.formState.isSubmitting}
-                sx={styles.button}
-              >
-                Save
-              </Button>
-            </Box>
+              <SubmitButton text="Submit" />
+            </DialogFooter>
           </form>
         </FormProvider>
-      </Modal>
-    </Box>
+      </DialogContent>
+    </Dialog>
   );
-};
+});
 
-export default memo(EditTree);
+EditTree.displayName = 'EditTree';

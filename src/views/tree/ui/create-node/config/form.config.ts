@@ -1,5 +1,5 @@
 import { ESex } from '@/entities/user';
-import { TSelectOption } from '@/shared/ui/select';
+import { TSelectOption } from '@/shared/ui/form/select';
 
 export const sexes: TSelectOption<ESex>[] = [
   { label: 'Male', value: ESex.MALE },

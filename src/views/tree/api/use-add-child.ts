@@ -1,10 +1,10 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { useCallback } from 'react';
+import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
 
 import { TNode } from '@/entities/trees';
 import { NodesApi } from '@/entities/trees/api/nodes';
-import { useToast } from '@/features/toast';
 import { EApiKey, TAddRelativeVariables } from '@/views/tree/api/model';
 import { Adapter } from '@/views/tree/lib';
 import { useTreeStore } from '@/views/tree/store/tree.store';
@@ -12,8 +12,6 @@ import { useTreeStore } from '@/views/tree/store/tree.store';
 type TUseAddChild = UseMutationResult<TNode, Error, TAddRelativeVariables>;
 
 export const useAddChild = (): TUseAddChild => {
-  const toast = useToast();
-
   const { onEdgesChange, onNodesChange } = useTreeStore(
     useShallow((state) => ({
       onNodesChange: state.onNodesChange,

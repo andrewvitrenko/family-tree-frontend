@@ -1,15 +1,4 @@
-import { Theme } from '@mui/material';
-import { SxProps } from '@mui/system';
-
-export const container: SxProps<Theme> = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'flex-end',
-  gap: 4,
-  paddingBottom: 3,
-  borderBottom: '1px solid',
-  borderColor: 'grey.300',
-};
+import { SxProps, Theme } from '@mui/material';
 
 export const input: SxProps<Theme> = {
   '.MuiInputBase-root': {

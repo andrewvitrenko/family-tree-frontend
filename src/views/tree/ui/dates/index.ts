@@ -1,1 +1,2 @@
-export { default } from './dates';
+export { Dates } from './dates';
+export { type TDatesProps } from './model/props.model';

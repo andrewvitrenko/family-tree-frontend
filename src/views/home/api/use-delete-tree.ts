@@ -3,18 +3,16 @@ import {
   UseMutationResult,
   useQueryClient,
 } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { TTree } from '@/entities/trees';
 import { TreesApi } from '@/entities/trees/api/trees';
-import { useToast } from '@/features/toast';
 import { EApiKey } from '@/views/home/api/model';
 
 type TUseDeleteTree = UseMutationResult<TTree, Error, void>;
 
 export const useDeleteTree = (id: string): TUseDeleteTree => {
   const queryClient = useQueryClient();
-
-  const toast = useToast();
 
   return useMutation({
     mutationKey: [EApiKey.TREES_DELETE],

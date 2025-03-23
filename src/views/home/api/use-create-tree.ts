@@ -3,18 +3,16 @@ import {
   UseMutationResult,
   useQueryClient,
 } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { TTree } from '@/entities/trees';
 import { TCreateTreePayload, TreesApi } from '@/entities/trees/api/trees';
-import { useToast } from '@/features/toast';
 import { EApiKey } from '@/views/home/api/model';
 
 type TUseCreateTree = UseMutationResult<TTree, Error, TCreateTreePayload>;
 
 export const useCreateTree = (): TUseCreateTree => {
   const queryClient = useQueryClient();
-
-  const toast = useToast();
 
   return useMutation({
     mutationKey: [EApiKey.TREES_ADD],

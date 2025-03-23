@@ -1,8 +1,3 @@
-import { Theme } from '@mui/material';
-import { CircularProgressProps } from '@mui/material/CircularProgress';
-import { SxProps } from '@mui/system';
+import { LucideProps } from 'lucide-react';
 
-export type TLoaderProps = CircularProgressProps & {
-  sx?: SxProps<Theme>;
-  size?: number;
-};
+export type TLoaderProps = LucideProps;

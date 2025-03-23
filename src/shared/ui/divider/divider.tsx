@@ -1,13 +1,19 @@
-import Box from '@mui/material/Box';
 import { FC, memo } from 'react';
 
-import { mergeSx } from '@/shared/lib';
+import { cn } from '@/shared/lib/utils';
 
+import { dividerVariants } from './config/styles.config';
 import { TDividerProps } from './model/props.model';
-import * as styles from './styles';
 
-const Divider: FC<TDividerProps> = ({ sx }) => {
-  return <Box sx={mergeSx(styles.divider, sx)} />;
-};
+export const Divider: FC<TDividerProps> = memo(
+  ({ className, orientation, ...props }) => {
+    return (
+      <div
+        className={cn(dividerVariants({ orientation, className }))}
+        {...props}
+      />
+    );
+  },
+);
 
-export default memo(Divider);
+Divider.displayName = 'Divider';

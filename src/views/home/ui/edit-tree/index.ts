@@ -1,1 +1,2 @@
-export { default } from './edit-tree';
+export { EditTree } from './edit-tree';
+export { type TEditTreeProps } from './model/props.model';

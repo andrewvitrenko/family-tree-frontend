@@ -1,5 +1,4 @@
-import { Theme } from '@mui/material';
-import { SxProps } from '@mui/system';
+import { SxProps, Theme } from '@mui/material';
 
 /*
  * Based on MUI example https://mui.com/system/getting-started/the-sx-prop/#passing-the-sx-prop

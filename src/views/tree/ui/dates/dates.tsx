@@ -1,26 +1,16 @@
-import Typography from '@mui/material/Typography';
 import { differenceInYears, format } from 'date-fns';
 import { FC, memo } from 'react';
 
-import { TDatesProps } from './model/props,model';
-import * as styles from './styles';
+import { TDatesProps } from './model/props.model';
 
-const Dates: FC<TDatesProps> = ({ dateOfBirth, dateOfDeath }) => {
+export const Dates: FC<TDatesProps> = memo(({ dateOfBirth, dateOfDeath }) => {
   return (
-    <>
-      <Typography sx={styles.content}>
-        {format(dateOfBirth, 'dd MMMM yyyy')}
-      </Typography>
-      {dateOfDeath && (
-        <Typography sx={styles.content}>
-          - {format(dateOfDeath, 'dd MMMM yyyy')}
-        </Typography>
-      )}
-      <Typography sx={styles.content}>
-        {differenceInYears(dateOfDeath ?? new Date(), dateOfBirth)}
-      </Typography>
-    </>
+    <p className="text-center text-sm">
+      <span>{format(dateOfBirth, 'dd MMMM yyyy')}</span>
+      {dateOfDeath && <span>- {format(dateOfDeath, 'dd MMMM yyyy')}</span>}
+      <span>{differenceInYears(dateOfDeath ?? new Date(), dateOfBirth)}</span>
+    </p>
   );
-};
+});
 
-export default memo(Dates);
+Dates.displayName = 'Dates';

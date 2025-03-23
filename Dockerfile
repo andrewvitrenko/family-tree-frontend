@@ -5,8 +5,8 @@ WORKDIR /app
 COPY ./ ./
 
 # Install all dependencies and build project
-RUN npm ci
-RUN npm run build
+RUN pnpm i --frozen-lockfile
+RUN pnpm  build
 
 # This stage will go to production, make sure node images are same
 FROM node:22-alpine AS production

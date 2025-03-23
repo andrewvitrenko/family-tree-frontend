@@ -1,22 +1,20 @@
 'use client';
 
-import Box from '@mui/material/Box';
 import { FC, memo, useState } from 'react';
 
 import { useTreesList } from '@/views/home/api';
 
 import { List, Toolbar } from '..';
-import * as styles from './styles';
 
-const Trees: FC = () => {
+export const Trees: FC = memo(() => {
   const [search, setSearch] = useState('');
 
   const { isFetching, isFetchingNextPage, hasNextPage, data, fetchNextPage } =
     useTreesList(search);
 
   return (
-    <Box sx={styles.wrapper}>
-      <Box sx={styles.container}>
+    <div className="mt-10 px-4 pb-4">
+      <div className="mx-auto max-w-7xl">
         <Toolbar setDebouncedSearch={setSearch} />
         <List
           trees={data}
@@ -25,9 +23,9 @@ const Trees: FC = () => {
           hasNextPage={hasNextPage}
           fetchNextPage={fetchNextPage}
         />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
-};
+});
 
-export default memo(Trees);
+Trees.displayName = 'Trees';

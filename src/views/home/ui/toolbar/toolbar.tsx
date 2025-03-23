@@ -16,7 +16,7 @@ export const Toolbar: FC<TToolbarProps> = memo(({ setDebouncedSearch }) => {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search);
-  const ref = useRef<HTMLInputElement>();
+  const ref = useRef<HTMLInputElement>(undefined);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);

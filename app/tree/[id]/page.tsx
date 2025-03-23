@@ -9,21 +9,25 @@ type TParams = {
 };
 
 type TProps = {
-  params: TParams;
+  params: Promise<TParams>;
 };
 
-export const generateMetadata = async ({
-  params,
-}: TProps): Promise<Metadata> => {
-  const tree = await TreesApi.getOne(params.id, { Cookie: getSsrCookies() });
+export const generateMetadata = async (props: TProps): Promise<Metadata> => {
+  const { id } = await props.params;
+  const tree = await TreesApi.getOne(id, {
+    Cookie: await getSsrCookies(),
+  });
 
   return {
     title: `Family Tree | ${tree.name}`,
   };
 };
 
-const Tree: NextPage<TProps> = async ({ params }) => {
-  const tree = await TreesApi.getOne(params.id, { Cookie: getSsrCookies() });
+const Tree: NextPage<TProps> = async (props) => {
+  const { id } = await props.params;
+  const tree = await TreesApi.getOne(id, {
+    Cookie: await getSsrCookies(),
+  });
 
   return <TreePage tree={tree} />;
 };
